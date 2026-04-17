@@ -75,7 +75,7 @@ function App() {
                <Signup />
              </OpenRoute>
            } />
-          <Route path="about" element={<About />} />
+          <Route path="/about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="dashboard" element={
              <PrivateRoute> <Dashboard /> </PrivateRoute>

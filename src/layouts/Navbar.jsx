@@ -48,7 +48,12 @@ const Navbar = () => {
               <div className="py-1 transition hover:text-or">
                 <NavLink to="/property"> Properties</NavLink>
               </div>
-              <div className="py-1 transition hover:text-or">About</div>
+              <div className="py-1 transition hover:text-or">
+              <NavLink to="/about">
+               About 
+               </NavLink>
+        
+                </div>
               <div className="py-1 transition hover:text-or">
                 <NavLink to='/contact'>
                   Contact
