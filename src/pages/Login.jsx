@@ -41,7 +41,6 @@ const Login = () => {
           obj
         );
 
-        // let token = res.data.token;
 
         console.log("res", res,   res.data );
 

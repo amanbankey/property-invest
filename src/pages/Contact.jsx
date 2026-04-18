@@ -16,7 +16,6 @@ function ContactForm() {
        console.log('form', form)
     }
       
-     
   };
 
   if (sent) {

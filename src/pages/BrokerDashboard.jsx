@@ -134,9 +134,9 @@ function BrokerCodeCard() {
   const [copied, setCopied] = useState(false);
 
   return (
-    <div className="bg-teal-700 rounded-2xl p-5 flex flex-col gap-4 h-full">
+    <div className="bg-teal-700  rounded-2xl p-5 flex flex-col gap-4 h-full">
       <h3 className="text-white font-semibold text-sm">Your Broker Code</h3>
-      <div className="bg-white/20 rounded-xl px-4 py-3 flex items-center justify-between">
+      <div className="bg-white/20 relative   rounded-xl px-4 py-3 flex items-center justify-between">
         <span className="text-white font-bold tracking-wider text-sm"> SOV-BROKER-001 </span>
         <CopyToClipboard text="SOV-BROKER-002" onCopy={() => setCopied(true)}>
         <button onClick={() => { 
@@ -149,9 +149,9 @@ function BrokerCodeCard() {
         </button>
       </CopyToClipboard>
 
-       
+       {copied && <p className="text-white text-xs absolute right-0 -top-3 -mt-2">Copied!</p>}
       </div>
-      {copied && <p className="text-teal-200 text-xs -mt-2">Copied!</p>}
+      
       <div className="flex items-start gap-3 bg-white/10 rounded-xl p-3">
         <div className="w-8 h-8 bg-white/20 rounded-lg flex-shrink-0 flex items-center justify-center">
           <HiOutlineShare className="text-white text-sm" />

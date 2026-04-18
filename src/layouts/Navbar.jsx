@@ -76,7 +76,7 @@ const Navbar = () => {
               {!isLoggedIn && (
                 <NavLink
                   to="/login"
-                  className="hidden sm:block px-4 py-2 bg-[#0F766E] hover:bg-[#0F766E] border-2 text-white  rounded-lg cursor-pointer "
+                  className="hidden sm:block px-4 py-2 bg-[#0F766E] hover:bg-[#0F766E]   text-white  rounded-lg cursor-pointer "
                 >
                   Login
                 </NavLink>

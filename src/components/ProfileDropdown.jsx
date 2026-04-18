@@ -13,7 +13,7 @@ export default function ProfileDropdown({handleLogout}) {
   useOnClickOutside(ref, () => setOpen(false));
 
   return (
-    <button className="relative bg-white" onClick={() => setOpen(true)}  >
+    <button className="relative " onClick={() => setOpen(true)}  >
       <div className="flex items-center gap-x-1">
         {/* <img
           src={user?.image}

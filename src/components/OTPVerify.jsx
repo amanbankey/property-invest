@@ -51,14 +51,6 @@ export default function OTPVerify({mobile, setPage}) {
     inputRefs.current[nextEmpty === -1 ? 5 : nextEmpty]?.focus();
   };
 
-  // const handleResend = () => {
-  //   if (!canResend) return;
-  //   setOtp(["", "", "", "", "", ""]);
-  //   setTimer(30);
-  //   setCanResend(false);
-  //   inputRefs.current[0]?.focus();
-  // };
-
   const handleResend = async (e) => {
     e.preventDefault()
     setOtpErr("")
@@ -76,8 +68,7 @@ export default function OTPVerify({mobile, setPage}) {
       const res = await axios.post(`${BASE_URL}/api/auth/resend-otp`,  
         obj 
       );
-  
-      console.log("OTP resent", res);
+      // console.log("OTP resent", res);
       setTimer(10);
       setCanResend(false);
       inputRefs.current[0]?.focus();
@@ -92,9 +83,9 @@ export default function OTPVerify({mobile, setPage}) {
   const submitHandler = async(e) => {
     e.preventDefault()
     const finalOtp = otp.join("");
-    console.log("otp:", finalOtp);
+    // console.log("otp:", finalOtp);
   
-    console.log("mobile numbe", mobile)
+    // console.log("mobile numbe", mobile)
 
     const obj = {
        phone: mobile,
@@ -165,9 +156,13 @@ export default function OTPVerify({mobile, setPage}) {
                 value={digit}
                 onChange={(e) => handleChange(i, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(i, e)}
-                className={`${otpErr ? 'border-2 border-red-400 text-red-500 ' : ' border-2 focus:border-[#1a5c47] text-[#1a2e2a]'} w-10 h-12 sm:w-12 sm:h-14
-                 md:w-14 md:h-16 text-center text-lg sm:text-xl font-bold text-[#1a2e2a] bg-[#eef0f7] rounded-xl 
-                 sm:rounded-2xl border-transparent  focus:bg-white outline-none transition-all`}
+                className={`${
+                  otpErr
+                    ? 'border-2 border-red-400 text-red-500 focus:border-red-500'
+                    : 'border-2 border-transparent focus:border-[#1a5c47] text-[#1a2e2a]'
+                } w-10 h-12 sm:w-12 sm:h-14
+                md:w-14 md:h-16 text-center text-lg sm:text-xl font-bold text-[#1a2e2a] bg-[#eef0f7] rounded-xl 
+                sm:rounded-2xl focus:bg-white outline-none transition-all`}
               />
             ))}
             

@@ -73,7 +73,7 @@ export default function VerifyMobile({mobile, setPage}) {
         obj 
       );
   
-      console.log("OTP resent", res);
+      // console.log("OTP resent", res);
 
       setTimer(30);
       setCanResend(false);
@@ -178,10 +178,14 @@ export default function VerifyMobile({mobile, setPage}) {
                 value={digit}
                 onChange={(e) => handleChange(i, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(i, e)}
-                className={`${otpErr ? 'border-2 border-red-400 text-red-500' : ' border-2 focus:border-[#1a5c47] text-[#0f2820]'} w-full aspect-square max-w-[52px] 
+                className={`${
+                  otpErr
+                    ? 'border-2 border-red-400 text-red-500 focus:border-red-500'
+                    : 'border-2 border-transparent focus:border-[#1a5c47] text-[#0f2820]'
+                } w-full aspect-square max-w-[52px] 
                 sm:max-w-[56px] md:max-w-[60px]
-                 text-center text-base sm:text-lg font-bold  bg-[#f0f2f8] rounded-xl sm:rounded-2xl
-                   border-transparent  focus:bg-white outline-none transition-all placeholder-gray-400`}
+                text-center text-base sm:text-lg font-bold bg-[#f0f2f8] rounded-xl sm:rounded-2xl
+                focus:bg-white outline-none transition-all placeholder-gray-400`}
                 placeholder="•"
               />
             ))}
