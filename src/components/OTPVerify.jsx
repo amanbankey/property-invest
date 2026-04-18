@@ -127,11 +127,11 @@ export default function OTPVerify({mobile, setPage}) {
   };
 
   return (
-    <div className=" flex flex-col" style={{ background: "linear-gradient(160deg, #eef0f5 0%, #e8eaf2 50%, #f0eef5 100%)" }}>
+    <div className=" flex flex-col rounded-2xl" style={{ background: "linear-gradient(160deg, #eef0f5 0%, #e8eaf2 50%, #f0eef5 100%)" }}>
      
 
       <div className="  flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-10 sm:py-14">
-        <div className="text-center mb-8 sm:mb-10">
+        <div className="text-center mb-8 sm:mb-10 ">
           <h1 className="text-[#1a2e2a] text-3xl sm:text-4xl  font-bold mb-3 sm:mb-4">
             Verify Your Number
           </h1>
@@ -203,7 +203,7 @@ export default function OTPVerify({mobile, setPage}) {
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-2 pb-3">
             <FiLock className="text-gray-400 text-xs" />
             <span className="text-[10px] sm:text-xs text-gray-400 tracking-widest uppercase font-medium">
               Secure OTP Verification

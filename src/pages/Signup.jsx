@@ -292,13 +292,13 @@ const Signup = () => {
 
     <div>
       {page == 2 && (
-         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+         <div className="fixed  inset-0 bg-black/50 flex items-center justify-center z-50">
       
          <div className="bg-white rounded-2xl p-6 w-[90%] max-w-lg   relative">
            
            <button
              onClick={() => setPage(0)}
-             className="absolute top-4 right-4 text-gray-500 text-xl"
+             className="absolute top-7 right-8 text-gray-500 text-xl"
            >
              ✕
            </button>

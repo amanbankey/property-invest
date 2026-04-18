@@ -141,13 +141,13 @@ export default function VerifyMobile({mobile, setPage}) {
 
      
     <div
-      className="  flex flex-col"
+      className="  flex flex-col rounded-2xl"
       style={{ background: "linear-gradient(150deg, #eef2ee 0%, #f0f4f0 40%, #e8ede8 100%)" }}
     >
      
-      <div className=" flex-1 flex items-center justify-center px-4 sm:px-6 py-8  ">
+      <div className=" flex-1  flex items-center justify-center px-4 sm:px-6 py-8  ">
         <div className="w-full max-w-xs sm:max-w-sm md:max-w-md bg-white rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100 px-6 sm:px-8 md:px-10 ">
-          <div className="flex justify-center mb-6 sm:mb-7">
+          <div className="flex justify-center mb-6 sm:mb-7  mt-3">
             <div className="bg-[#e8f0ec] p-4 sm:p-5 rounded-2xl">
               <FiRadio className="text-[#1a5c47] text-2xl sm:text-3xl" />
             </div>
@@ -216,9 +216,9 @@ export default function VerifyMobile({mobile, setPage}) {
             </button>
           </p>
 
-          <div className="flex items-center justify-center gap-2 pt-4 border-t border-gray-100">
+          <div className="flex items-center justify-center gap-2 pt-4 border-t border-gray-100 pb-3">
             <FiLock className="text-gray-400 text-xs" />
-            <span className="text-[10px] sm:text-xs text-gray-400 tracking-widest uppercase font-medium">
+            <span className="text-[10px] sm:text-xs text-gray-400 tracking-widest uppercase font-medium ">
               Secure OTP Verification
             </span>
           </div>

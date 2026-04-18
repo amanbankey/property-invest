@@ -240,7 +240,7 @@ const Login = () => {
            
            <button
              onClick={() => setPage(0)}
-             className="absolute top-4 right-4 text-gray-500 text-xl"
+             className="absolute top-7 right-8 text-gray-500 text-xl"
            >
              ✕
            </button>
