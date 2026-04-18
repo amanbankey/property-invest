@@ -45,32 +45,7 @@ const chartPoints = [
   { x: 8, y: 25 }, { x: 9, y: 30 }, { x: 10, y: 20 }, { x: 11, y: 10 },
 ];
 
-function LineChart() {
-  const W = 560, H = 160, pad = 10;
-  const maxY = 100;
-  const pts = chartPoints.map((p, i) => ({
-    cx: pad + (i / (chartPoints.length - 1)) * (W - pad * 2),
-    cy: pad + (p.y / maxY) * (H - pad * 2),
-  }));
-  const path = pts.map((p, i) => `${i === 0 ? "M" : "L"}${p.cx},${p.cy}`).join(" ");
-  const area = path + ` L${pts[pts.length - 1].cx},${H} L${pts[0].cx},${H} Z`;
-  const months = ["JAN", "MAR", "MAY", "JUL", "SEP", "NOV"];
-  return (
-    <svg viewBox={`0 0 ${W} ${H + 20}`} className="w-full" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#0f766e" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#0f766e" stopOpacity="0.02" />
-        </linearGradient>
-      </defs>
-      <path d={area} fill="url(#areaGrad)" />
-      <path d={path} fill="none" stroke="#0f766e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      {months.map((m, i) => (
-        <text key={m} x={pad + (i / (months.length - 1)) * (W - pad * 2)} y={H + 16} textAnchor="middle" fontSize="10" fill="#9ca3af">{m}</text>
-      ))}
-    </svg>
-  );
-}
+
 
 function StatusBadge({ status }) {
   const s = status === "Completed" ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700";
@@ -170,24 +145,33 @@ function BrokerCodeCard() {
 function ReferralChart() {
   const [active, setActive] = useState("Monthly");
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm h-full">
-      <div className="flex items-start justify-between mb-4">
-        <div>
-          <h3 className="font-semibold text-gray-800 text-sm">Referral Performance</h3>
-          <p className="text-xs text-gray-400">Growth over last 12 months</p>
-        </div>
-        <div className="flex gap-1">
-          {["Weekly", "Monthly", "Yearly"].map(t => (
-            <button key={t} onClick={() => setActive(t)}
-              className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors
-                ${active === t ? "bg-teal-700 text-white" : "text-gray-400 hover:text-gray-600"}`}>
-              {t}
-            </button>
-          ))}
-        </div>
-      </div>
-      <LineChart />
+    <div className="bg-teal-700 text-white rounded-2xl shadow-lg p-6 max-w-md w-full">
+     
+    {/* Title */}
+    <h2 className="text-2xl font-semibold mb-3">
+      How Broker Code Works
+    </h2>
+
+    {/* Content */}
+    <p className="text-sm text-teal-100 leading-relaxed mb-4">
+      Broker code ek unique identifier hota hai jo har broker ko assign kiya jata hai. 
+      Jab koi user aapka broker code use karta hai, to uske through hone wale 
+      transactions aapke account se link ho jaate hain.
+    </p>
+
+    <p className="text-sm text-teal-100 leading-relaxed mb-4">
+      Isse aap apne referrals, commissions aur activity ko easily track kar sakte ho. 
+      Ye system transparency maintain karta hai aur earnings ko automate karta hai.
+    </p>
+
+    {/* Highlight Box */}
+    <div className="bg-teal-800 rounded-xl p-3">
+      <p className="text-xs text-teal-200">
+        💡 Tip: Apna broker code zyada se zyada share karo taaki aapki earning aur network grow ho.
+      </p>
     </div>
+
+  </div>
   );
 }
 

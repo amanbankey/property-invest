@@ -42,7 +42,7 @@ const Login = () => {
         );
 
 
-        console.log("res", res,   res.data );
+        // console.log("res", res,   res.data );
 
         // console.log("token", token  );
         // 9999999994

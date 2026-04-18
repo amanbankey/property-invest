@@ -55,7 +55,7 @@ const Signup = () => {
         return;
       }  
 
-      console.log('signup')
+      // console.log('signup')
       const obj = {
         name: fullName,
         phone: mobile,
@@ -69,7 +69,7 @@ const Signup = () => {
         );
 
 
-        console.log(res);
+        // console.log(res);
 
         setPage(1);
         // toast.success(res.data.message);

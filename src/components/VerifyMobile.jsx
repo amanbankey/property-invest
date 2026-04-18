@@ -92,13 +92,13 @@ export default function VerifyMobile({mobile, setPage}) {
 
     const finalOtp = otp.join("");
     // console.log("otp:", finalOtp);
-    
     if (finalOtp.length === 6 && finalOtp === "123456") {
 
       const obj = {
         phone: mobile,
         otp: finalOtp,
       }
+      console.log('obj', obj )
       try {
         const res = await axios.post(
           `${BASE_URL}/api/auth/verify-otp`,
