@@ -1,5 +1,7 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
+console.log('base', BASE_URL)
+
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { FiSmartphone, FiCheckCircle, FiUsers, FiBarChart2, FiLock, FiCircle } from "react-icons/fi";
@@ -29,6 +31,9 @@ const Login = () => {
         return;
       } 
 
+      const url = `${BASE_URL}/api/auth/send-otp`;
+      console.log('ur', url )
+
       const obj = {
         phone: mobile,
         // otp: "123456",
@@ -42,7 +47,7 @@ const Login = () => {
         );
 
 
-        // console.log("res", res,   res.data );
+        console.log("res", res,   res.data );
 
         // console.log("token", token  );
         // 9999999994
