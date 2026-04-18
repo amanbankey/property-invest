@@ -76,7 +76,7 @@ const Navbar = () => {
               {!isLoggedIn && (
                 <NavLink
                   to="/login"
-                  className="hidden sm:block px-4 py-2 bg-[#0F766E] hover:bg-[#0F766E] border-2 text-white  rounded-lg cursor-pointer "
+                  className="hidden sm:block px-4 py-2 bg-[#0F766E] hover:bg-[#0F766E]   text-white  rounded-lg cursor-pointer "
                 >
                   Login
                 </NavLink>
@@ -153,7 +153,9 @@ const Navbar = () => {
 
             <div className="flex justify-center gap-3 pb-10">
               {!isLoggedIn && (
-                <NavLink
+                <NavLink onClick={() => {
+                  setMobileMenuOpen((prev) => !prev)
+                }}
                   to="/signup"
                   className="sm:hidden w-40 text-center block  px-4 py-2 bg-[#0F766E] hover:bg-[#0F766E] text-white rounded-lg  cursor-pointer"
                 >
@@ -161,7 +163,9 @@ const Navbar = () => {
                 </NavLink>
               )}
               {!isLoggedIn && (
-                <NavLink
+                <NavLink onClick={() => {
+                  setMobileMenuOpen((prev) => !prev)
+                }}
                   to="/login"
                   className="sm:hidden w-40 text-center block px-4 py-2 bg-[#0F766E] hover:bg-[#0F766E] border-2 text-white  rounded-lg cursor-pointer "
                 >

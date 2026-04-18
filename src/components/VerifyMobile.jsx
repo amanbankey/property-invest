@@ -73,7 +73,7 @@ export default function VerifyMobile({mobile, setPage}) {
         obj 
       );
   
-      console.log("OTP resent", res);
+      // console.log("OTP resent", res);
 
       setTimer(30);
       setCanResend(false);
@@ -92,13 +92,13 @@ export default function VerifyMobile({mobile, setPage}) {
 
     const finalOtp = otp.join("");
     // console.log("otp:", finalOtp);
-    
     if (finalOtp.length === 6 && finalOtp === "123456") {
 
       const obj = {
         phone: mobile,
         otp: finalOtp,
       }
+      console.log('obj', obj )
       try {
         const res = await axios.post(
           `${BASE_URL}/api/auth/verify-otp`,
@@ -141,13 +141,13 @@ export default function VerifyMobile({mobile, setPage}) {
 
      
     <div
-      className="  flex flex-col"
+      className="  flex flex-col rounded-2xl"
       style={{ background: "linear-gradient(150deg, #eef2ee 0%, #f0f4f0 40%, #e8ede8 100%)" }}
     >
      
-      <div className=" flex-1 flex items-center justify-center px-4 sm:px-6 py-8  ">
+      <div className=" flex-1  flex items-center justify-center px-4 sm:px-6 py-8  ">
         <div className="w-full max-w-xs sm:max-w-sm md:max-w-md bg-white rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100 px-6 sm:px-8 md:px-10 ">
-          <div className="flex justify-center mb-6 sm:mb-7">
+          <div className="flex justify-center mb-6 sm:mb-7  mt-3">
             <div className="bg-[#e8f0ec] p-4 sm:p-5 rounded-2xl">
               <FiRadio className="text-[#1a5c47] text-2xl sm:text-3xl" />
             </div>
@@ -178,10 +178,14 @@ export default function VerifyMobile({mobile, setPage}) {
                 value={digit}
                 onChange={(e) => handleChange(i, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(i, e)}
-                className={`${otpErr ? 'border-2 border-red-400 text-red-500' : ' border-2 focus:border-[#1a5c47] text-[#0f2820]'} w-full aspect-square max-w-[52px] 
+                className={`${
+                  otpErr
+                    ? 'border-2 border-red-400 text-red-500 focus:border-red-500'
+                    : 'border-2 border-transparent focus:border-[#1a5c47] text-[#0f2820]'
+                } w-full aspect-square max-w-[52px] 
                 sm:max-w-[56px] md:max-w-[60px]
-                 text-center text-base sm:text-lg font-bold  bg-[#f0f2f8] rounded-xl sm:rounded-2xl
-                   border-transparent  focus:bg-white outline-none transition-all placeholder-gray-400`}
+                text-center text-base sm:text-lg font-bold bg-[#f0f2f8] rounded-xl sm:rounded-2xl
+                focus:bg-white outline-none transition-all placeholder-gray-400`}
                 placeholder="•"
               />
             ))}
@@ -212,9 +216,9 @@ export default function VerifyMobile({mobile, setPage}) {
             </button>
           </p>
 
-          <div className="flex items-center justify-center gap-2 pt-4 border-t border-gray-100">
+          <div className="flex items-center justify-center gap-2 pt-4 border-t border-gray-100 pb-3">
             <FiLock className="text-gray-400 text-xs" />
-            <span className="text-[10px] sm:text-xs text-gray-400 tracking-widest uppercase font-medium">
+            <span className="text-[10px] sm:text-xs text-gray-400 tracking-widest uppercase font-medium ">
               Secure OTP Verification
             </span>
           </div>

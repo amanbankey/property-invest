@@ -1,5 +1,7 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
+console.log('base', BASE_URL)
+
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { FiSmartphone, FiCheckCircle, FiUsers, FiBarChart2, FiLock, FiCircle } from "react-icons/fi";
@@ -28,6 +30,9 @@ const Login = () => {
         setMobileErr("Mobile No. is required ❌");
         return;
       } 
+ 
+      const url = `${BASE_URL}/api/auth/send-otp`;
+      console.log('ur', url )
 
       const obj = {
         phone: mobile,
@@ -41,7 +46,6 @@ const Login = () => {
           obj
         );
 
-        // let token = res.data.token;
 
         console.log("res", res,   res.data );
 
@@ -241,7 +245,7 @@ const Login = () => {
            
            <button
              onClick={() => setPage(0)}
-             className="absolute top-4 right-4 text-gray-500 text-xl"
+             className="absolute top-7 right-8 text-gray-500 text-xl"
            >
              ✕
            </button>
