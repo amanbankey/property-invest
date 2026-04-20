@@ -49,7 +49,8 @@ const AadharVerify = ({setActive}) => {
 
            <div className="flex items-center justify-between border border-gray-200 rounded-xl px-4 py-3.5 bg-gray-50">
                
-             <input placeholder="Enter your Aadhar number"  className="flex-1 px-4 py-2 text-sm text-gray-700 placeholder-gray-400 outline-none bg-gray-50 min-w-0" 
+             <input placeholder="Enter your Aadhar number"
+               className="flex-1 sm:px-4 px-0 py-2 text-sm text-gray-700 placeholder-gray-400 outline-none bg-gray-50 min-w-0" 
                 value={aadhaarNumber} 
                 onChange={(e) => setAadhaarNumber(formatAadhaar(e.target.value))}
                 type="text" 

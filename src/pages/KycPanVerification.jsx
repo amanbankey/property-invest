@@ -128,13 +128,13 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
                             required
                             maxLength={12}
                             minLength={12}
-                            className="flex-1 px-4 py-2 text-sm text-gray-700 placeholder-gray-400 outline-none bg-gray-50 min-w-0"
+                            className="flex-1 sm:px-4 px-0 py-2 text-sm text-gray-700 placeholder-gray-400 outline-none bg-gray-50 min-w-0"
                           />
                         </div>
 
                         <div className="flex items-center gap-1.5">
                           <MdOutlineVerified size={20} className="text-emerald-600" />
-                          <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
+                          <span className="sm:text-xs text-[0.5rem] font-bold text-emerald-700 uppercase tracking-wider">
                             Verified
                           </span>
                         </div>
@@ -143,18 +143,18 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
 
                     <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-start gap-3 mb-5">
                       <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
-                        <FiUser size={18} className="text-emerald-700" />
+                        <FiUser   className="text-emerald-700 sm:text-xl text-sm" />
                       </div>
                       <div>
-                        <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-0.5">
+                        <p className="text-[10px]  font-bold text-emerald-700 uppercase tracking-widest mb-0.5">
                           Name as per PAN
                         </p>
-                        <p className="text-base font-extrabold text-gray-900 tracking-wide">
+                        <p className="sm:text-base text-sm font-extrabold text-gray-900 tracking-wide">
                           {name}
                         </p>
-                        <div className="flex items-center gap-1 mt-1">
-                          <FiShield size={11} className="text-emerald-600" />
-                          <p className="text-xs text-gray-500">
+                        <div className="hidden sm:flex items-center gap-1 mt-1">
+                          <FiShield size={11} className="text-emerald-600  " />
+                          <p className="sm:text-xs text-[0.6rem] text-gray-500 ">
                             Matches with your provided basic info
                           </p>
                         </div>
@@ -163,7 +163,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
 
                     <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-start gap-3 mb-8">
                       <FiShield size={18} className="text-gray-400 shrink-0 mt-0.5" />
-                      <p className="text-xs text-gray-600 leading-relaxed">
+                      <p className="sm:text-xs text-[0.6rem] text-gray-600 leading-relaxed">
                         <span className="font-semibold text-gray-800">
                           Regulatory Compliance:
                         </span>{" "}
@@ -174,11 +174,9 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
 
                     <button
                       type="submit"
-                      className="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-4 rounded-2xl text-base flex items-center justify-center gap-2 transition-colors mb-4"
+                      className="w-full text-xs bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-4 rounded-2xl sm:text-base flex items-center justify-center gap-2 transition-colors mb-4"
                     >
-                      
                         Proceed to ID Verification
-                     
                       <FiArrowRight size={18} />
                     </button>
                   </form>

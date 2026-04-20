@@ -251,6 +251,7 @@ function BasicInfoForm({setActive}) {
               </label>
               <input
                 type="date"
+                placeholder="Enter dob"
                 className={inputCls}
                 value={form.dob}
                 onChange={(e) => setForm({ ...form, dob: e.target.value })}
