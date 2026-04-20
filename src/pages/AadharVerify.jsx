@@ -58,7 +58,7 @@ const AadharVerify = ({setActive}) => {
                 required />
                 <div className="flex items-center gap-1.5">
                   <MdOutlineVerified  className="text-emerald-600" />
-                  <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
+                  <span className="sm:text-xs text-[0.5rem] font-bold text-emerald-700 uppercase tracking-wider">
                     Verified
                   </span>
                 </div>
