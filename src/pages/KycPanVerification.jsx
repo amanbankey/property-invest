@@ -27,8 +27,8 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
 
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log('hello', panNum)
-     navigate('/kyc-review');
+    // console.log('hello', panNum)
+     navigate('/aadhar-verify');
     try{
          
     }catch(err){

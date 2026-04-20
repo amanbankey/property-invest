@@ -124,6 +124,7 @@ export default function KycReviewandSubmit() {
             <Section title="Identity Verification">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <Field label="PAN Number" value="ABCDE1234F" />
+                <Field label="Aadhar Number" value="**** **** ****" />
                 <Field label="Document Type" value="Passport (United Kingdom)" icon={<FiShield size={14} className="text-emerald-700" />} />
               </div>
             </Section>

@@ -11,10 +11,11 @@ import {
   FiLock,
   FiCheck,
 } from "react-icons/fi";
+
 import { MdOutlineAccountBalance, MdTrendingUp } from "react-icons/md";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { BsShieldCheck } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const steps = [
   { key: "basic", label: "BASIC INFO", icon: <FiUser size={16} /> },
@@ -72,8 +73,8 @@ function StepBar({ active }) {
         })}
       </div>
     </div>
-  );
-}
+  );  
+} 
 
 function PropertyCard() {
   return (
@@ -128,78 +129,181 @@ function SecurityBadge() {
 }
 
 function BasicInfoForm() {
+  const navigate = useNavigate();
+  
   const [form, setForm] = useState({
     name: "",
     email: "",
     dob: "",
     address: "",
   });
+  const [errors, setErrors] = useState({});
+
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+   const validate = () => {
+    let newErrors = {};
+
+    // ✅ Name
+    const nameRegex = /^[A-Za-z ]{3,50}$/;
+    if (!nameRegex.test(form.name)) {
+      newErrors.name = "Name must be 3-50 letters only";
+    }
+
+    // ✅ Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    let today = new Date();
+    let selectedDate = new Date(form.dob);
+  
+    if (!form.dob) {
+      newErrors.dob = "Date of birth is required";
+    }else if (selectedDate > today) {
+      newErrors.dob = "Please provide correct date";
+    } 
+
+    // ✅ Address
+    if (form.address.length < 10) {
+      newErrors.address = "Address must be at least 10 characters";
+    }
+
+    return newErrors;
+  };
+  
 
   const inputCls =
     "w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-200 transition-all";
 
+    const onSubmit = (e) => {
+      e.preventDefault();
+
+      const validationErrors = validate();
+      setErrors(validationErrors);
+      if (Object.keys(validationErrors).length === 0) {
+        alert("Form Submitted ✅");
+        navigate("/kyc-pan-verify");
+        console.log(form)
+
+        setForm({
+          name: "",
+          email: "",
+          dob: "",
+          address: "",
+        })
+
+      } else {
+        setErrors(validationErrors);
+      }
+
+     
+      
+      // try{
+
+      // }catch(err){
+        
+      // }
+    }
+
+    // const handleChange = (field) => (e) => {
+    //   setForm({ ...form, [field]: e.target.value });
+    // };
+
   return (
     <div className="space-y-5">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Full Name (as per PAN Card)
-        </label>
-        <input
-          className={inputCls}
-          placeholder="Johnathan Doe"
-          value={form.name}
-          onChange={set("name")}
-        />
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Email Address
-          </label>
-          <input
-            type="email"
-            className={inputCls}
-            placeholder="john@sovereign.com"
-            value={form.email}
-            onChange={set("email")}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Date of Birth
-          </label>
-          <input
-            type="date"
-            className={inputCls}
-            value={form.dob}
-            onChange={set("dob")}
-          />
-        </div>
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Residential Address
-        </label>
-        <textarea
-          className={`${inputCls} resize-none h-24`}
-          placeholder="Enter your full permanent address"
-          value={form.address}
-          onChange={set("address")}
-        />
-      </div>
-      <SecurityBadge />
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-1">
-        <button
-          onClick={() => {}}
-          className="w-full sm:w-auto bg-teal-800 text-white font-semibold text-sm px-8 py-3.5 rounded-xl hover:bg-teal-900 active:scale-95 transition-all"
-        >
-          <NavLink to="/">Next Step</NavLink>
-        </button>
-        <button className="text-gray-500 text-sm hover:text-gray-700 transition-colors">
-          Save and finish later
-        </button>
-      </div>
+
+       <form onSubmit={onSubmit}>
+          <div className="space-y-5">
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Full Name (as per PAN Card)
+              </label>
+              <input
+                className={inputCls}
+                placeholder="Enter your name "
+                value={form.name}
+                onChange={(e) =>
+                  setForm({ ...form, name: e.target.value })
+                }
+               
+              />
+               <p style={{ color: "red" }}>{errors.name}</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  className={inputCls}
+                  placeholder="Enter your email"
+                  value={form.email}
+                  onChange={(e) =>
+                    setForm({ ...form, email: e.target.value })
+                  }
+                 
+                />
+                 <p style={{ color: "red" }}>{errors.email}</p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Date of Birth
+                </label>
+                <input
+                  type="date"
+                  className={inputCls}
+                  value={form.dob}
+                  onChange={(e) =>
+                    setForm({ ...form, dob: e.target.value })
+                  }
+                  max={new Date().toISOString().split("T")[0]}
+                 
+                />
+                <p style={{ color: "red" }}>{errors.dob}</p>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Residential Address
+              </label>
+              <textarea
+                className={`${inputCls} resize-none h-24`}
+                placeholder="Enter your full permanent address"
+                value={form.address}
+                onChange={(e) =>
+                  setForm({ ...form, address: e.target.value })
+                }
+               
+              /> 
+                <p style={{ color: "red" }}>{errors.address}</p>
+            </div>
+
+             <SecurityBadge />
+
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-1">
+              <button
+                type="submit"
+                className="w-full sm:w-auto bg-teal-800 text-white font-semibold text-sm px-8 py-3.5 rounded-xl hover:bg-teal-900 active:scale-95 transition-all"
+              >
+                Next Step
+              </button>
+
+              <button
+                type="button"
+                className="text-gray-500 text-sm hover:text-gray-700 transition-colors"
+              >
+                Save and finish later
+              </button>
+            </div>
+
+          </div>
+                </form>
     </div>
   );
 }
