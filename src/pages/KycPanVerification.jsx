@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FiHelpCircle, FiBell, FiUser, FiCreditCard, FiFileText, FiCamera, FiHome, FiCheckSquare, FiArrowRight, FiShield, FiCheck, FiInfo } from "react-icons/fi";
 import { BsBank2 } from "react-icons/bs";
 import { MdOutlineVerified } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const STEPS = [
   { icon: <FiUser size={16} />, label: "Basic Info" },
@@ -19,10 +19,22 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
 
 
  export default function KycPanVerification() {
-  const [panNumber] = useState("BHPPK9211R");
+  const navigate = useNavigate();
+
+  const [panNum, setPanNum] = useState('');
   const [activeStep, setActiveStep] = useState(1);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+    // console.log('hello', panNum)
+     navigate('/aadhar-verify');
+    try{
+         
+    }catch(err){
+
+    }
+  }
   return (
     <div className="min-h-screen bg-gray-100 font-sans flex flex-col">
       
@@ -70,7 +82,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
 
         <main className="flex-1 overflow-y-auto px-4 sm:px-8 py-6 flex flex-col items-center">
           <div className="w-full max-w-2xl">
-            <div className="flex items-center justify-center gap-0 mb-8">
+            {/* <div className="flex items-center justify-center gap-0 mb-8">
               {PROGRESS_STEPS.map((step, i) => (
                 <div key={step} className="flex items-center">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0 transition-colors ${step === 1 ? "bg-emerald-700 text-white" : step === 2 ? "bg-emerald-700 text-white" : "bg-gray-200 text-gray-400"}`}>
@@ -81,56 +93,89 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
                   )}
                 </div>
               ))}
-            </div>
+            </div> */}
+
 
             <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 sm:p-8">
               <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-1">PAN Verification</h1>
               <p className="text-gray-500 text-sm mb-7">Verify your tax identity to unlock investment limits.</p>
+            
+                  <form onSubmit={onSubmit}>
+                    <div className="mb-5">
+                      <label className="flex items-center gap-1.5 text-sm font-semibold text-gray-800 mb-2">
+                        PAN Number <sup className="text-emerald-800">*</sup>
+                      </label>
 
-              <div className="mb-5">
-                <label className="flex items-center gap-1.5 text-sm font-semibold text-gray-800 mb-2">
-                  PAN Number <FiInfo size={14} className="text-gray-400" />
-                </label>
-                <div className="flex items-center justify-between border border-gray-200 rounded-xl px-4 py-3.5 bg-gray-50">
-                  <span className="text-base font-bold text-gray-900 tracking-widest">{panNumber}</span>
-                  <div className="flex items-center gap-1.5">
-                    <MdOutlineVerified size={20} className="text-emerald-600" />
-                    <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">Verified</span>
-                  </div>
-                </div>
-              </div>
+                      <div className="flex items-center justify-between border border-gray-200 rounded-xl px-4 py-3.5 bg-gray-50">
+                        <div>
+                          <input
+                            type="text"
+                            placeholder="Enter aadhar number"
+                            value={panNum}
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              setPanNum(value);
+                            }}
+                            required
+                            maxLength={12}
+                            minLength={12}
+                            className="flex-1 px-4 py-2 text-sm text-gray-700 placeholder-gray-400 outline-none bg-gray-50 min-w-0"
+                          />
+                        </div>
 
-              <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-start gap-3 mb-5">
-                <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
-                  <FiUser size={18} className="text-emerald-700" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-0.5">Name as per PAN</p>
-                  <p className="text-base font-extrabold text-gray-900 tracking-wide">SIDDHARTH MALHOTRA</p>
-                  <div className="flex items-center gap-1 mt-1">
-                    <FiShield size={11} className="text-emerald-600" />
-                    <p className="text-xs text-gray-500">Matches with your provided basic info</p>
-                  </div>
-                </div>
-              </div>
+                        <div className="flex items-center gap-1.5">
+                          <MdOutlineVerified size={20} className="text-emerald-600" />
+                          <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
+                            Verified
+                          </span>
+                        </div>
+                      </div>
+                    </div>
 
-              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-start gap-3 mb-8">
-                <FiShield size={18} className="text-gray-400 shrink-0 mt-0.5" />
-                <p className="text-xs text-gray-600 leading-relaxed">
-                  <span className="font-semibold text-gray-800">Regulatory Compliance:</span> PAN is required for financial compliance under sovereign banking regulations. Your data is encrypted and never stored on public servers.
-                </p>
-              </div>
+                    <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-start gap-3 mb-5">
+                      <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
+                        <FiUser size={18} className="text-emerald-700" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-0.5">
+                          Name as per PAN
+                        </p>
+                        <p className="text-base font-extrabold text-gray-900 tracking-wide">
+                          SIDDHARTH MALHOTRA
+                        </p>
+                        <div className="flex items-center gap-1 mt-1">
+                          <FiShield size={11} className="text-emerald-600" />
+                          <p className="text-xs text-gray-500">
+                            Matches with your provided basic info
+                          </p>
+                        </div>
+                      </div>
+                    </div>
 
-              <button className="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-4 rounded-2xl text-base flex items-center justify-center gap-2 transition-colors mb-4">
-                <NavLink to='/kyc-review'>
-                   Proceed to ID Verification
-                </NavLink>
-                <FiArrowRight size={18} />
-              </button>
+                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-start gap-3 mb-8">
+                      <FiShield size={18} className="text-gray-400 shrink-0 mt-0.5" />
+                      <p className="text-xs text-gray-600 leading-relaxed">
+                        <span className="font-semibold text-gray-800">
+                          Regulatory Compliance:
+                        </span>{" "}
+                        PAN is required for financial compliance under sovereign banking
+                        regulations. Your data is encrypted and never stored on public servers.
+                      </p>
+                    </div>
 
-              <button className="w-full text-sm font-semibold text-gray-700 hover:text-gray-900 text-center transition-colors">
+                    <button
+                      type="submit"
+                      className="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-4 rounded-2xl text-base flex items-center justify-center gap-2 transition-colors mb-4"
+                    >
+                      
+                        Proceed to ID Verification
+                     
+                      <FiArrowRight size={18} />
+                    </button>
+                  </form>
+              {/* <button  className="w-full text-sm font-semibold text-gray-700 hover:text-gray-900 text-center transition-colors">
                 Request Manual Review
-              </button>
+              </button> */}
             </div>
 
            

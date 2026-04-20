@@ -138,6 +138,7 @@ const Signup = () => {
               type="text"
               placeholder="Enter your full name"
               value={fullName}
+              required
               onChange={(e) =>    {
                 setFullName(e.target.value)
                 setFullNameErr("");
@@ -174,6 +175,7 @@ const Signup = () => {
                       setMobileErr("");
                     }}
                 className="flex-1    bg-[#f0f4f8] rounded-xl px-4 py-3.5 text-sm text-gray-700 placeholder-gray-400 outline-none focus:ring-2 focus:ring-[#14532d]/30 transition-all min-w-0"
+               required
               /></div>
 
              
@@ -205,6 +207,7 @@ const Signup = () => {
               checked={agreed}
               onChange={(e) => setAgreed(e.target.checked)}
               className="mt-0.5 w-4 h-4 flex-shrink-0 accent-[#14532d]"
+              required
             />
                </div>
 

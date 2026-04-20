@@ -1,6 +1,6 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-console.log('base', BASE_URL)
+// console.log('base', BASE_URL)
 
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
@@ -31,9 +31,6 @@ const Login = () => {
         return;
       } 
  
-      const url = `${BASE_URL}/api/auth/send-otp`;
-      console.log('ur', url )
-
       const obj = {
         phone: mobile,
         // otp: "123456",
@@ -150,7 +147,7 @@ const Login = () => {
                       // typing pe error hata
                       setMobileErr("");
                     }}
-
+                    required
                     maxLength={10}
                     minLength={10}
                     className="flex-1 px-4 py-3.5 text-sm text-gray-700 placeholder-gray-400 outline-none bg-white min-w-0"
