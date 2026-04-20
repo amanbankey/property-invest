@@ -28,7 +28,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
   const onSubmit = (e) => {
     e.preventDefault()
     // console.log('hello', panNum)
-     navigate('/aadhar-verify');
+    //  navigate('/aadhar-verify');
     try{
          
     }catch(err){
@@ -40,7 +40,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
       
 
       <div className="flex flex-1 overflow-hidden">
-        <aside className="hidden md:flex w-52 lg:w-56 bg-white border-r border-gray-200 flex-col justify-between py-6 px-4 shrink-0">
+        {/* <aside className="hidden md:flex w-52 lg:w-56 bg-white border-r border-gray-200 flex-col justify-between py-6 px-4 shrink-0">
           <div>
             <p className="text-xs font-extrabold text-emerald-800 uppercase tracking-widest mb-0.5">KYC Verification</p>
             <p className="text-xs text-gray-400 mb-8">Sovereign Compliance</p>
@@ -61,7 +61,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
             </div>
             <p className="text-xs text-emerald-200">15% Complete</p>
           </div>
-        </aside>
+        </aside> */}
 
         <div className="md:hidden bg-white border-b border-gray-200 px-4 py-2">
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="flex items-center gap-2 text-sm text-emerald-800 font-semibold">

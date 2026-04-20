@@ -21,13 +21,8 @@ const steps = [
   { key: "basic", label: "BASIC INFO", icon: <FiUser size={16} /> },
   { key: "pan", label: "PAN VERIFY", icon: <FiCreditCard size={16} /> },
   { key: "id", label: "ID VERIFY", icon: <FiFileText size={16} /> },
-  {
-    key: "docs",
-    label: "DOCUMENTS",
-    icon: <HiOutlineDocumentText size={16} />,
-  },
-  { key: "selfie", label: "SELFIE", icon: <FiCamera size={16} /> },
-  { key: "bank", label: "BANK", icon: <MdOutlineAccountBalance size={16} /> },
+  
+  // { key: "selfie", label: "SELFIE", icon: <FiCamera size={16} /> },
   { key: "review", label: "REVIEW", icon: <FiCheckSquare size={16} /> },
 ];
 
@@ -130,7 +125,8 @@ function SecurityBadge() {
 
 function BasicInfoForm() {
   const navigate = useNavigate();
-  
+  const [show , setShow] = useState(0);
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -182,8 +178,8 @@ function BasicInfoForm() {
       const validationErrors = validate();
       setErrors(validationErrors);
       if (Object.keys(validationErrors).length === 0) {
-        alert("Form Submitted ✅");
-        navigate("/kyc-pan-verify");
+
+        // navigate("/kyc-pan-verify");
         console.log(form)
 
         setForm({
@@ -213,12 +209,12 @@ function BasicInfoForm() {
   return (
     <div className="space-y-5">
 
-       <form onSubmit={onSubmit}>
+                 <form onSubmit={onSubmit}>
           <div className="space-y-5">
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name (as per PAN Card)
+                Full Name (as per PAN Card)   <sup className="text-emerald-800">*</sup>
               </label>
               <input
                 className={inputCls}
@@ -235,7 +231,7 @@ function BasicInfoForm() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address
+                  Email Address   <sup className="text-emerald-800">*</sup>
                 </label>
                 <input
                   type="email"
@@ -252,7 +248,7 @@ function BasicInfoForm() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Date of Birth
+                  Date of Birth  <sup className="text-emerald-800 ">*</sup>
                 </label>
                 <input
                   type="date"
@@ -270,7 +266,7 @@ function BasicInfoForm() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Residential Address
+                Residential Address  <sup className="text-emerald-800">*</sup>
               </label>
               <textarea
                 className={`${inputCls} resize-none h-24`}
@@ -303,7 +299,7 @@ function BasicInfoForm() {
             </div>
 
           </div>
-                </form>
+                 </form>
     </div>
   );
 }

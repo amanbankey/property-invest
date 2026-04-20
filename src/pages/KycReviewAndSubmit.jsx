@@ -115,7 +115,8 @@ export default function KycReviewandSubmit() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <Field label="Full Name" value="Eleanor Sterling-Wellesley" />
                 <Field label="Email Address" value="eleanor.w@sovereign.estate" />
-                <div className="sm:col-span-2">
+                <div className="sm:col-span-1  ">
+                  <Field label="dob" value="12-2-88" />
                   <Field label="Residential Address" value="12 Kensington Gardens, London SW1A 1AA" />
                 </div>
               </div>
