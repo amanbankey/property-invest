@@ -57,7 +57,7 @@ const AadharVerify = ({setActive}) => {
                 maxLength={14}
                 required />
                 <div className="flex items-center gap-1.5">
-                  <MdOutlineVerified size={20} className="text-emerald-600" />
+                  <MdOutlineVerified  className="text-emerald-600" />
                   <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
                     Verified
                   </span>
@@ -67,7 +67,7 @@ const AadharVerify = ({setActive}) => {
 
             {/* Name */}
             <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-start gap-3 mb-5">
-              <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-emerald-100 rounded-full flex items-center justify-center">
                 <FiUser size={18} className="text-emerald-700" />
               </div>
 

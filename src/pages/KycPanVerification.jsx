@@ -133,7 +133,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
                         </div>
 
                         <div className="flex items-center gap-1.5">
-                          <MdOutlineVerified size={20} className="text-emerald-600" />
+                          <MdOutlineVerified  className="text-emerald-600" />
                           <span className="sm:text-xs text-[0.5rem] font-bold text-emerald-700 uppercase tracking-wider">
                             Verified
                           </span>
