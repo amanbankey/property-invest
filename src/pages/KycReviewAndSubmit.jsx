@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FiHelpCircle, FiBell, FiUser, FiCreditCard, FiFileText, FiCamera, FiCheckSquare, FiShield, FiCheck } from "react-icons/fi";
 import { BsBank2 } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const NAV_STEPS = [
   { icon: <FiUser size={16} />, label: "Basic Info" },
@@ -69,12 +70,21 @@ function ProgressStepper() {
   );
 }
 
-function Section({ title, onEdit, children }) {
+function Section({ title, type,  setActive, children }) {
+
+  const onEdit = (e) => {
+    e.preventDefault() ;
+    setActive(type)
+  }
+
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6 mb-4">
+    <div className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6 mb-4 shadow-xl">
       <div className="flex items-center justify-between mb-5">
         <h2 className="text-base font-bold text-emerald-800">{title}</h2>
-        <button className="text-sm text-gray-500 hover:text-emerald-700 font-medium transition-colors">Edit</button>
+        <button className="text-sm text-gray-500 hover:text-emerald-700 font-medium transition-colors"
+         onClick={onEdit}>
+          Edit
+        </button>
       </div>
       {children}
     </div>
@@ -93,44 +103,53 @@ function Field({ label, value, icon }) {
   );
 }
 
-export default function KycReviewandSubmit() {
+export default function KycReviewandSubmit({setActive}) {
   const [activeNav, setActiveNav] = useState(6);
   const [confirmed, setConfirmed] = useState(false);
+
+  const { aadhaarNumber, panNum, name,  email, dob, address, isVerified  } = useSelector((state) => state.kyc);
+  // console.log("ke", aadhaarNumber, panNum, name,  email, dob, address, isVerified);
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans flex flex-col">
       
-
       <div className="flex flex-1">
-        <Sidebar active={activeNav} setActive={setActiveNav} />
+        {/* <Sidebar active={activeNav} setActive={setActiveNav} /> */}
 
         <main className="flex-1 overflow-y-auto px-4 sm:px-8 py-6">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-1">Review & Submit</h1>
             <p className="text-gray-500 text-sm mb-8">Please double check your details before final submission</p>
 
-            <ProgressStepper />
+            {/* <ProgressStepper /> */}
 
-            <Section title="Personal Info">
+            <Section title="Personal Info" setActive={setActive} type="basic" >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <Field label="Full Name" value="Eleanor Sterling-Wellesley" />
-                <Field label="Email Address" value="eleanor.w@sovereign.estate" />
-                <div className="sm:col-span-1  ">
-                  <Field label="dob" value="12-2-88" />
-                  <Field label="Residential Address" value="12 Kensington Gardens, London SW1A 1AA" />
+                <Field label="Full Name" value={name} />
+                <Field label="Email Address" value={email} />
+                <div className="sm:col-span-1 space-y-5 ">
+                  <Field label="dob" value={dob} />
+                  <Field label="Residential Address" value={address} />
                 </div>
               </div>
             </Section>
 
-            <Section title="Identity Verification">
+            <Section title="Pan Verification" setActive={setActive}  type="pan">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <Field label="PAN Number" value="ABCDE1234F" />
-                <Field label="Aadhar Number" value="**** **** ****" />
+                <Field label="PAN Number" value={panNum.panNum} />
                 <Field label="Document Type" value="Passport (United Kingdom)" icon={<FiShield size={14} className="text-emerald-700" />} />
               </div>
             </Section>
 
-            <Section title="Uploaded Documents">
+
+            <Section title="Aadhar Verification" setActive={setActive}  type="id">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <Field label="Aadhar Number" value={aadhaarNumber.aadhaarNumber} />
+                {/* <Field label="Document Type" value="Passport (United Kingdom)" icon={<FiShield size={14} className="text-emerald-700" />} /> */}
+              </div>
+            </Section>
+
+            <Section title="Uploaded Documents" >
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3">
                 {DOCS.map(doc => (
                   <div key={doc.name} className="rounded-xl overflow-hidden border border-gray-200">

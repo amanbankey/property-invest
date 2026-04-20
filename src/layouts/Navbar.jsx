@@ -8,9 +8,6 @@ import { CgProfile } from "react-icons/cg";
 
 import { RxCross1 } from "react-icons/rx";
 
-// const data = [
-// {item: "home", path: '/'},  {item: "Property", path: '/property'}, {item: "Contact", path: '/contact'}, {item: "About", path: '/about'},
-// ]
 
 const Navbar = () => {
   const [open, setOpen] = useState(true);
@@ -33,7 +30,7 @@ const Navbar = () => {
         <nav className="  mx-auto   bg-white/40  transparent  rounded-2xl   backdrop-blur-xl">
           <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 h-[65px] sm:h-[70px] lg:h-[75px] max-w-screen-2xl mx-auto">
             <NavLink to="/" className="flex-shrink-0 text-black duration-200">
-              logo
+               <img src="https://cdn-icons-png.flaticon.com/128/602/602175.png" className="object-contain w-10 10" />
             </NavLink>
 
             <div className="hidden lg:flex items-center gap-6 text-[16px] font-medium tracking-wide">

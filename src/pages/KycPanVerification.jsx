@@ -3,6 +3,7 @@ import { FiHelpCircle, FiBell, FiUser, FiCreditCard, FiFileText, FiCamera, FiHom
 import { BsBank2 } from "react-icons/bs";
 import { MdOutlineVerified } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const STEPS = [
   { icon: <FiUser size={16} />, label: "Basic Info" },
@@ -13,22 +14,30 @@ const STEPS = [
   { icon: <BsBank2 size={16} />, label: "Bank Details" },
   { icon: <FiCheckSquare size={16} />, label: "Review" },
 ];
+import { useDispatch } from "react-redux";
 
+import { setPan } from "../slices/kycslice";
 
 const PROGRESS_STEPS = [1, 2, 3, 4];
 
 
- export default function KycPanVerification() {
+ export default function KycPanVerification({setActive}) {
   const navigate = useNavigate();
 
   const [panNum, setPanNum] = useState('');
   const [activeStep, setActiveStep] = useState(1);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+  const {  name,    } = useSelector((state) => state.kyc);
 
   const onSubmit = (e) => {
     e.preventDefault()
+    setActive("id")
     // console.log('hello', panNum)
-    //  navigate('/aadhar-verify');
+  
+    dispatch(setPan({
+       panNum:panNum
+    }))
     try{
          
     }catch(err){
@@ -36,7 +45,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
     }
   }
   return (
-    <div className="min-h-screen bg-gray-100 font-sans flex flex-col">
+    <div className="min-h-screen  font-sans flex flex-col">
       
 
       <div className="flex flex-1 overflow-hidden">
@@ -63,7 +72,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
           </div>
         </aside> */}
 
-        <div className="md:hidden bg-white border-b border-gray-200 px-4 py-2">
+        {/* <div className="md:hidden bg-white border-b border-gray-200 px-4 py-2">
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="flex items-center gap-2 text-sm text-emerald-800 font-semibold">
             <FiCreditCard size={16} /> PAN Verify
             <FiArrowRight size={14} className={`transition-transform ${mobileMenuOpen ? "rotate-90" : ""}`} />
@@ -78,10 +87,10 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
               ))}
             </div>
           )}
-        </div>
+        </div> */}
 
         <main className="flex-1 overflow-y-auto px-4 sm:px-8 py-6 flex flex-col items-center">
-          <div className="w-full max-w-2xl">
+          <div className="w-full max-w-2xl ">
             {/* <div className="flex items-center justify-center gap-0 mb-8">
               {PROGRESS_STEPS.map((step, i) => (
                 <div key={step} className="flex items-center">
@@ -110,7 +119,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
                         <div>
                           <input
                             type="text"
-                            placeholder="Enter aadhar number"
+                            placeholder="Enter pan number"
                             value={panNum}
                             onChange={(e) => {
                               const value = e.target.value;
@@ -141,7 +150,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
                           Name as per PAN
                         </p>
                         <p className="text-base font-extrabold text-gray-900 tracking-wide">
-                          SIDDHARTH MALHOTRA
+                          {name}
                         </p>
                         <div className="flex items-center gap-1 mt-1">
                           <FiShield size={11} className="text-emerald-600" />

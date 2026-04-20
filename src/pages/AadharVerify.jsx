@@ -2,10 +2,13 @@ import { FiInfo, FiUser, FiShield, FiArrowRight } from "react-icons/fi";
 import { MdOutlineVerified } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setAadhaar } from "../slices/kycslice";
 
-const AadharVerify = () => {
+const AadharVerify = ({setActive}) => {
   const navigate = useNavigate(); 
   const [aadhaarNumber, setAadhaarNumber] = useState('');
+  const dispatch = useDispatch();
 
   const formatAadhaar = (value) => { 
     const cleaned = value.replace(/\D/g, '').slice(0, 12);
@@ -15,17 +18,20 @@ const AadharVerify = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted");
-    // navigate('/kyc-review')
-      
+    // console.log("Form Submitted");
+  
+    setActive("review")
+    dispatch(setAadhaar({
+      aadhaarNumber: aadhaarNumber,
+    }))
+
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      
+    <div className="flex items-center justify-center ">
       <div >
       <form
             onSubmit={handleSubmit}
-            className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-gray-100 p-6 sm:p-8"
+            className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-gray-100 p-6  sm:p-8"
           >
             <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-1">
               Aadhaar Verification
@@ -35,7 +41,7 @@ const AadharVerify = () => {
               Verify your identity using Aadhaar to continue KYC process.
             </p>
 
-            {/* Aadhaar Number */}
+        
             <div className="mb-5">
               <label className="flex items-center gap-1.5 text-sm font-semibold text-gray-800 mb-2">
                 Aadhaar Number   <sup className="text-emerald-800">*</sup>
