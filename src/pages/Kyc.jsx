@@ -346,7 +346,7 @@ export default function KYCVerification() {
 
   return (
     <div className="  bg-slate-50 font-sans">
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 y">
+      <main className="max-w-4xl mx-auto px-2 sm:px-4 lg:px-8 py-8 sm:py-10 y">
         <div className="text-center mb-8 sm:mb-10">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-teal-800 mb-1">
             KYC Verification

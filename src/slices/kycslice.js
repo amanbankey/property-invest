@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    aadhaarNumber: "",
+    aadhaarPreview: null,
+    panPreview: null,
     name: "",
     email:"",
     dob:"",
@@ -15,11 +16,12 @@ const kycSlice = createSlice({
   initialState: initialState,
   reducers: {
       setAadhaar: (state, action) => {
-        state.aadhaarNumber = action.payload;
+        state.aadhaarPreview = action.payload.aadhaarPreview;
       },
 
       setPan: (state, action) => {
-        state.panNum = action.payload;
+        // state.panNum = action.payload;
+        state.panPreview = action.payload.panPreview;
       },
 
       setKycData: (state, action) => {

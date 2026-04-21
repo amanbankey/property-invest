@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiHelpCircle, FiBell, FiUser, FiCreditCard, FiFileText, FiCamera, FiCheckSquare, FiShield, FiCheck } from "react-icons/fi";
 import { BsBank2 } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
@@ -106,9 +106,12 @@ function Field({ label, value, icon }) {
 export default function KycReviewandSubmit({setActive}) {
   const [activeNav, setActiveNav] = useState(6);
   const [confirmed, setConfirmed] = useState(false);
+ 
 
-  const { aadhaarNumber, panNum, name,  email, dob, address, isVerified  } = useSelector((state) => state.kyc);
-  // console.log("ke", aadhaarNumber, panNum, name,  email, dob, address, isVerified);
+  const { aadhaarPreview,    panPreview,  name,  email, dob, address, isVerified  } = useSelector((state) => state.kyc);
+  // console.log("ke", aadhaarPreview, panPreview, name,  email, dob, address, isVerified);
+
+
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans flex flex-col">
@@ -136,15 +139,22 @@ export default function KycReviewandSubmit({setActive}) {
 
             <Section title="Pan Verification" setActive={setActive}  type="pan">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <Field label="PAN Number" value={panNum.panNum} />
+                {/* <Field label="PAN Number" value={panNum.panNum} /> */}
+               {panPreview && (
+                <img
+                  src={panPreview}
+                  alt="PAN"
+                  className="h-24 mt-2"
+                />
+              )}
                 <Field label="Document Type" value="Passport (United Kingdom)" icon={<FiShield size={14} className="text-emerald-700" />} />
               </div>
             </Section>
 
-
             <Section title="Aadhar Verification" setActive={setActive}  type="id">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <Field label="Aadhar Number" value={aadhaarNumber.aadhaarNumber} />
+                <img src={aadhaarPreview}  alt="aadahr"
+                  className="h-24 mt-2" /> 
                 {/* <Field label="Document Type" value="Passport (United Kingdom)" icon={<FiShield size={14} className="text-emerald-700" />} /> */}
               </div>
             </Section>

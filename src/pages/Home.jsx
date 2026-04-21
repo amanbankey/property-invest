@@ -12,7 +12,7 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { AiOutlineSafety } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import Lenis from "@studio-freight/lenis";
-
+import mobile from '../assets/images/original.jpg'
 
 
 
@@ -334,36 +334,13 @@ function AppBanner() {
           </div>
         </div>
         <div className="flex-1 flex justify-center lg:justify-end">
-          <div className="bg-gray-800 rounded-3xl p-4 shadow-2xl w-56 sm:w-64">
-            <div className="bg-gray-700 rounded-2xl h-40 sm:h-52 flex items-center justify-center">
-              <FiBarChart2 size={48} className="text-emerald-400" />
-            </div>
-            <div className="mt-3 space-y-1.5">
-              <div className="h-2 bg-gray-700 rounded-full w-3/4 mx-auto"></div>
-              <div className="h-2 bg-emerald-500 rounded-full w-1/2 mx-auto opacity-70"></div>
-            </div>
-          </div>
+          <img src={mobile} alt="img" />
+      
         </div>
       </div>
     </section>
   );
 }
-
-
-// useEffect(() => {
-//   const lenis = new Lenis({
-//     lerp: 0.05,     // smoothness (0.05 = very smooth)
-//     smooth: true,
-//   });
-
-//   function raf(time) {
-//     lenis.raf(time);
-//     requestAnimationFrame(raf);
-//   }
-
-//   requestAnimationFrame(raf);
-
-// }, []);
 
 
 export default function Home() {
