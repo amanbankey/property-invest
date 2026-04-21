@@ -5,7 +5,7 @@ import { HiOutlineUserGroup, HiOutlineShieldCheck, HiOutlineChartBar, HiOutlineC
 import { HiOutlineSquares2X2, HiBriefcase, HiOutlineUsers, HiOutlineBanknotes, HiOutlineDocumentText, HiOutlineQuestionMarkCircle, HiArrowRightOnRectangle, HiOutlineShare, HiOutlineClipboardDocument, HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
 import { RiCopperCoinLine } from "react-icons/ri";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-
+import { RxCross1 } from "react-icons/rx";
 const navItems = [
   { icon: HiOutlineSquares2X2, label: "Overview", active: true },
   { icon: HiBriefcase, label: "Portfolio" },
@@ -145,7 +145,7 @@ function BrokerCodeCard() {
 function ReferralChart() {
   const [active, setActive] = useState("Monthly");
   return (
-    <div className="bg-teal-700 text-white rounded-2xl shadow-lg p-6 max-w-md w-full">
+    <div className="bg-teal-700 text-white rounded-2xl shadow-lg p-6 sm:max-w-md w-full">
      
     {/* Title */}
     <h2 className="text-2xl font-semibold mb-3">
@@ -320,7 +320,7 @@ function Header({ setMobileOpen }) {
   return (
     <div className="flex items-center justify-between mb-6">
       <div className="flex items-center gap-3">
-        <button className="lg:hidden text-gray-500 hover:text-gray-700" onClick={() => setMobileOpen(true)}>
+        <button className="lg:hidden text-gray-500 hover:text-gray-700" onClick={() => setMobileOpen(prev => !prev)}>
           <HiOutlineSquares2X2 className="text-2xl" />
         </button>
         <div>
@@ -344,20 +344,31 @@ export default function BrokerDashboard() {
     <div className="flex bg-gray-50 font-sans">
       
       {/* ✅ LEFT SIDEBAR (STICKY) */}
-      <aside className={`
-        sticky top-[11%] h-[90vh] w-52 bg-gray-50 border-r border-gray-200
-        flex flex-col z-10
-        ${mobileOpen ? "translate-x-0" : "-translate-x-full"} 
-        lg:translate-x-0 lg:flex-shrink-0
-      `}>
+      <aside className={
+        // ` sticky top-[11%] h-[90vh] w-52 bg-gray-50 border-r border-gray-200
+        // flex flex-col z-10
+        // ${mobileOpen ? "translate-x-0" : "-translate-x-full"} 
+        // lg:translate-x-0 lg:flex-shrink-0`
+              `fixed lg:sticky top-0 lg:top-[11%] left-0
+          h-full lg:h-[90vh] w-52 bg-gray-50 border-r border-gray-200
+          flex flex-col z-40
+          transform transition-transform duration-300
+          ${mobileOpen ? "translate-x-0" : "-translate-x-full"} 
+          lg:translate-x-0`
+      }>
         
         <div className="flex items-center gap-2 px-4 py-5 border-bborder-gray-200">
           <div className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center">
             <HiBriefcase className="text-white text-sm" />
           </div>
+          <div className="flex  items-center  justify-around gap-8"> 
           <div>
             <p className="text-sm font-semibold text-gray-800 leading-tight">Broker Portal</p>
             <p className="text-xs text-gray-400">Premium Tier</p>
+          </div>
+          <div>
+             <  RxCross1 className="text-xl " onClick={() => setMobileOpen(false)} />
+          </div>
           </div>
         </div>
 
@@ -381,13 +392,19 @@ export default function BrokerDashboard() {
         </div>
       </aside>
 
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={() => setMobileOpen(false)}
+        ></div>
+      )}
       {/* ✅ RIGHT CONTENT (NORMAL PAGE SCROLL) */}
       <main className="flex-1 p-4 sm:p-6 lg:p-8 min-w-0">
         
-        <Header setMobileOpen={setMobileOpen} />
+        <Header setMobileOpen={setMobileOpen}  />
         <StatCards />
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
           <div className="lg:col-span-2">
             <BrokerCodeCard />
           </div>
