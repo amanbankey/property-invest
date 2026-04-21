@@ -62,11 +62,12 @@ const AadharVerify = ({ setActive }) => {
             Verify your identity using Aadhaar to continue KYC process.
           </p>
 
+
           <div className="mb-5">
             <label className="flex items-center gap-1.5 text-sm font-semibold text-gray-800 mb-2">
               Upload Aadhaar <sup className="text-emerald-800">*</sup>
             </label>
-
+             
             <div className="flex items-center justify-between border border-gray-200 rounded-xl px-4 py-3.5 bg-gray-50">
               <div>
                 <input
@@ -85,8 +86,7 @@ const AadharVerify = ({ setActive }) => {
                 </span>
               </div>
             </div>
-
-            {/* ✅ Aadhaar Preview */}
+             
             {aadhaarPreview && (
               <img
                 src={aadhaarPreview}
@@ -94,7 +94,8 @@ const AadharVerify = ({ setActive }) => {
                 className="mt-2 h-20"
               />
             )}
-          </div>
+            </div>
+
 
           {/* Name */}
           <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-start gap-3 mb-5">
