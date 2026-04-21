@@ -159,7 +159,7 @@ export default function KycReviewandSubmit({setActive}) {
               </div>
             </Section>
 
-            <Section title="Uploaded Documents" >
+            {/* <Section title="Uploaded Documents" >
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3">
                 {DOCS.map(doc => (
                   <div key={doc.name} className="rounded-xl overflow-hidden border border-gray-200">
@@ -170,9 +170,9 @@ export default function KycReviewandSubmit({setActive}) {
                   </div>
                 ))}
               </div>
-            </Section>
+            </Section> */}
 
-            <Section title="Bank Details">
+            {/* <Section title="Bank Details">
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-xs font-bold text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full uppercase tracking-wider">Primary</span>
               </div>
@@ -181,7 +181,7 @@ export default function KycReviewandSubmit({setActive}) {
                 <Field label="Account Number" value="**** **** 8829" />
                 <Field label="Bank Name" value="Standard Chartered Wealth" />
               </div>
-            </Section>
+            </Section> */}
 
             <div className="bg-white rounded-2xl border border-gray-200 p-5 mb-6 flex items-start gap-3">
               <button onClick={() => setConfirmed(!confirmed)}

@@ -65,11 +65,15 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
             <button className="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-7 py-3 rounded-lg transition-colors text-sm">
-              <NavLink to='/property'>
+              <NavLink to='/property' >
                   Explore Properties
               </NavLink>
             </button>
-            <button className="border border-gray-300 hover:border-emerald-400 text-gray-700 font-semibold px-7 py-3 rounded-lg transition-colors text-sm bg-green-50">Become a Partner</button>
+            <button className="border border-gray-300 hover:border-emerald-400 text-gray-700 font-semibold px-7 py-3 rounded-lg transition-colors text-sm bg-green-50">
+              <NavLink to='/broker-dashboard'>
+                  Become a Partner
+              </NavLink>
+            </button>
           </div>
           <div className="mt-10 flex gap-10 justify-center lg:justify-start">
             <div>

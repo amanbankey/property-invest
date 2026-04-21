@@ -407,7 +407,7 @@ export default function BrokerDashboard() {
           </div>
         </div>
 
-        <ActiveOpportunities />
+        {/* <ActiveOpportunities /> */}
       </main>
     </div>
   );

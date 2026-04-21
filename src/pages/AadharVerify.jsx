@@ -98,7 +98,7 @@ const AadharVerify = ({ setActive }) => {
 
 
           {/* Name */}
-          <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-start gap-3 mb-5">
+          {/* <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-start gap-3 mb-5">
             <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
               <FiUser size={18} className="text-emerald-700" />
             </div>
@@ -119,7 +119,7 @@ const AadharVerify = ({ setActive }) => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Info */}
           <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-start gap-3 mb-8">

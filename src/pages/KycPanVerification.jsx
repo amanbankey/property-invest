@@ -112,9 +112,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
                         )}
                     </div>
 
-
-
-                    <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-start gap-3 mb-5">
+                    {/* <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-start gap-3 mb-5">
                       <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center shrink-0">
                         <FiUser   className="text-emerald-700 sm:text-xl text-sm" />
                       </div>
@@ -132,7 +130,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
                           </p>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
 
                     <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-start gap-3 mb-8">
                       <FiShield size={18} className="text-gray-400 shrink-0 mt-0.5" />
