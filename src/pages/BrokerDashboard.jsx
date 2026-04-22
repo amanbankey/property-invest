@@ -6,6 +6,7 @@ import { HiOutlineSquares2X2, HiBriefcase, HiOutlineUsers, HiOutlineBanknotes, H
 import { RiCopperCoinLine } from "react-icons/ri";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { RxCross1 } from "react-icons/rx";
+
 const navItems = [
   { icon: HiOutlineSquares2X2, label: "Overview", active: true },
   { icon: HiBriefcase, label: "Portfolio" },
@@ -366,7 +367,7 @@ export default function BrokerDashboard() {
             <p className="text-sm font-semibold text-gray-800 leading-tight">Broker Portal</p>
             <p className="text-xs text-gray-400">Premium Tier</p>
           </div>
-          <div>
+          <div className="border-2 lg:hidden block">
              <  RxCross1 className="text-xl " onClick={() => setMobileOpen(false)} />
           </div>
           </div>

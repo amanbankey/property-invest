@@ -17,6 +17,7 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
+  console.log('op', open)
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
@@ -24,8 +25,12 @@ const Navbar = () => {
     toast.success("Logout successfully ");
   };
 
+  const onDashboard = () => {
+    navigate('/dashboard');
+    setMobileMenuOpen(false);
+  }
   return (
-    <div className="z-30 shadow-lg  sticky top-0 ">
+    <div className="z-20 shadow-lg  sticky top-0">
       <div className="">
         <nav className="  mx-auto   bg-white/40  transparent  rounded-2xl   backdrop-blur-xl">
           <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 h-[65px] sm:h-[70px] lg:h-[75px] max-w-screen-2xl mx-auto">
@@ -79,12 +84,17 @@ const Navbar = () => {
                 </NavLink>
               )}
 
-              {isLoggedIn && (
+          <div className="hidden lg:block"> 
+            <div className="flex justify-center gap-3  ">
+               {isLoggedIn && (
                 <>
                   <CgProfile className="w-7 h-7" />
                   <ProfileDropdown handleLogout={handleLogout} />
                 </>
               )}
+            </div>
+            </div>
+             
 
               {/* cross and show button  */}
               {!mobileMenuOpen && (
@@ -146,9 +156,21 @@ const Navbar = () => {
               >
                 Contact
               </NavLink>
+
+              <div className="flex flex-col items-start gap-3 mb-5 ">
+              {/* <NavLink to="/dashboard"> */}
+              <button className="text-white bg-emerald-500 hover:bg-emerald-600 px-3 py-2  rounded-lg "  
+              onClick={onDashboard}> 
+                Dashboard 
+              </button>
+
+               {/* </NavLink> */}
+               <button className="text-white bg-emerald-500 hover:bg-emerald-600 px-3 py-2  rounded-lg " onClick={handleLogout} > Logout </button>
+              </div>
+
             </div>
 
-            <div className="flex justify-center gap-3 pb-10">
+            <div className="flex justify-start gap-3 pb-5">
               {!isLoggedIn && (
                 <NavLink onClick={() => {
                   setMobileMenuOpen((prev) => !prev)
@@ -170,12 +192,19 @@ const Navbar = () => {
                 </NavLink>
               )}
 
-              {isLoggedIn && (
+             
+
+              {/* <div className=" flex justify-center gap-3 mb-5 z-40">
+                 {isLoggedIn && (
                 <>
                   <CgProfile className="w-7 h-7" />
                   <ProfileDropdown handleLogout={handleLogout} />
                 </>
               )}
+              </div> */}
+
+
+             
             </div>
           </div>
         </nav>
