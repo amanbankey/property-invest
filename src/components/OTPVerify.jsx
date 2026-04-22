@@ -130,12 +130,12 @@ export default function OTPVerify({mobile, setPage}) {
     <div className=" flex flex-col rounded-2xl" style={{ background: "linear-gradient(160deg, #eef0f5 0%, #e8eaf2 50%, #f0eef5 100%)" }}>
      
 
-      <div className="  flex-1 flex flex-col items-center justify-center px-4 sm:px-6 py-10 sm:py-14">
+      <div className="  flex-1 flex flex-col items-center justify-center px-2 sm:px-6 py-6 sm:py-14">
         <div className="text-center mb-8 sm:mb-10 ">
-          <h1 className="text-[#1a2e2a] text-3xl sm:text-4xl  font-bold mb-3 sm:mb-4">
+          <h1 className="text-[#1a2e2a] text-xl whitespace-nowrap  sm:text-3xl font-bold mb-3 sm:mb-4">
             Verify Your Number
           </h1>
-          <p className="text-gray-500 text-sm sm:text-base">
+          <p className="text-gray-500 text-xs sm:text-base">
             We've sent a 6-digit code to{" "}
             <span className="text-[#1a5c47] font-semibold">+91 {maskMobile(mobile)}</span>
           </p>
@@ -156,12 +156,13 @@ export default function OTPVerify({mobile, setPage}) {
                 value={digit}
                 onChange={(e) => handleChange(i, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(i, e)}
+                  placeholder="•"
                 className={`${
                   otpErr
                     ? 'border-2 border-red-400 text-red-500 focus:border-red-500'
                     : 'border-2 border-transparent focus:border-[#1a5c47] text-[#1a2e2a]'
-                } w-10 h-12 sm:w-12 sm:h-14
-                md:w-14 md:h-16 text-center text-lg sm:text-xl font-bold text-[#1a2e2a] bg-[#eef0f7] rounded-xl 
+                }  w-full aspect-square max-w-[52px] 
+                sm:max-w-[56px] md:max-w-[60px] text-center text-lg sm:text-xl font-bold text-[#1a2e2a] bg-[#eef0f7] rounded-lg
                 sm:rounded-2xl focus:bg-white outline-none transition-all`}
               />
             ))}
@@ -174,8 +175,8 @@ export default function OTPVerify({mobile, setPage}) {
               )
             }
            <button className="w-full bg-[#1a5c47] hover:bg-[#155240] active:bg-[#0f3d2e] text-white 
-           font-bold py-3.5 sm:py-4 rounded-xl sm:rounded-2xl text-sm 
-           sm:text-base tracking-wide transition-colors mb-6 sm:mb-7  ">
+           font-bold py-3 sm:py-4 rounded-xl sm:rounded-2xl text-xs 
+           sm:text-sm tracking-wide transition-colors mb-6 sm:mb-7  ">
             Verify & Continue
           </button>
            </form>
@@ -203,7 +204,7 @@ export default function OTPVerify({mobile, setPage}) {
             </div>
           </div>
 
-          <div className="flex items-center justify-center gap-2 pb-3">
+          <div className="flex items-center justify-center gap-2 sm:pb-3">
             <FiLock className="text-gray-400 text-xs" />
             <span className="text-[10px] sm:text-xs text-gray-400 tracking-widest uppercase font-medium">
               Secure OTP Verification

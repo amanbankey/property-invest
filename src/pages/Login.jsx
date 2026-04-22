@@ -64,20 +64,6 @@ const Login = () => {
 
   
       <div className="relative top-0 flex flex-col  ">
-
-      <nav className="absolute top-0 left-0 right-0 z-10 flex justify-between items-center px-6 sm:px-10 py-5 bg-transparent">
-        {/* <span className="text-white text-base sm:text-lg font-bold tracking-tight">
-          Sovereign Estate
-        </span> */}
-        <div className="flex gap-4 sm:gap-6 items-center">
-          {/* <a href="#" className="text-[#0F766E] text-sm sm:text-base font-medium   transition-colors">
-            Explore Properties
-          </a> */}
-          {/* <NavLink to="/signup" className=" text-[#0F766E]   text-sm sm:text-base font-semibold underline hover:opacity-80 transition-opacity">
-            Sign Up
-          </NavLink> */}
-         </div>
-      </nav>
  
       <div className="flex flex-col lg:flex-row min-h-screen ">
         <div
@@ -224,25 +210,17 @@ const Login = () => {
         </div>
       </div>
  
-      {/* <footer className="bg-[#f5f5f0] border-t border-gray-200 px-6 sm:px-10 py-4 flex justify-between items-center">
-        <p className="text-[10px] sm:text-xs text-gray-400 font-medium tracking-widest uppercase">
-          Sovereign Curator — Digital Assets Group
-        </p>
-        <p className="text-[10px] sm:text-xs text-gray-400 font-medium tracking-widest uppercase">
-          Est. 2024
-        </p>
-      </footer> */}
        </div>
  
      <div>
       {page == 1 && (
-         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 ">
       
-         <div className="bg-white rounded-2xl p-6 w-[90%] max-w-lg   relative">
+         <div className="bg-white rounded-2xl p-2 w-[90%] max-w-lg   relative ">
            
            <button
              onClick={() => setPage(0)}
-             className="absolute top-7 right-8 text-gray-500 text-xl"
+             className="absolute top-3 right-5 text-gray-500 text-xl"
            >
              ✕
            </button>

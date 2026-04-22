@@ -137,37 +137,35 @@ export default function VerifyMobile({mobile, setPage}) {
   };
 
   return (
-    <div> 
-
-     
+    <div className=""> 
     <div
-      className="  flex flex-col rounded-2xl"
+      className="  flex flex-col rounded-2xl "
       style={{ background: "linear-gradient(150deg, #eef2ee 0%, #f0f4f0 40%, #e8ede8 100%)" }}
     >
      
       <div className=" flex-1  flex items-center justify-center px-4 sm:px-6 py-8  ">
         <div className="w-full max-w-xs sm:max-w-sm md:max-w-md bg-white rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100 px-6 sm:px-8 md:px-10 ">
-          <div className="flex justify-center mb-6 sm:mb-7  mt-3">
-            <div className="bg-[#e8f0ec] p-4 sm:p-5 rounded-2xl">
-              <FiRadio className="text-[#1a5c47] text-2xl sm:text-3xl" />
+          <div className="flex justify-center mb-4 sm:mb-7  mt-3">
+            <div className="bg-[#e8f0ec] p-3 sm:p-5 rounded-xl">
+              <FiRadio className="text-[#1a5c47] text-xl sm:text-3xl" />
             </div>
           </div>
 
           <div className="  ">
             <form onSubmit={handleSubmit}> 
-          <div className="text-center mb-7 sm:mb-8">
-            <h1 className="text-[#0f2820] text-2xl sm:text-3xl font-bold mb-2 sm:mb-3">
+          <div className="text-center mb-2 sm:mb-8">
+            <h1 className="text-[#0f2820] text-xl whitespace-nowrap  sm:text-3xl font-bold mb-2 sm:mb-3">
               Verify Mobile Number
             </h1>
-            <p className="text-gray-500 text-sm sm:text-base mb-1">
+            <p className="text-gray-500 text-xs sm:text-base sm:mb-1">
               Enter the 6-digit code sent to +91  {maskMobile(mobile)}.
             </p>
-            <a href="#" className="text-[#1a5c47] text-sm sm:text-base font-medium hover:opacity-70 transition-opacity">
+            <a href="#" className="text-[#1a5c47] text-xs sm:text-base font-medium hover:opacity-70 transition-opacity">
               Change number
             </a>
           </div>
 
-          <div className=" flex justify-between gap-1.5 sm:gap-2 mb-1 " onPaste={handlePaste}>
+          <div className=" flex justify-between gap-1.5 sm:gap-2 sm:mb-1  " onPaste={handlePaste}>
             {otp.map((digit, i) => (
               <input
                 key={i}
@@ -184,7 +182,7 @@ export default function VerifyMobile({mobile, setPage}) {
                     : 'border-2 border-transparent focus:border-[#1a5c47] text-[#0f2820]'
                 } w-full aspect-square max-w-[52px] 
                 sm:max-w-[56px] md:max-w-[60px]
-                text-center text-base sm:text-lg font-bold bg-[#f0f2f8] rounded-xl sm:rounded-2xl
+                text-center text-base sm:text-lg font-bold bg-[#f0f2f8] rounded-lg sm:rounded-2xl
                 focus:bg-white outline-none transition-all placeholder-gray-400`}
                 placeholder="•"
               />
@@ -205,7 +203,7 @@ export default function VerifyMobile({mobile, setPage}) {
             Verify OTP
           </button>
 
-          <p className="text-center text-sm text-gray-500 mb-7 sm:mb-8">
+          <p className="text-center text-xs mt-2 text-gray-500 mb-0 sm:mb-8">
             Didn't receive the code?{" "}
             <button
               onClick={handleResend}

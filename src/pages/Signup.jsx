@@ -104,7 +104,7 @@ const Signup = () => {
               1 Share = 1% Ownership
             </span>
           </div>
-          <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-8 sm:mb-12">
+          <h1 className="text-white text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-8 sm:mb-12">
             Start Your<br />Investment<br />Journey
           </h1>
           <ul className="space-y-4 sm:space-y-5">
@@ -279,7 +279,7 @@ const Signup = () => {
         
         <button
           onClick={() => setPage(0)}
-          className="absolute top-3 right-3 text-gray-500 text-xl"
+          className="absolute top-1 right-2 text-gray-500 text-xl"
         >
           ✕
         </button>

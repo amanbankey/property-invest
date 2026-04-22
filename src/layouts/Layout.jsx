@@ -9,12 +9,18 @@ const Layout = () => {
   const hideNavbar = 
   location.pathname === "/login" || 
   location.pathname === "/signup";
+
+
+  const hideFooter = location.pathname === '/broker-dashboard';
+
   return (
     <>
     
        {!hideNavbar && <Navbar />}
       <Outlet />
-      <Footer />
+
+      {!hideFooter && <Footer />}
+      
       
     </>
   );
