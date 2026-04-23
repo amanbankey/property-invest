@@ -45,9 +45,7 @@ export default function KycSubmission() {
                </NavLink>
              
             </button>
-            <button className="w-full sm:w-auto text-gray-600 hover:text-gray-900 font-semibold px-6 py-3.5 rounded-2xl text-sm border border-gray-200 bg-white bg-opacity-60 hover:bg-opacity-100 transition-colors">
-              View Submission
-            </button>
+        
           </div>
         </div>
       </main>

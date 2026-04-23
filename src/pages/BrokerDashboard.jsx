@@ -8,25 +8,35 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { RxCross1 } from "react-icons/rx";
 
 const navItems = [
-  { icon: HiOutlineSquares2X2, label: "Overview", active: true },
-  { icon: HiBriefcase, label: "Portfolio" },
-  { icon: HiOutlineUsers, label: "Investors" },
-  { icon: HiOutlineBanknotes, label: "Revenue" },
+  { icon: HiOutlineSquares2X2, label: "Overview", type:"overview",  active: true },
+  { icon: HiOutlineUserGroup, label: "Total Referral",   type:"referral",  },
+  { icon: HiOutlineShieldCheck, label: "Total Converted",   type:"converted",  },
+ 
 ];
 
 const statCards = [
   { icon: HiOutlineUserGroup, label: "Total Referrals", value: "1,284", color: "text-teal-700" },
   { icon: HiOutlineShieldCheck, label: "Total Converted", value: "432", color: "text-teal-700" },
-  { icon: HiOutlineChartBar, label: "Total Investment", value: "$2.4M", color: "text-teal-700" },
+  // { icon: HiOutlineChartBar, label: "Total Investment", value: "$2.4M", color: "text-teal-700" },
   { icon: RiCopperCoinLine, label: "Total Earnings", value: "$86,400", color: "text-yellow-600" },
-  { icon: HiOutlineCalendar, label: "Pending Comm.", value: "$12,150", color: "text-red-500" },
-  { icon: HiOutlineCheckCircle, label: "Paid Comm.", value: "$74,250", color: "text-teal-700" },
 ];
 
 const recentInvestors = [
   { name: "Jonathan Sterling", contact: "+91  XXXXX1234", property: "Azure Bay Penthouse", amount: "$125,000", date: "Oct 12, 2023", status: "Completed" },
   { name: "Amara Okafor", contact: "+91  XXXXX5678", property: "Golden Valley Estates", amount: "$45,000", date: "Oct 08, 2023", status: "In Process" },
   { name: "Kenji Tanaka", contact: "+91  XXXXX9812", property: "The Sovereign Tower", amount: "$250,000", date: "Sep 28, 2023", status: "Completed" },
+];
+
+const totalReferral = [
+  { name: "Jonathan Sterling", contact: "+91  XXXXX1234", property: "Azure Bay Penthouse", amount: "$125,000", date: "Oct 12, 2023", status: "Completed" },
+  { name: "Amara Okafor", contact: "+91  XXXXX5678", property: "Golden Valley Estates", amount: "$45,000", date: "Oct 08, 2023", status: "In Process" },
+  { name: "Kenji Tanaka", contact: "+91  XXXXX9812", property: "The Sovereign Tower", amount: "$250,000", date: "Sep 28, 2023", status: "Completed" },
+  { name: "Jonathan Sterling", contact: "+91  XXXXX1234", property: "Azure Bay Penthouse", amount: "$125,000", date: "Oct 12, 2023", status: "Completed" },
+  { name: "Amara Okafor", contact: "+91  XXXXX5678", property: "Golden Valley Estates", amount: "$45,000", date: "Oct 08, 2023", status: "In Process" },
+  { name: "Kenji Tanaka", contact: "+91  XXXXX9812", property: "The Sovereign Tower", amount: "$250,000", date: "Sep 28, 2023", status: "Completed" },
+  { name: "Jonathan Sterling", contact: "+91  XXXXX1234", property: "Azure Bay Penthouse", amount: "$125,000", date: "Oct 12, 2023", status: "Completed" },
+  { name: "Amara Okafor", contact: "+91  XXXXX5678", property: "Golden Valley Estates", amount: "$45,000", date: "Oct 08, 2023", status: "In Process" },
+  // { name: "Kenji Tanaka", contact: "+91  XXXXX9812", property: "The Sovereign Tower", amount: "$250,000", date: "Sep 28, 2023", status: "Completed" },
 ];
 
 const commissionDetails = [
@@ -340,11 +350,12 @@ function Header({ setMobileOpen }) {
 
 export default function BrokerDashboard() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [active, setActive] = useState("overview");
+  console.log('dd', active)
 
   return (
-    <div className="flex bg-gray-50 font-sans">
+    <div className="flex bg-gray-50 font-sans   ">
       
-      {/* ✅ LEFT SIDEBAR (STICKY) */}
       <aside className={
         // ` sticky top-[11%] h-[90vh] w-52 bg-gray-50 border-r border-gray-200
         // flex flex-col z-10
@@ -372,16 +383,33 @@ export default function BrokerDashboard() {
           </div>
           </div>
         </div>
-
-        <nav className="flex-1 py-4 px-2">
-          {navItems.map(({ icon: Icon, label, active }) => (
-            <button key={label} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm font-medium transition-colors
-              ${active ? "bg-teal-50 text-teal-700" : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"}`}>
+      
+        {/* <nav className="flex-1 py-4 px-2">
+          {navItems.map(({ icon: Icon, label, active, type }) => (
+            <button key={label} onClick={() => setActive(type)} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm font-medium transition-colors
+              ${type ? "bg-teal-50 text-teal-700" : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"}`}>
               <Icon className="text-lg flex-shrink-0" />
               {label}
             </button>
           ))}
-        </nav>
+        </nav> */}
+        
+        <nav className="flex-1 py-4 px-2">
+            {navItems.map(({ icon: Icon, label, type }) => (
+              <button
+                key={label}
+                onClick={() => setActive(type)}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm font-medium transition-colors
+                  ${active === type 
+                    ? "bg-teal-50 text-teal-700" 
+                    : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                  }`}
+              >
+                <Icon className="text-lg flex-shrink-0" />
+                {label}
+              </button>
+            ))}
+          </nav>
 
         <div className="px-2 pb-4 border-t border-gray-200 pt-3">
           <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-500 hover:bg-gray-50 mb-1">
@@ -393,14 +421,83 @@ export default function BrokerDashboard() {
         </div>
       </aside>
 
-      {mobileOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-          onClick={() => setMobileOpen(false)}
-        ></div>
-      )}
-      {/* ✅ RIGHT CONTENT (NORMAL PAGE SCROLL) */}
-      <main className="flex-1 p-4 sm:p-6 lg:p-8 min-w-0">
+      
+     {active === "referral" && (<div className="w-full ">
+       
+      <div className="bg-white rounded-2xl px-5 py-5    shadow-md mb-6 ">
+      <div className="flex items-center justify-between px-5 py-4 border-b border-gray-50">
+        <h3 className="font-bold text-gray-800 text-base">Total Referral</h3>
+        <button className="text-teal-700 text-sm font-medium flex items-center gap-1 hover:underline">
+          View All <HiOutlineChevronRight />
+        </button>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-gray-50">
+              {["INVESTOR NAME", "CONTACT", "PROPERTY NAME", "INVESTMENT VALUE", "DATE", ].map(h => (
+                <th key={h} className="text-left px-5 py-3 text-xs text-gray-400 font-medium whitespace-nowrap">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {totalReferral.map((row) => (
+              <tr key={row.name} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50">
+                <td className="px-5 py-4 font-semibold text-gray-800 whitespace-nowrap">{row.name}</td>
+                <td className="px-5 py-4 text-gray-500 whitespace-nowrap">{row.contact}</td>
+                <td className="px-5 py-4 text-gray-600 whitespace-nowrap">{row.property}</td>
+                <td className="px-5 py-4 font-semibold text-gray-800 whitespace-nowrap">{row.amount}</td>
+                <td className="px-5 py-4 text-gray-500 whitespace-nowrap">{row.date}</td>
+                {/* <td className="px-5 py-4 whitespace-nowrap"><StatusBadge status={row.status} /></td> */}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+      
+       </div>)}
+
+       {active === "converted" && (
+        <div className="w-full   ">
+
+       <div className="bg-white rounded-2xl px-5 py-5  w-full  shadow-md mb-6">
+       <div className="flex items-center justify-between px-5 py-4 border-b border-gray-50">
+         <h3 className="font-bold text-gray-800 text-base">Total Converted</h3>
+         <button className="text-teal-700 text-sm font-medium flex items-center gap-1 hover:underline">
+           View All <HiOutlineChevronRight />
+         </button>
+       </div>
+       <div className="overflow-x-auto w-full">
+         <table className="w-full text-sm ">
+           <thead>
+             <tr className="border-b border-gray-50">
+               {["INVESTOR NAME", "CONTACT", "PROPERTY NAME", "INVESTMENT VALUE", "DATE", ].map(h => (
+                 <th key={h} className="text-left px-5 py-3 text-xs text-gray-400 font-medium whitespace-nowrap">{h}</th>
+               ))}
+             </tr>
+           </thead>
+           <tbody>
+             {totalReferral.map((row) => (
+               <tr key={row.name} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50">
+                 <td className="px-5 py-4 font-semibold text-gray-800 whitespace-nowrap">{row.name}</td>
+                 <td className="px-5 py-4 text-gray-500 whitespace-nowrap">{row.contact}</td>
+                 <td className="px-5 py-4 text-gray-600 whitespace-nowrap">{row.property}</td>
+                 <td className="px-5 py-4 font-semibold text-gray-800 whitespace-nowrap">{row.amount}</td>
+                 <td className="px-5 py-4 text-gray-500 whitespace-nowrap">{row.date}</td>
+                 {/* <td className="px-5 py-4 whitespace-nowrap"><StatusBadge status={row.status} /></td> */}
+               </tr>
+             ))}
+           </tbody>
+         </table>
+       </div>
+     </div>
+ 
+       
+        </div>)}
+
+     {active === "overview" && ( <main className="flex-1 p-4 sm:p-6 lg:p-8 min-w-0">
         
         <Header setMobileOpen={setMobileOpen}  />
         <StatCards />
@@ -426,7 +523,19 @@ export default function BrokerDashboard() {
         </div>
 
         {/* <ActiveOpportunities /> */}
-      </main>
+      </main>)}
+     
+
+
+
+
+
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={() => setMobileOpen(false)}
+        ></div>
+      )}
     </div>
   );
 }

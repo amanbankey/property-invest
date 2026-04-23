@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { FiHelpCircle, FiBell, FiUser, FiCreditCard, FiFileText, FiCamera, FiCheckSquare, FiShield, FiCheck } from "react-icons/fi";
 import { BsBank2 } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const NAV_STEPS = [
@@ -30,45 +30,8 @@ const DOCS = [
   { img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&q=80", name: "SELFIE.PNG" },
 ];
 
-function Sidebar({ active, setActive }) {
-  return (
-    <aside className="hidden md:flex w-48 lg:w-52 bg-white border-r border-gray-200 flex-col py-6 px-4 shrink-0">
-      <div className="mb-8">
-        <p className="text-sm font-extrabold text-gray-900">KYC Verification</p>
-        <p className="text-xs text-gray-400">Sovereign Compliance</p>
-      </div>
-      <nav className="space-y-1">
-        {NAV_STEPS.map((s, i) => (
-          <button key={s.label} onClick={() => setActive(i)}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors ${active === i ? "text-emerald-800 font-semibold border-l-4 border-emerald-700 bg-white rounded-r-xl" : "text-gray-400 hover:text-gray-700 rounded-xl hover:bg-gray-50"}`}>
-            <span>{s.icon}</span>
-            <span className="text-sm">{s.label}</span>
-          </button>
-        ))}
-      </nav>
-    </aside>
-  );
-}
 
-function ProgressStepper() {
-  return (
-    <div className="flex items-center justify-center gap-0 mb-8 overflow-x-auto pb-2">
-      {PROGRESS.map((step, i) => (
-        <div key={step.label} className="flex items-center shrink-0">
-          <div className="flex flex-col items-center">
-            <div className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold border-2 ${i < 5 ? "bg-emerald-700 border-emerald-700 text-white" : "bg-white border-emerald-700 text-emerald-800"}`}>
-              {i < 5 ? <FiCheck size={16} /> : step.num}
-            </div>
-            <span className="text-[9px] text-gray-400 mt-1 font-semibold tracking-widest">{step.label}</span>
-          </div>
-          {i < PROGRESS.length - 1 && (
-            <div className={`h-0.5 w-10 sm:w-16 lg:w-20 mb-4 mx-0.5 ${i < 4 ? "bg-emerald-700" : "bg-gray-300"}`}></div>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
+
 
 function Section({ title, type,  setActive, children }) {
 
@@ -76,6 +39,7 @@ function Section({ title, type,  setActive, children }) {
     e.preventDefault() ;
     setActive(type)
   }
+  
 
   return (
     <div className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6 mb-4 shadow-xl">
@@ -104,27 +68,34 @@ function Field({ label, value, icon }) {
 }
 
 export default function KycReviewandSubmit({setActive}) {
+  const navigate = useNavigate();
+
   const [activeNav, setActiveNav] = useState(6);
   const [confirmed, setConfirmed] = useState(false);
  
+  const { aadhaarPreview,  aadharNum,  panPreview, panNum, name,  email, dob, address, isVerified,
+    nomineeName, nomineePan,  nomineeAadhar,  nomineeDob , 
+    accountNum,  branchName,  ifsCode, beneficiaryName, cancelCheckUpload } = useSelector((state) => state.kyc);
 
-  const { aadhaarPreview,    panPreview,  name,  email, dob, address, isVerified  } = useSelector((state) => state.kyc);
-  // console.log("ke", aadhaarPreview, panPreview, name,  email, dob, address, isVerified);
+  console.log("pan",panPreview   );
+  console.log("aadhar",aadhaarPreview   );
 
-
+  const onSubmit = () => {
+    navigate('/kyc-submission')
+    
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans flex flex-col">
       
       <div className="flex flex-1">
-        {/* <Sidebar active={activeNav} setActive={setActiveNav} /> */}
 
         <main className="flex-1 overflow-y-auto px-4 sm:px-8 py-6">
           <div className="max-w-3xl mx-auto">
             <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-1">Review & Submit</h1>
             <p className="text-gray-500 text-sm mb-8">Please double check your details before final submission</p>
 
-            {/* <ProgressStepper /> */}
+          
 
             <Section title="Personal Info" setActive={setActive} type="basic" >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -139,55 +110,68 @@ export default function KycReviewandSubmit({setActive}) {
 
             <Section title="Pan Verification" setActive={setActive}  type="pan">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {/* <Field label="PAN Number" value={panNum.panNum} /> */}
-               {panPreview && (
+                <Field label="PAN Number" value={panNum} />
+              
                 <img
                   src={panPreview}
                   alt="PAN"
                   className="h-24 mt-2"
                 />
-              )}
+            
                 <Field label="Document Type" value="Passport (United Kingdom)" icon={<FiShield size={14} className="text-emerald-700" />} />
               </div>
             </Section>
 
             <Section title="Aadhar Verification" setActive={setActive}  type="id">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <Field label="Aadhar Number" value={aadharNum} />
                 <img src={aadhaarPreview}  alt="aadahr"
                   className="h-24 mt-2" /> 
-                {/* <Field label="Document Type" value="Passport (United Kingdom)" icon={<FiShield size={14} className="text-emerald-700" />} /> */}
               </div>
             </Section>
 
-            {/* <Section title="Uploaded Documents" >
-              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-3">
-                {DOCS.map(doc => (
-                  <div key={doc.name} className="rounded-xl overflow-hidden border border-gray-200">
-                    <img src={doc.img} alt={doc.name} className="w-full h-28 sm:h-36 object-cover" />
-                    <div className="bg-white px-2 py-1.5 border-t border-gray-100">
-                      <p className="text-[10px] text-gray-500 font-semibold tracking-wider truncate">{doc.name}</p>
-                    </div>
-                  </div>
-                ))}
+            <Section title="Nominee Verification" setActive={setActive}  type="nominee">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <Field label="Nominee Name" value={nomineeName} />
+              <Field label="Nominee Pan Number" value={nomineePan} />
+              <Field label="Nominee Date of birth" value={nomineeDob} />
+              <Field label="Nominee Aadhar Number" value={nomineeAadhar} />
+              
               </div>
-            </Section> */}
+            </Section>
 
-            {/* <Section title="Bank Details">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-xs font-bold text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded-full uppercase tracking-wider">Primary</span>
+            <Section title="Bank Verification" setActive={setActive}  type="bank">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <Field label="Beneficiary Name"  value={beneficiaryName} />
+              <Field label="Account Number"value={accountNum} />
+              <Field label="Branch Name" value={branchName} />
+              <Field label="IfSC code" value={ifsCode} />
+             
+              <img src={cancelCheckUpload}  alt="cancel"
+                  className="h-24 mt-2" /> 
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                <Field label="Account Holder" value="E. Sterling-Wellesley" />
-                <Field label="Account Number" value="**** **** 8829" />
-                <Field label="Bank Name" value="Standard Chartered Wealth" />
-              </div>
-            </Section> */}
+            </Section>
 
             <div className="bg-white rounded-2xl border border-gray-200 p-5 mb-6 flex items-start gap-3">
-              <button onClick={() => setConfirmed(!confirmed)}
-                className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 mt-0.5 transition-colors ${confirmed ? "bg-emerald-700 border-emerald-700" : "border-gray-400 bg-white"}`}>
-                {confirmed && <FiCheck size={12} className="text-white" />}
-              </button>
+             
+              <label className="flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={confirmed}
+                        onChange={() => setConfirmed(!confirmed)}
+                        className="hidden"
+                      />
+
+                      <span
+                        className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 mt-0.5 transition-colors ${
+                          confirmed
+                            ? "bg-emerald-700 border-emerald-700"
+                            : "border-gray-400 bg-white"
+                        }`}
+                      >
+                        {confirmed && <FiCheck size={12} className="text-white" />}
+                      </span>
+                    </label>
               <div>
                 <p className="text-sm font-bold text-gray-900 mb-1">I confirm all details are correct</p>
                 <p className="text-xs text-gray-500 leading-relaxed">I hereby declare that the information provided is true and accurate to the best of my knowledge. I understand that providing false information may result in application rejection.</p>
@@ -196,11 +180,10 @@ export default function KycReviewandSubmit({setActive}) {
 
             <div className="flex items-center justify-between pb-8">
               <button className="text-sm font-semibold text-gray-500 hover:text-gray-800 transition-colors">Save as Draft</button>
-              <button disabled={!confirmed}
+              <button disabled={!confirmed} onClick={onSubmit}
                 className={`px-8 py-3.5 rounded-2xl text-sm font-bold transition-colors ${confirmed ? "bg-emerald-800 hover:bg-emerald-900 text-white" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
-               <NavLink to='/kyc-submission'>
-                     Submit KYC
-               </NavLink>
+              
+                  Submit KYC
                
               </button>
             </div>

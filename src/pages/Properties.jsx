@@ -81,19 +81,6 @@ function FilterPanel({ locations, setLocations, budgetRange, setBudgetRange, roi
       </div>
 
       <div className="mb-6">
-        <div className="flex items-center justify-between mb-2">
-          <p className="text-xs font-semibold text-gray-700 uppercase tracking-wider">Target ROI</p>
-          <span className="text-xs text-gray-500">8% - 14%</span>
-        </div>
-        <input type="range" min={5} max={20} step={1} value={roiRange} onChange={e => setRoiRange(Number(e.target.value))}
-          className="w-full accent-emerald-700 h-1.5 rounded-full" />
-        <div className="flex justify-between mt-1">
-          <span className="text-[10px] text-gray-400">5%</span>
-          <span className="text-[10px] text-gray-400">20%</span>
-        </div>
-      </div>
-
-      <div className="mb-6">
         <p className="text-xs font-semibold text-gray-700 mb-3 uppercase tracking-wider">Funding Status</p>
         <div className="flex flex-wrap gap-2">
           {FUNDING_STATUS.map(s => (
@@ -122,9 +109,7 @@ function PropertyCard({ p }) {
           {p.badge1 && <span className={`text-[10px] font-bold text-white px-2 py-0.5 rounded-full ${BADGE1_COLORS[p.badge1] || "bg-emerald-700"}`}>{p.badge1}</span>}
           {p.badge2 && <span className="text-[10px] font-bold text-gray-700 bg-white px-2 py-0.5 rounded-full border border-gray-200">{p.badge2}</span>}
         </div>
-        <button onClick={() => setSaved(!saved)} className="absolute top-3 right-3 bg-white p-1.5 rounded-full shadow">
-          <FiBookmark size={14} className={saved ? "text-emerald-700 fill-emerald-700" : "text-gray-400"} />
-        </button>
+        
       </div>
       <div className="p-4">
         <h3 className="font-bold text-gray-900 text-sm sm:text-base">{p.name}</h3>
@@ -132,10 +117,10 @@ function PropertyCard({ p }) {
           <HiOutlineLocationMarker size={12} className="text-gray-400" />
           <span className="text-xs text-gray-500">{p.loc}</span>
         </div>
-        <div className="grid grid-cols-2 gap-3 mt-3">
-          <div>
-            <p className="text-[10px] text-gray-400 uppercase tracking-wider">{p.roiLabel}</p>
-            <span className="inline-block mt-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">{p.roi}</span>
+        <div className="grid grid-cols-2 gap-3 mt-3"> 
+        <div className="">
+            <p className="text-[10px] text-gray-400 uppercase tracking-wider">Locking Period</p>
+            <p className="text-sm font-bold text-gray-900 mt-1">{p.locking_period}</p>
           </div>
           <div>
             <p className="text-[10px] text-gray-400 uppercase tracking-wider">TOTAL VALUE</p>
@@ -160,9 +145,7 @@ function PropertyCard({ p }) {
                  View Details
              </NavLink>
            </button>
-          <button className="p-2.5 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors">
-            <FiBarChart2 size={16} className="text-gray-500" />
-          </button>
+         
         </div>
       </div>
     </div>
@@ -186,41 +169,41 @@ export default function PropertyPage() {
       badge1: "HOT", badge2: "OFFICE",
       img: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=500&q=80",
       name: "Azure Corporate Plaza", loc: "London, UK",
-      roiLabel: "EXPECTED ROI", roi: "+12.4%", totalValue: "$14.2M",
+      locking_period:"+125.4%", roi: "+12.4%", totalValue: "$14.2M",
       sharePrice: "$1,420", funded: 72, status: "active"
     } , {
             badge1: "NEW", badge2: "RESIDENTIAL",
             img: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=500&q=80",
             name: "Veridian Luxury Suites", loc: "London, UK",
-            roiLabel: "RENTAL YIELD", roi: "+6.8%", totalValue: "$28.5M",
+            locking_period:"+125.4%", roi: "+6.8%", totalValue: "$28.5M",
             sharePrice: "$2,850", funded: 15, status: "active"
           },
           {
             badge1: "HOT", badge2: "RETAIL",
             img: "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=500&q=80",
             name: "Summit Retail Hub", loc: "London, UK",
-            roiLabel: "EXPECTED ROI", roi: "+15.2%", totalValue: "$52.0M",
+             locking_period:"+125.4%",    roi: "+15.2%", totalValue: "$52.0M",
             sharePrice: "$5,200", funded: 94, status: "funded"
           },
           {
             badge1: "RESIDENTIAL", badge2: null,
             img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=500&q=80",
             name: "Artisan SOHO Lofts", loc: "London, UK",
-            roiLabel: "RENTAL YIELD", roi: "+5.2%", totalValue: "$8.8M",
+             locking_period:"+125.4%",    roi: "+5.2%", totalValue: "$8.8M",
             sharePrice: "$880", funded: 42, status: "active"
           },
           {
             badge1: "STABLE", badge2: "INDUSTRIAL",
             img: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=500&q=80",
             name: "North-West Logistics", loc: "London, UK",
-            roiLabel: "EXPECTED ROI", roi: "+11.1%", totalValue: "$11.5M",
+            locking_period:"+125.4%",    roi: "+11.1%", totalValue: "$11.5M",
             sharePrice: "$1,150", funded: 58, status: "active"
           },
           {
             badge1: "PREMIUM", badge2: "MIXED USE",
             img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=500&q=80",
             name: "The Heritage Arcade", loc: "Paris, France",
-            roiLabel: "EXPECTED ROI", roi: "+9.4%", totalValue: "$19.1M",
+            locking_period:"+125.4%",    roi: "+9.4%", totalValue: "$19.1M",
             sharePrice: "$1,910", funded: 88, status: "active"
           },
 ])
@@ -245,6 +228,27 @@ export default function PropertyPage() {
  
  
   const visibleProperties  = filtered.slice(0, load);
+  
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      console.log("Geolocation not supported");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log("Latitude:", position.coords.latitude);
+        console.log("Longitude:", position.coords.longitude);
+      },
+      (error) => {
+        if (error.code === 1) {
+          console.log("User denied location permission");
+        } else {
+          console.log("Error getting location:", error.message);
+        }
+      }
+    );
+  }, []);
 
   return (
     <div className="min-h-screen bg-green-50 font-sans">

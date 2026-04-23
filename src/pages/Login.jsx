@@ -48,8 +48,6 @@ const Login = () => {
 
         // console.log("token", token  );
         // 9999999994
-
-        // localStorage.setItem("token", token);
         setPage(1);
 
       } catch (error) {
@@ -62,19 +60,18 @@ const Login = () => {
 
     <div> 
 
-  
       <div className="relative top-0 flex flex-col  ">
  
-      <div className="flex flex-col lg:flex-row min-h-screen ">
+      <div className="flex flex-col lg:flex-row  ">
         <div
-          className="relative w-full lg:w-[58%] min-h-[480px] sm:min-h-[540px] lg:min-h-screen flex flex-col justify-end pb-12 sm:pb-16 px-6 sm:px-10 lg:px-14"
+          className="relative w-full lg:w-[58%] min-h-[480px] sm:min-h-[300px]  flex flex-col justify-center py-12 sm:py-16 px-6 sm:px-10 lg:px-14"
           style={{
             background: "linear-gradient(160deg, #1d6b52 0%, #1a5c47 30%, #155240 60%, #fff 130%)",
           }}
         >
-          <div className="relative z-10 mt-20 lg:mt-0">
-            <h1 className="text-white text-4xl sm:text-5xl lg:text-6xl   font-normal leading-tight mb-5 sm:mb-6">
-              Invest in Real Estate<br />with Confidence
+          <div className="relative z-10  ">
+            <h1 className="text-white text-3xl sm:text-5xl   font-normal leading-tight mb-5 sm:mb-6">
+              Invest in Real Estate with Confidence
             </h1>
             <p className="text-white/75 text-sm sm:text-base lg:text-lg mb-10 sm:mb-12 max-w-lg leading-relaxed">
               Login to explore properties, track your portfolio, and invest in shares with complete transparency.
@@ -96,11 +93,10 @@ const Login = () => {
           </div>
         </div>
  
-        <div className="w-full lg:w-[42%] bg-[#f5f5f0] flex flex-col justify-center px-5 sm:px-10 md:px-14 lg:px-10 xl:px-14 py-10 sm:py-14 lg:py-20">
+        <div className="w-full lg:w-[42%] bg-[#f5f5f0] flex flex-col justify-center px-5 sm:px-10 md:px-16 lg:px-14 xl:px-20 py-5 sm:py-16 ">
           <div className="w-full max-w-md mx-auto lg:mx-0">
            
-           
-            <div className="  bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 mb-5">
+            <div className="  bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 mb-7">
              
             <div>
               <form onSubmit={submitHandler} className=" "> 
@@ -155,7 +151,7 @@ const Login = () => {
                 Send OTP
               </button>
  
-              <div className="border-t border-gray-100 pt-5 space-y-3 text-center">
+              <div className=" border-gray-100  space-y-3 text-center">
                 <p className="text-sm text-gray-600">
                   Don't have an account?{" "}
                   <NavLink to="/signup" className=" text-[#1a5c47] font-semibold hover:opacity-70 transition-opacity">
@@ -163,8 +159,6 @@ const Login = () => {
                 </NavLink>
                  
                 </p>
-               
-
                 <div className="flex items-center justify-center gap-4 text-sm text-gray-500">
                   <a href="#" className="hover:text-gray-700 transition-colors">
                     Forgot / Verify Number
@@ -195,19 +189,22 @@ const Login = () => {
                   Privacy Policy
                 </a>
               </p>
-              <p className="text-xs sm:text-sm text-gray-500">
+              {/* <p className="text-xs sm:text-sm text-gray-500">
                 Need help accessing your account?{" "}
                 <a href="#" className="text-[#1a5c47] font-semibold hover:opacity-70 transition-opacity">
                   Contact Support       
                 </a>
-              </p>
+              </p> */}
             </div>
 
             </form>
+
             </div>
+
             </div>
           </div>
         </div>
+
       </div>
  
        </div>
@@ -239,12 +236,5 @@ const Login = () => {
 
 export default Login
 
-
-//   primary #0F766E 
-
-// secondry #134E4A
-// tertiary #D4A017
-
-// neutral #0F172A
 
 

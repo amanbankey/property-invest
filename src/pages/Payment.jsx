@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiLock, FiShield, FiCheckCircle, FiCreditCard, FiChevronRight, FiInfo } from "react-icons/fi";
 import { MdOutlineVerified } from "react-icons/md";
 import { BsPhone, BsBank2, BsBuilding } from "react-icons/bs";
@@ -23,6 +23,9 @@ function PaymentTabs({ active, setActive }) {
     { key: "upi", label: "UPI / GPay", icon: <BsPhone size={14} /> },
     { key: "net", label: "Net Banking", icon: <BsBank2 size={14} /> },
   ];
+
+  
+  
   return (
     <div className="flex items-center gap-1 bg-gray-100 rounded-2xl p-1 w-full sm:w-auto mb-6">
       {tabs.map((t) => (
@@ -47,7 +50,8 @@ function CardForm() {
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const inputCls = "w-full bg-slate-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-200 transition-all";
-
+  
+ 
   return (
     <div className="space-y-5">
       <div>
@@ -71,8 +75,9 @@ function CardForm() {
           <input className={inputCls} placeholder="•••" type="password" value={form.cvv} onChange={set("cvv")} maxLength={4} />
         </div>
       </div>
-      <NavLink to='/investment-success'>
-      <button className="w-full bg-teal-800 text-white font-bold text-sm sm:text-base py-4 rounded-xl hover:bg-teal-900 active:scale-[0.98] transition-all mt-2">
+      <NavLink to='/investment-success' >
+      <button className="w-full bg-teal-800 text-white font-bold text-sm sm:text-base py-4 rounded-xl hover:bg-teal-900 active:scale-[0.98] transition-all mt-2" 
+      >
         Confirm and Pay $24,500
       </button>
       </NavLink>
@@ -81,13 +86,59 @@ function CardForm() {
 }
 
 function UPIForm() {
+
+  const loadRazorpay = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => {
+        console.log("Razorpay loaded");
+        resolve(true);
+      };
+      script.onerror = () => {
+        console.log("Razorpay failed to load");
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
+
+  const handlePayment = async () => {
+    const res = await loadRazorpay();
+  
+    if (!res) {
+      alert("Razorpay SDK failed to load");
+      return;
+    }
+    const options = {
+      key: "rzp_test_bzK53YGmR1lrbV", 
+      amount: 50000, // paise me (500 = ₹5)
+      currency: "INR",
+      name: "Test Company",
+      description: "Test Transaction",
+      handler: function (response) {
+        console.log(response);
+      },
+      prefill: {
+        name: "Your Name",
+        email: "test@email.com",
+        contact: "9999999999",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+  
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open(); // 👈 ye missing hota hai aksar
+  };
   return (
     <div className="space-y-5">
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">UPI ID</label>
         <input className="w-full bg-slate-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-200 transition-all" placeholder="yourname@upi" />
       </div>
-      <button className="w-full bg-teal-800 text-white font-bold text-sm sm:text-base py-4 rounded-xl hover:bg-teal-900 active:scale-[0.98] transition-all">
+      <button onClick={handlePayment} className="w-full bg-teal-800 text-white font-bold text-sm sm:text-base py-4 rounded-xl hover:bg-teal-900 active:scale-[0.98] transition-all">
         Confirm and Pay $24,500
       </button>
     </div>
@@ -138,7 +189,7 @@ function TrustBadges() {
 function PaymentForm() {
   const [activeTab, setActiveTab] = useState("card");
   return (
-    <div className="flex-1 min-w-0">
+    <div className="flex-1 min-w-0 ">
       <PaymentTabs active={activeTab} setActive={setActiveTab} />
       {activeTab === "card" && <CardForm />}
       {activeTab === "upi" && <UPIForm />}
@@ -157,7 +208,7 @@ function OrderSummary() {
   ];
   return (
     <div className="w-full lg:w-96 xl:w-[420px] flex-shrink-0 shadow-2xl">
-      <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden ">
         <div className="relative h-44 sm:h-52 bg-gradient-to-br from-amber-200 via-orange-200 to-sky-300 flex items-end">
           <div className="absolute inset-0 flex items-center justify-center">
             <BsBuilding size={60} className="text-white opacity-30" />
@@ -198,7 +249,7 @@ function OrderSummary() {
         </div>
       </div>
 
-      <p className="text-gray-400 text-xs text-center mt-4 leading-relaxed px-2">
+      <p className="text-gray-400 text-xs text-center mt-4 leading-relaxed px-5 pb-10">
         By clicking "Confirm and Pay", you agree to Sovereign Curator's{" "}
         <span className="text-teal-700 underline cursor-pointer">Terms of Investment</span>{" "}
         and acknowledge the risks associated with fractional property ownership.
@@ -215,7 +266,7 @@ export default function Payment() {
     
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
         <PageHeader />
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
+        <div className="flex flex-col  lg:flex-row gap-8 lg:gap-10 lg:items-start items-center ">
           <PaymentForm />
           <OrderSummary />
         </div>

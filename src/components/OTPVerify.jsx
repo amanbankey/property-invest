@@ -185,9 +185,7 @@ export default function OTPVerify({mobile, setPage}) {
            </div>
       
           <div className="flex items-center justify-center gap-2 sm:gap-3 mb-5 sm:mb-6">
-            <button onClick={() => {}} className="text-gray-500 text-xs sm:text-sm hover:text-gray-800 transition-colors">
-              Change number
-            </button>
+          
             <span className="text-gray-300 text-xs">•</span>
             <div className="flex items-center gap-2">
               <button

@@ -2,11 +2,6 @@
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGooglePlay, FaApple } from "react-icons/fa";
 
 
-
-
-
-
-
 export default function Footer() {
 
 
@@ -41,7 +36,7 @@ export default function Footer() {
             ))}
           </div>
           <div className="border-t border-gray-800 pt-6 text-center">
-            <p className="text-xs text-gray-600">© 2024 SovereignCurator. All rights reserved. Investment involves risk. Past performance is not indicative of future results.</p>
+            <p className="text-xs text-gray-600">© 2024 SovereignCurator. All rights reserved. </p>
           </div>
         </div>
       </footer>

@@ -160,9 +160,7 @@ export default function VerifyMobile({mobile, setPage}) {
             <p className="text-gray-500 text-xs sm:text-base sm:mb-1">
               Enter the 6-digit code sent to +91  {maskMobile(mobile)}.
             </p>
-            <a href="#" className="text-[#1a5c47] text-xs sm:text-base font-medium hover:opacity-70 transition-opacity">
-              Change number
-            </a>
+         
           </div>
 
           <div className=" flex justify-between gap-1.5 sm:gap-2 sm:mb-1  " onPaste={handlePaste}>

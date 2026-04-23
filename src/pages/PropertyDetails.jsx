@@ -6,7 +6,6 @@ import { MdOutlineSquareFoot, MdOutlinePeople } from "react-icons/md";
 import { RiBuilding2Line } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 
-const NAV_LINKS = ["Properties", "Portfolio", "Insights", "Learn"];
 
 const GALLERY = [
   "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
@@ -136,14 +135,7 @@ function StickyCard() {
           <p className="text-[10px] text-gray-400 uppercase tracking-wider">Share Price</p>
           <p className="text-base font-bold text-gray-900">$25,000</p>
         </div>
-        <div>
-          <p className="text-[10px] text-gray-400 uppercase tracking-wider">Yield</p>
-          <p className="text-base font-bold text-emerald-700">8.1%</p>
-        </div>
-        <div>
-          <p className="text-[10px] text-gray-400 uppercase tracking-wider">Target ROI</p>
-          <p className="text-base font-bold text-emerald-700">15.5%</p>
-        </div>
+        
       </div>
       <div className="mb-1 flex items-center justify-between">
         <span className="text-xs text-gray-500 font-medium">88% Funded</span>
@@ -161,21 +153,7 @@ function StickyCard() {
       <button className="w-full flex items-center justify-center gap-2 border border-gray-200 text-gray-700 font-medium py-2.5 rounded-xl text-sm hover:bg-gray-50 transition-colors mb-4">
         <FiHeart size={15} /> Save to Watchlist
       </button>
-      <div className="flex justify-around border-t border-gray-100 pt-4">
-        {["Share", "Scale", "Regulate"].map(a => (
-          <button key={a} className="flex flex-col items-center gap-1">
-            <FiShare2 size={16} className="text-gray-400" />
-            <span className="text-[10px] text-gray-400">{a}</span>
-          </button>
-        ))}
-      </div>
-      <div className="mt-4 bg-yellow-50 border border-yellow-200 rounded-xl p-3">
-        <div className="flex items-center gap-2 mb-1">
-          <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
-          <span className="text-xs font-semibold text-gray-800">Fractional Logic</span>
-        </div>
-        <p className="text-[10px] text-gray-500 leading-relaxed">Each share represents exactly 1% legal ownership in the underlying Special Purpose Vehicle (SPV) that owns this asset.</p>
-      </div>
+    
     </div>
   );
 }
@@ -276,8 +254,7 @@ export default function PropertydetailPage() {
                 {[
                   { label: "Total Asset Value", value: "$2,500,000" },
                   { label: "Price Per Share", value: "$25,000" },
-                  { label: "Expected ROI", value: "15.5%", green: true },
-                  { label: "Rental Yield", value: "8.1%", green: true },
+                 
                   { label: "Holding Period", value: "5 Years" },
                   { label: "Appreciation Est.", value: "7.4% / yr" },
                 ].map(item => (
@@ -302,8 +279,16 @@ export default function PropertydetailPage() {
                 </div>
               </div>
               <div className="bg-gray-200 rounded-xl h-40 sm:h-52 flex items-center justify-center mb-4 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1569336415962-a4bd9f69c8e8?w=700&q=80" alt="map" className="w-full h-full object-cover rounded-xl opacity-80" />
-              </div>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d13757.354064198062!2d73.8536679!3d18.4719759!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1776857246711!5m2!1sen!2sin"
+                  width="100%"
+                  height="450"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+             </div>
               <div className="grid grid-cols-3 gap-3">
                 {[
                   { name: "Metro Access", desc: "2 mins walking distance" },

@@ -1,21 +1,10 @@
-// import React from 'react'
-
-// const Checkout = () => {
-//   return (
-//     <div>Checkout</div>
-//   )
-// }
-
-// export default Checkout
-
-
 
 import { useState } from "react";
 import { FiCheckCircle, FiShield, FiLock, FiMapPin, FiMinus, FiPlus, FiCheck, FiAlertCircle } from "react-icons/fi";
 import { MdVerified, MdOutlineAccountBalance } from "react-icons/md";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { BsGraphUp } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 
 
 
@@ -99,7 +88,7 @@ function ShareSelector({ shares, setShares }) {
 function ReferralCode({ code, setCode, applied, setApplied }) {
   return (
     <div>
-      <p className="text-gray-500 text-xs font-semibold tracking-wide uppercase mb-2">Apply Referral Code (Optional)</p>
+      <p className="text-gray-500 text-xs font-semibold tracking-wide uppercase mb-2"> Broker Referral Code (Optional)</p>
       <div className="flex gap-2 items-center">
         <div className="flex-1 flex items-center border border-gray-200 rounded-lg overflow-hidden">
           <input
@@ -241,10 +230,16 @@ function FundingProgress() {
 }
 
 export default function Checkout() {
+  const navigate = useNavigate()
   const [shares, setShares] = useState(1);
   const [code, setCode] = useState("SOVEREIGN2024");
   const [applied, setApplied] = useState(true);
   const [agreed, setAgreed] = useState(false);
+  
+  const onSubmit = () => {
+    navigate('/kyc')
+
+  }
 
   return (
     <div className="min-h-screen bg-white font-sans">
@@ -267,10 +262,11 @@ export default function Checkout() {
               className={`w-full py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all
               active:scale-[0.98] ${agreed ? "bg-teal-700 text-white hover:bg-teal-800" : "bg-teal-700/60 text-white  "}`}
               disabled={!agreed}
+              onClick={onSubmit}
             >
-              <NavLink to='/kyc'>
+              
                   Proceed to Payment
-              </NavLink>
+             
             
             </button>
           </div>

@@ -2,14 +2,14 @@ import { FiInfo, FiUser, FiShield, FiArrowRight } from "react-icons/fi";
 import { MdOutlineVerified } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch , useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAadhaar } from "../slices/kycslice";
 
 const AadharVerify = ({ setActive }) => {
   const navigate = useNavigate();
   const [aadhaarNumber, setAadhaarNumber] = useState("");
   const [aadharIma, setAadharImg] = useState("");
-  const {  aadhaarPreview } = useSelector((state) => state.kyc);
+  const { aadhaarPreview } = useSelector((state) => state.kyc);
   const [aadharFile, setAadharFile] = useState(null);
   const dispatch = useDispatch();
 
@@ -22,11 +22,15 @@ const AadharVerify = ({ setActive }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log("Form Submitted");
-    setActive("review");
+    dispatch(
+      setAadhaar({
+        aadharNum: aadhaarNumber,
+      })
+    );
+    setActive("nominee");
     const formData = new FormData();
     formData.append("adhar Img", aadharFile);
     // console.log("Ready to send:", aadharFile);
-  
   };
 
   // Aadhaar handler image uploader
@@ -34,7 +38,7 @@ const AadharVerify = ({ setActive }) => {
     const file = e.target.files[0];
 
     if (!file) return;
-    setAadharFile(file)
+    setAadharFile(file);
 
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -45,6 +49,21 @@ const AadharVerify = ({ setActive }) => {
       );
     };
     reader.readAsDataURL(file);
+  };
+ 
+  const handleAadhaarNumber = (e) => {
+    let value = e.target.value.replace(/\D/g, ""); 
+  
+    // max 12 digits
+    value = value.substring(0, 12);
+    
+    // 4-4-4 format
+    const formatted = value
+      .replace(/(\d{4})(?=\d)/g, "$1 ")
+      .trim();
+     
+    setAadhaarNumber(formatted);
+    // console.log('aadjar', aadhaarNumber, formatted)
   };
 
   return (
@@ -62,12 +81,37 @@ const AadharVerify = ({ setActive }) => {
             Verify your identity using Aadhaar to continue KYC process.
           </p>
 
+          <div className="mb-5">
+            <label className="flex items-center gap-1.5 text-sm font-semibold text-gray-800 mb-2">
+              Aadhaar Number <FiInfo size={14} className="text-gray-400" />
+            </label>
+
+            <div className="flex items-center justify-between border border-gray-200 rounded-xl px-4 py-3.5 bg-gray-50">
+             
+            <input
+                  placeholder="Enter your Aadhaar number"
+                  value={aadhaarNumber}
+                  onChange={handleAadhaarNumber}
+                  type="text"
+                  required
+                  className="bg-transparent outline-none w-full"
+                  maxLength={14} // spaces include ho rahe hain
+                />
+
+              <div className="flex items-center gap-1.5">
+                <MdOutlineVerified className="text-emerald-600" />
+                <span className="sm:text-xs text-[0.5rem] font-bold text-emerald-700 uppercase tracking-wider">
+                  Verified
+                </span>
+              </div>
+            </div>
+          </div>
 
           <div className="mb-5">
             <label className="flex items-center gap-1.5 text-sm font-semibold text-gray-800 mb-2">
               Upload Aadhaar <sup className="text-emerald-800">*</sup>
             </label>
-             
+
             <div className="flex items-center justify-between border border-gray-200 rounded-xl px-4 py-3.5 bg-gray-50">
               <div>
                 <input
@@ -79,14 +123,9 @@ const AadharVerify = ({ setActive }) => {
                 />
               </div>
 
-              <div className="flex items-center gap-1.5">
-                <MdOutlineVerified  className="text-emerald-600" />
-                <span className="sm:text-xs text-[0.5rem] font-bold text-emerald-700 uppercase tracking-wider">
-                  Verified
-                </span>
-              </div>
-            </div>
              
+            </div>
+
             {aadhaarPreview && (
               <img
                 src={aadhaarPreview}
@@ -94,32 +133,7 @@ const AadharVerify = ({ setActive }) => {
                 className="mt-2 h-20"
               />
             )}
-            </div>
-
-
-          {/* Name */}
-          {/* <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 flex items-start gap-3 mb-5">
-            <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-              <FiUser size={18} className="text-emerald-700" />
-            </div>
-
-            <div>
-              <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-0.5">
-                Name as per Aadhaar
-              </p>
-
-              <p className="text-base font-extrabold text-gray-900 tracking-wide">
-                SIDDHARTH MALHOTRA
-              </p>
-
-              <div className="flex items-center gap-1 mt-1">
-                <FiShield size={11} className="text-emerald-600" />
-                <p className="text-xs text-gray-500">
-                  Matches with your provided details
-                </p>
-              </div>
-            </div>
-          </div> */}
+          </div>
 
           {/* Info */}
           <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-start gap-3 mb-8">

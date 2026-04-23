@@ -61,14 +61,9 @@ function App() {
           <Route path="payment" element={<Payment />} />
 
           <Route path="kyc" element={<KYCVerification />} />
-          {/* <Route path="kyc-pan-verify" element={<KycPanVerification />} /> */}
-          {/* <Route path="kyc-review" element={<KycReviewandSubmit />} /> */}
+    
           <Route path="kyc-submission" element={<KycSubmission />} />
-          {/* <Route path="aadhar-verify" element={<AadharVerify />} /> */}
-
-
-
-
+         
           <Route
             path="login"
             element={

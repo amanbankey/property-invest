@@ -321,17 +321,22 @@ function FAQ() {
 
 function AppBanner() {
   return (
-    <section className="bg-gray-900 py-14 lg:py-20 rounded-3xl px-20 ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-10 text-center lg:text-left">
-        <div className="flex-1">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white">Your Real Estate Portfolio in Your Pocket</h2>
-          <p className="text-gray-400 mt-3 text-sm max-w-md mx-auto lg:mx-0">Track your fractional yields, browse new opportunities, and manage your wealth from anywhere in the world.</p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-            <button className="flex items-center gap-3 bg-white hover:bg-gray-100 text-gray-900 font-semibold px-5 py-3 rounded-xl text-sm transition-colors">
+    <section className="bg-gray-900 py-14 lg:py-20 rounded-3xl sm:px-20 px-2">
+      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-10 text-center lg:text-left">
+      
+        <div className="flex-1  sm:flex-col ">
+          <div >
+             <h2 className="text-xl sm:text-4xl font-bold text-white">Your Real Estate Portfolio in Your Pocket</h2>
+             <p className="text-gray-400 mt-3 text-sm max-w-md mx-auto lg:mx-0">Track your fractional yields, browse new opportunities, and manage your wealth from anywhere in the world.</p>
+         
+         </div>
+         
+          <div className="mt-8 flex flex-row sm:flex-row gap-3 justify-center lg:justify-start ">
+            <button className="flex max-w-40 items-center gap-3 bg-white hover:bg-gray-100 text-gray-900 font-semibold px-5 py-3 rounded-xl text-sm transition-colors">
               <FaApple size={20} />
               <div className="text-left"><div className="text-[10px] text-gray-500">Download on the</div><div className="font-bold text-sm">App Store</div></div>
             </button>
-            <button className="flex items-center gap-3 bg-white hover:bg-gray-100 text-gray-900 font-semibold px-5 py-3 rounded-xl text-sm transition-colors">
+            <button className="flex  max-w-40  items-center gap-3 bg-white hover:bg-gray-100 text-gray-900 font-semibold px-5 py-3 rounded-xl text-sm transition-colors">
               <FaGooglePlay size={18} className="text-emerald-600" />
               <div className="text-left"><div className="text-[10px] text-gray-500">Get it on</div><div className="font-bold text-sm">Google Play</div></div>
             </button>

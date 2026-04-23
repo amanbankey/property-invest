@@ -120,30 +120,9 @@ export default function Referral({setPage}) {
             </button>
           </div>
           </div>
-
-         
-
-          <div className="flex items-center justify-center gap-2 bg-white/70 border border-gray-200/60 rounded-xl px-4 py-3">
-            <FiInfo className="text-gray-400 text-sm flex-shrink-0" />
-            <p className="text-gray-500 text-xs sm:text-sm">
-              You can still explore and invest without a referral code
-            </p>
-          </div>
         </div>
       </div>
 
-      {/* <footer className="px-5 sm:px-8 py-5 sm:py-6 text-center">
-        <div className="flex items-center justify-center gap-4 sm:gap-6 mb-2 sm:mb-3">
-          {["Privacy Policy", "Terms of Service", "Help Center"].map((link) => (
-            <a key={link} href="#" className="text-gray-400 text-[11px] sm:text-xs font-medium hover:text-gray-600 transition-colors">
-              {link}
-            </a>
-          ))}
-        </div>
-        <p className="text-gray-400 text-[11px] sm:text-xs">
-          © 2024 Sovereign Wealth. All rights reserved.
-        </p>
-      </footer> */}
     </div>
   );
 }

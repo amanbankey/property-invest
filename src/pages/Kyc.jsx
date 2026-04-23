@@ -8,9 +8,10 @@ import {
   FiCheckSquare,
   FiBell,
   FiShield,
-  FiLock,
-  FiCheck,
+  FiLock,FiHeart,
+  FiCheck,FiUsers
 } from "react-icons/fi";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 
 import { MdOutlineAccountBalance, MdTrendingUp } from "react-icons/md";
 import { HiOutlineDocumentText } from "react-icons/hi";
@@ -22,13 +23,15 @@ import KycReviewandSubmit from "./KycReviewAndSubmit";
 
 import { useDispatch } from "react-redux";
 import { setKycData } from "../slices/kycslice";
+import Nominee from "./Nominee";
+import BankDetails from "./BankDetails";
 
 const steps = [
   { key: "basic", label: "BASIC INFO", icon: <FiUser size={16} /> },
   { key: "pan", label: "PAN VERIFY", icon: <FiCreditCard size={16} /> },
   { key: "id", label: "ID VERIFY", icon: <FiFileText size={16} /> },
-
-  // { key: "selfie", label: "SELFIE", icon: <FiCamera size={16} /> },
+  { key: "nominee", label: "NOMINEE", icon: <FiUsers size={16} /> }, 
+  { key: "bank", label: "BANK", icon: <FiHome size={16} /> },
   { key: "review", label: "REVIEW", icon: <FiCheckSquare size={16} /> },
 ];
 
@@ -204,12 +207,6 @@ function BasicInfoForm({setActive}) {
     } else {
       setErrors(validationErrors);
     }
-
-    // try{
-
-    // }catch(err){
-
-    // }
   };
 
   return (
@@ -227,7 +224,7 @@ function BasicInfoForm({setActive}) {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
-            <p style={{ color: "red" }}>{errors.name}</p>
+            <p style={{ color: "red" }} className="text-xs">{errors.name}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -242,7 +239,7 @@ function BasicInfoForm({setActive}) {
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
               />
-              <p style={{ color: "red" }}>{errors.email}</p>
+              <p style={{ color: "red" }} className="text-xs">{errors.email}</p>
             </div>
 
             <div>
@@ -257,7 +254,7 @@ function BasicInfoForm({setActive}) {
                 onChange={(e) => setForm({ ...form, dob: e.target.value })}
                 max={new Date().toISOString().split("T")[0]}
               />
-              <p style={{ color: "red" }}>{errors.dob}</p>
+              <p style={{ color: "red" }} className="text-xs">{errors.dob}</p>
             </div>
           </div>
 
@@ -271,7 +268,7 @@ function BasicInfoForm({setActive}) {
               value={form.address}
               onChange={(e) => setForm({ ...form, address: e.target.value })}
             />
-            <p style={{ color: "red" }}>{errors.address}</p>
+            <p style={{ color: "red" }} className="text-xs">{errors.address}</p>
           </div>
 
           <SecurityBadge />
@@ -284,12 +281,7 @@ function BasicInfoForm({setActive}) {
               Next Step
             </button>
 
-            <button
-              type="button"
-              className="text-gray-500 text-sm hover:text-gray-700 transition-colors"
-            >
-              Save and finish later
-            </button>
+           
           </div>
         </div>
       </form>
@@ -299,8 +291,8 @@ function BasicInfoForm({setActive}) {
 
 function FormCard({ setActive}) {
   return (
-    <div className="relative">
-      <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 sm:p-8 xl:mr-72">
+    <div className="relative ">
+      <div className="bg-white  rounded-2xl shadow-2xl border border-gray-100 p-6 sm:p-8 xl:mr-72">
         <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
           Basic Information
         </h2>
@@ -310,27 +302,43 @@ function FormCard({ setActive}) {
         </p>
         <BasicInfoForm setActive={setActive} />
       </div>
-      <PropertyCard />
-    </div>
-  );
-}
+      {/* <PropertyCard /> */}
 
-function FooterBadges() {
-  return (
-    <div className="flex flex-wrap justify-center gap-4 sm:gap-8 py-6">
-      {[
-        { icon: <BsShieldCheck size={13} />, label: "GDPR COMPLIANT" },
-        { icon: <FiLock size={13} />, label: "SSL SECURE" },
-        { icon: <FiShield size={13} />, label: "REGULATORY APPROVED" },
-      ].map((b) => (
-        <div
-          key={b.label}
-          className="flex items-center gap-1.5 text-gray-400 text-xs font-semibold"
-        >
-          {b.icon}
-          <span>{b.label}</span>
-        </div>
-      ))}
+
+       <div className="hidden  xl:block absolute right-0 top-0 w-72 bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 px-5 py-5 ">
+            <h2 className="text-xl font-extrabold text-gray-900">The Azure Heights</h2>
+            <div className="flex items-center gap-1 mt-1 mb-4">
+              <HiOutlineLocationMarker size={13} className="text-gray-400" />
+              <span className="text-xs text-gray-500">Marina District, Dubai</span>
+            </div>
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div>
+                <p className="text-[10px] text-gray-400 uppercase tracking-wider">Total Value</p>
+                <p className="text-base font-bold text-gray-900">$2,500,000</p>
+              </div>
+              <div>
+                <p className="text-[10px] text-gray-400 uppercase tracking-wider">Share Price</p>
+                <p className="text-base font-bold text-gray-900">$25,000</p>
+              </div>
+              
+            </div>
+            <div className="mb-1 flex items-center justify-between">
+              <span className="text-xs text-gray-500 font-medium">88% Funded</span>
+              <span className="text-xs text-gray-400">12 / 100 Shares Left</span>
+            </div>
+            <div className="w-full bg-gray-100 rounded-full h-1.5 mb-1">
+              <div className="bg-emerald-700 h-1.5 rounded-full" style={{ width: "88%" }}></div>
+            </div>
+            <p className="text-[10px] text-gray-400 mb-4">Joined by 94 individual investors</p>
+            <button className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl text-sm transition-colors mb-3">
+              <NavLink to='/checkout'>
+                   Invest Now
+              </NavLink>
+             </button>
+          
+           
+       </div>
+
     </div>
   );
 }
@@ -341,7 +349,7 @@ export default function KYCVerification() {
   const [edit,  setEdit] = useState('');
 
   useEffect(() => {
-    // console.log("EDIT VALUE:", edit);
+ 
   }, [edit]);
 
   return (
@@ -362,9 +370,10 @@ export default function KYCVerification() {
         {active === "basic" && <FormCard  setActive={setActive} />}
         {active  === "pan" && <KycPanVerification  setActive={setActive}  />}
         {active === "id" && <AadharVerify  setActive={setActive} />}
+        {active === "nominee" && <Nominee setActive={setActive} />}
+        {active === "bank" && <BankDetails setActive={setActive} />}
         {active === "review" && <KycReviewandSubmit  setActive={setActive}  />}
-
-        {/* <FooterBadges /> */}
+   
       </main>
     </div>
   );
