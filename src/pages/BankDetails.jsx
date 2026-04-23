@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setAadhaar } from "../slices/kycslice";
 import { setBank } from "../slices/kycslice";
 
-export default function BankDetails({setActive}) {
+export default function BankDetails({setActive, edit, setEdit}) {
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     beneficiaryName: "",
@@ -28,7 +28,7 @@ export default function BankDetails({setActive}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    setActive("review")
+    
     dispatch(setBank({
         accountNum: formData.accountNumber,   // mapping fix
         branchName: formData.branchName,
@@ -36,6 +36,13 @@ export default function BankDetails({setActive}) {
         beneficiaryName: formData.beneficiaryName,
         cancelCheckUpload: cancelCheck     // already from redux
       }));
+
+      if (edit === "bank") {
+        setActive("review");
+        setEdit('');
+      } else {
+        setActive("review");
+      }
   };
 
 
@@ -186,7 +193,8 @@ export default function BankDetails({setActive}) {
                         type="submit"
                         className="w-full text-xs bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-4 rounded-2xl sm:text-base flex items-center justify-center gap-2"
                         >
-                        Review Bank Details
+                          {edit === "bank" ? "Update Bank Details" : " Review Bank Details"}
+                       
                         </button>
 
                     </form>

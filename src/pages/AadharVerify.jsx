@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAadhaar } from "../slices/kycslice";
 
-const AadharVerify = ({ setActive }) => {
+const AadharVerify = ({ setActive, edit, setEdit }) => {
   const navigate = useNavigate();
   const [aadhaarNumber, setAadhaarNumber] = useState("");
   const [aadharIma, setAadharImg] = useState("");
@@ -27,7 +27,12 @@ const AadharVerify = ({ setActive }) => {
         aadharNum: aadhaarNumber,
       })
     );
-    setActive("nominee");
+    if (edit === "id") {
+      setActive("review");
+      setEdit('');
+    } else {
+      setActive("nominee");
+    }
     const formData = new FormData();
     formData.append("adhar Img", aadharFile);
     // console.log("Ready to send:", aadharFile);
@@ -152,7 +157,8 @@ const AadharVerify = ({ setActive }) => {
             type="submit"
             className="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-4 rounded-2xl text-base flex items-center justify-center gap-2 transition-colors mb-4"
           >
-            Proceed to Next Step
+            {edit === "id" ? "Update Aadhaar" : " Proceed to Next Step"}
+           
             <FiArrowRight size={18} />
           </button>
 
@@ -160,6 +166,7 @@ const AadharVerify = ({ setActive }) => {
             type="button"
             className="w-full text-sm font-semibold text-gray-700 hover:text-gray-900 text-center"
           >
+            
             Request Manual Verification
           </button>
         </form>

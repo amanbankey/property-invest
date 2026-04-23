@@ -133,7 +133,7 @@ function SecurityBadge() {
   );
 }
 
-function BasicInfoForm({setActive}) {
+function BasicInfoForm({setActive, edit, setEdit}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -197,13 +197,19 @@ function BasicInfoForm({setActive}) {
         address: form.address,
       }));
 
-      setForm({
-        name: "",
-        email: "",
-        dob: "",
-        address: "",
-      });
-      setActive("pan")
+      if (edit === "basic") {
+        setActive("review");
+        setEdit('');
+      } else {
+        setForm({
+          name: "",
+          email: "",
+          dob: "",
+          address: "",
+        });
+        setActive("pan");
+      }
+
     } else {
       setErrors(validationErrors);
     }
@@ -274,11 +280,12 @@ function BasicInfoForm({setActive}) {
           <SecurityBadge />
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-1">
+           
             <button
               type="submit"
               className="w-full sm:w-auto bg-teal-800 text-white font-semibold text-sm px-8 py-3.5 rounded-xl hover:bg-teal-900 active:scale-95 transition-all"
             >
-              Next Step
+             {edit === "basic" ? "Update Info" : "Next Step"}
             </button>
 
            
@@ -289,7 +296,7 @@ function BasicInfoForm({setActive}) {
   );
 }
 
-function FormCard({ setActive}) {
+function FormCard({ setActive, edit, setEdit }) {
   return (
     <div className="relative ">
       <div className="bg-white  rounded-2xl shadow-2xl border border-gray-100 p-6 sm:p-8 xl:mr-72">
@@ -300,7 +307,7 @@ function FormCard({ setActive}) {
           Please provide your personal details for verification. This
           information is required by law for high-value fractional investments.
         </p>
-        <BasicInfoForm setActive={setActive} />
+        <BasicInfoForm setActive={setActive} edit={edit} setEdit={setEdit} />
       </div>
       {/* <PropertyCard /> */}
 
@@ -348,9 +355,9 @@ export default function KYCVerification() {
   const [show, setShow] = useState(0);
   const [edit,  setEdit] = useState('');
 
-  useEffect(() => {
+  // useEffect(() => {
  
-  }, [edit]);
+  // }, [edit]);
 
   return (
     <div className="  bg-slate-50 font-sans">
@@ -367,12 +374,12 @@ export default function KYCVerification() {
           <StepBar active={active} />
         </div>
 
-        {active === "basic" && <FormCard  setActive={setActive} />}
-        {active  === "pan" && <KycPanVerification  setActive={setActive}  />}
-        {active === "id" && <AadharVerify  setActive={setActive} />}
-        {active === "nominee" && <Nominee setActive={setActive} />}
-        {active === "bank" && <BankDetails setActive={setActive} />}
-        {active === "review" && <KycReviewandSubmit  setActive={setActive}  />}
+        {active === "basic" && <FormCard  setActive={setActive} edit={edit} setEdit={setEdit} />}
+        {active  === "pan" && <KycPanVerification  setActive={setActive} edit={edit} setEdit={setEdit}  />}
+        {active === "id" && <AadharVerify  setActive={setActive} edit={edit} setEdit={setEdit} />}
+        {active === "nominee" && <Nominee setActive={setActive} edit={edit} setEdit={setEdit} />}
+        {active === "bank" && <BankDetails setActive={setActive} edit={edit} setEdit={setEdit} />}
+        {active === "review" && <KycReviewandSubmit  setActive={setActive}  edit={edit} setEdit={setEdit} />}
    
       </main>
     </div>

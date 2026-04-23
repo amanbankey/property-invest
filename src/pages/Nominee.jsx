@@ -4,7 +4,7 @@ import { MdOutlineVerified } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
 import { setNominee } from "../slices/kycslice";
 
-const Nominee = ({setActive}) => {
+const Nominee = ({setActive, edit, setEdit}) => {
    const dispatch =  useDispatch()
   const [formData, setFormData] = useState({
     nomineeName: "",
@@ -51,7 +51,12 @@ const Nominee = ({setActive}) => {
         nomineeDob: formData.nomineeDob,
               
          }));
-    setActive("bank")
+         if (edit === "nominee") {
+          setActive("review");
+          setEdit('');
+        } else {
+          setActive("bank");
+        }
     console.log("Final Data:", payload);
   };
 
@@ -176,7 +181,8 @@ const Nominee = ({setActive}) => {
                   type="submit"
                   className="w-full text-xs bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-4 rounded-2xl sm:text-base flex items-center justify-center gap-2"
                 >
-                  Proceed to Bank Details
+                  {edit === "nominee" ? "Update Nominee" : "Proceed to Bank Details"}
+                  
                   <FiArrowRight size={18} />
                 </button>
 

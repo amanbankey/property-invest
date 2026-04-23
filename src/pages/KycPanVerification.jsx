@@ -21,7 +21,7 @@ import { setPan } from "../slices/kycslice";
 const PROGRESS_STEPS = [1, 2, 3, 4];
 
 
- export default function KycPanVerification({setActive}) {
+ export default function KycPanVerification({setActive, edit ,setEdit}) {
   const navigate = useNavigate();
 
   const [panNum, setPanNum] = useState('');
@@ -35,14 +35,19 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setActive("id")
     dispatch(setPan({
       panNum: panNum,
     }))
+
     const formData = new FormData();
     formData.append("panImg", panFile);
     // console.log("Ready to send:", panFile);
- 
+    if (edit === "pan") {
+      setActive("review");
+      setEdit('');
+    } else {
+      setActive("id");
+    }
   }
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -148,7 +153,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
                           />
                         )}
                     </div>
-                    
+
                     <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 flex items-start gap-3 mb-8">
                       <FiShield size={18} className="text-gray-400 shrink-0 mt-0.5" />
                       <p className="sm:text-xs text-[0.6rem] text-gray-600 leading-relaxed">
@@ -164,7 +169,7 @@ const PROGRESS_STEPS = [1, 2, 3, 4];
                       type="submit"
                       className="w-full text-xs bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-4 rounded-2xl sm:text-base flex items-center justify-center gap-2 transition-colors mb-4"
                     >
-                        Proceed to ID Verification
+                        {edit === "pan" ? "Update PAN" : " Proceed to ID Verification"}
                       <FiArrowRight size={18} />
                     </button>
                   </form>
