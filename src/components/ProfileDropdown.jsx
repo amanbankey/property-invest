@@ -1,8 +1,10 @@
 import { useRef, useState } from "react"
 import { AiOutlineCaretDown } from "react-icons/ai"
 import { VscDashboard, VscSignOut } from "react-icons/vsc"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import useOnClickOutside from "../hooks/useOnClickOutside"
+import { CiSaveUp2 } from "react-icons/ci";
+
 
 export default function ProfileDropdown({handleLogout}) {
 
@@ -44,6 +46,12 @@ export default function ProfileDropdown({handleLogout}) {
             <VscSignOut className="text-lg" />
             Logout
           </div>
+
+         <NavLink to='/watchlist'>  <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
+              <CiSaveUp2  className="text-lg" />
+              WatchList
+            </div> </NavLink>
+        
         </div>
       )}
     </button>

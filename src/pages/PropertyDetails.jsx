@@ -4,7 +4,11 @@ import { BsPersonCircle, BsBuilding, BsFileText, BsShieldCheck, BsDiagram3 } fro
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { MdOutlineSquareFoot, MdOutlinePeople } from "react-icons/md";
 import { RiBuilding2Line } from "react-icons/ri";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch , useSelector } from "react-redux";
+
+import { addToWatchlist } from "../slices/watchlistSlice";
+
 
 
 const GALLERY = [
@@ -36,11 +40,12 @@ const RELATED = [
 
 
 
-function Gallery() {
+function Gallery({img}) {
+
   return (
     <div className="mb-8">
       <div className="relative rounded-2xl overflow-hidden mb-2">
-        <img src={GALLERY[0]} alt="main" className="w-full h-56 sm:h-72 lg:h-80 object-cover" />
+        <img src={img} alt="main" className="w-full h-56 sm:h-72 lg:h-80 object-cover" />
         <div className="absolute top-3 left-3 flex gap-2">
           <span className="bg-gray-800 text-white text-[10px] font-bold px-2 py-1 rounded-full">COMMERCIAL</span>
           <span className="bg-emerald-700 text-white text-[10px] font-bold px-2 py-1 rounded-full">88% FUNDED</span>
@@ -118,22 +123,30 @@ function ReturnsCalculator() {
   );
 }
 
-function StickyCard() {
+function StickyCard({property}) {
+  const dispatch = useDispatch();
+
+  // const properties = useSelector((state) => state.property.properties);
+
+  // console.log("pro" , properties,  );
+
+   
+
   return (
     <div className="bg-white rounded-2xl border border-gray-200 shadow-md p-5 lg:sticky lg:top-20">
-      <h2 className="text-xl font-extrabold text-gray-900">The Azure Heights</h2>
+      <h2 className="text-xl font-extrabold text-gray-900">{property.name}</h2>
       <div className="flex items-center gap-1 mt-1 mb-4">
         <HiOutlineLocationMarker size={13} className="text-gray-400" />
-        <span className="text-xs text-gray-500">Marina District, Dubai</span>
+        <span className="text-xs text-gray-500">{property.loc}</span>
       </div>
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div>
           <p className="text-[10px] text-gray-400 uppercase tracking-wider">Total Value</p>
-          <p className="text-base font-bold text-gray-900">$2,500,000</p>
+          <p className="text-base font-bold text-gray-900">{property.totalValue}</p>
         </div>
         <div>
           <p className="text-[10px] text-gray-400 uppercase tracking-wider">Share Price</p>
-          <p className="text-base font-bold text-gray-900">$25,000</p>
+          <p className="text-base font-bold text-gray-900">{property.sharePrice}</p>
         </div>
         
       </div>
@@ -150,7 +163,12 @@ function StickyCard() {
              Invest Now
         </NavLink>
        </button>
-      <button className="w-full flex items-center justify-center gap-2 border border-gray-200 text-gray-700 font-medium py-2.5 rounded-xl text-sm hover:bg-gray-50 transition-colors mb-4">
+
+
+
+      <button 
+      onClick={() => dispatch(addToWatchlist(property.id))}
+      className="w-full flex items-center justify-center gap-2 border border-gray-200 text-gray-700 font-medium py-2.5 rounded-xl text-sm hover:bg-gray-50 transition-colors mb-4">
         <FiHeart size={15} /> Save to Watchlist
       </button>
     
@@ -210,6 +228,13 @@ function RelatedCard({ p }) {
 
 
 export default function PropertydetailPage() {
+
+  const properties = useSelector((state) => state.property.properties);
+  const location = useLocation();
+  const id = location.state?.id;
+  const property = properties[id-1];
+  console.log('id', property  )
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -223,11 +248,12 @@ export default function PropertydetailPage() {
 
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="flex-1 min-w-0">
-            <Gallery />
+            <Gallery img={property.img} />
 
             <section className="bg-white rounded-2xl border border-gray-200 p-5 mb-6">
               <h2 className="text-lg font-bold text-gray-900 mb-3">Property Overview</h2>
-              <p className="text-sm text-gray-600 leading-relaxed mb-5">The Azure Heights represents a cornerstone investment in the heart of Dubai's Marina District. This premium commercial asset spans the upper 3 floors of a Grade-A skyscraper, offering unparalleled views and high-yield tenant stability. The property is currently tenanted by three Fortune 500 regional headquarters on long-term 5-year leases.</p>
+              <p className="text-sm text-gray-600 leading-relaxed mb-5">The Azure Heights represents a 
+                cornerstone investment in the heart of Dubai's Marina District. This premium commercial asset spans the upper 3 floors of a Grade-A skyscraper, offering unparalleled views and high-yield tenant stability. The property is currently tenanted by three Fortune 500 regional headquarters on long-term 5-year leases.</p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="flex items-center gap-2">
                   <MdOutlineSquareFoot size={18} className="text-gray-400 shrink-0" />
@@ -235,7 +261,7 @@ export default function PropertydetailPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <HiOutlineLocationMarker size={18} className="text-gray-400 shrink-0" />
-                  <span className="text-xs text-gray-600">Marina District Core, Dubai</span>
+                  <span className="text-xs text-gray-600">{property.loc}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MdOutlinePeople size={18} className="text-gray-400 shrink-0" />
@@ -257,6 +283,8 @@ export default function PropertydetailPage() {
                  
                   { label: "Holding Period", value: "5 Years" },
                   { label: "Appreciation Est.", value: "7.4% / yr" },
+                  { label: "Locking period", value: property.locking_period },
+
                 ].map(item => (
                   <div key={item.label}>
                     <p className="text-[10px] text-gray-400 uppercase tracking-wider">{item.label}</p>
@@ -340,7 +368,7 @@ export default function PropertydetailPage() {
           </div>
 
           <div className="w-full lg:w-80 xl:w-96 shrink-0">
-            <StickyCard />
+            <StickyCard  property={property}/>
           </div>
 
           

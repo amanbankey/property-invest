@@ -30,6 +30,7 @@ import InvestmentSuccess from "./pages/InvestmentSuccess";
 import Lenis from "@studio-freight/lenis";
 import BrokerDashboard from "./pages/BrokerDashboard";
 import AadharVerify from "./pages/AadharVerify";
+import WatchList from "./components/WatchList";
 
 function App() {
   useEffect(() => {
@@ -80,7 +81,7 @@ function App() {
               </OpenRoute>
             }
           />
-          <Route path="/about" element={<About />} />
+          <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route
             path="dashboard"
@@ -93,6 +94,8 @@ function App() {
           />
 
           <Route path="broker-dashboard" element={<BrokerDashboard />} />
+          <Route path="watchlist" element={<WatchList />} />
+
         </Route>
       </Routes>
     </div>
