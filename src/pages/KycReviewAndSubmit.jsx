@@ -31,13 +31,12 @@ const DOCS = [
 ];
 
 
-
-
-function Section({ title, type,  setActive, children }) {
+function Section({ title, type, setEdit, setActive, children }) {
 
   const onEdit = (e) => {
     e.preventDefault() ;
     setActive(type)
+    setEdit(type);
   }
   
 
@@ -67,7 +66,7 @@ function Field({ label, value, icon }) {
   );
 }
 
-export default function KycReviewandSubmit({setActive}) {
+export default function KycReviewandSubmit({setActive, edit, setEdit}) {
   const navigate = useNavigate();
 
   const [activeNav, setActiveNav] = useState(6);
@@ -77,8 +76,8 @@ export default function KycReviewandSubmit({setActive}) {
     nomineeName, nomineePan,  nomineeAadhar,  nomineeDob , 
     accountNum,  branchName,  ifsCode, beneficiaryName, cancelCheckUpload } = useSelector((state) => state.kyc);
 
-  console.log("pan",panPreview   );
-  console.log("aadhar",aadhaarPreview   );
+  // console.log("pan",panPreview   );
+  // console.log("aadhar",aadhaarPreview   );
 
   const onSubmit = () => {
     navigate('/kyc-submission')
@@ -97,7 +96,7 @@ export default function KycReviewandSubmit({setActive}) {
 
           
 
-            <Section title="Personal Info" setActive={setActive} type="basic" >
+            <Section title="Personal Info" setActive={setActive} type="basic"  setEdit={setEdit} >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <Field label="Full Name" value={name} />
                 <Field label="Email Address" value={email} />
@@ -108,7 +107,7 @@ export default function KycReviewandSubmit({setActive}) {
               </div>
             </Section>
 
-            <Section title="Pan Verification" setActive={setActive}  type="pan">
+            <Section title="Pan Verification" setActive={setActive}  type="pan"  setEdit={setEdit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <Field label="PAN Number" value={panNum} />
               
@@ -122,7 +121,7 @@ export default function KycReviewandSubmit({setActive}) {
               </div>
             </Section>
 
-            <Section title="Aadhar Verification" setActive={setActive}  type="id">
+            <Section title="Aadhar Verification" setActive={setActive}  type="id"  setEdit={setEdit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <Field label="Aadhar Number" value={aadharNum} />
                 <img src={aadhaarPreview}  alt="aadahr"
@@ -130,7 +129,7 @@ export default function KycReviewandSubmit({setActive}) {
               </div>
             </Section>
 
-            <Section title="Nominee Verification" setActive={setActive}  type="nominee">
+            <Section title="Nominee Verification" setActive={setActive}  type="nominee"  setEdit={setEdit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <Field label="Nominee Name" value={nomineeName} />
               <Field label="Nominee Pan Number" value={nomineePan} />
@@ -140,7 +139,7 @@ export default function KycReviewandSubmit({setActive}) {
               </div>
             </Section>
 
-            <Section title="Bank Verification" setActive={setActive}  type="bank">
+            <Section title="Bank Verification" setActive={setActive}  type="bank"  setEdit={setEdit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <Field label="Beneficiary Name"  value={beneficiaryName} />
               <Field label="Account Number"value={accountNum} />
