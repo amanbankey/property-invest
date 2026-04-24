@@ -149,7 +149,7 @@ function HowItWorks() {
 
 function PropertyCard({ p }) {
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow">
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl   hover:scale-105 duration-300 tr transition-all">
       <div className="relative">
         <img src={p.img} alt={p.name} className="w-full h-44 object-cover" />
         <span className="absolute top-3 left-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-md tracking-wide">{p.badge}</span>

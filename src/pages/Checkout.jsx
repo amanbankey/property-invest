@@ -4,8 +4,8 @@ import { FiCheckCircle, FiShield, FiLock, FiMapPin, FiMinus, FiPlus, FiCheck, Fi
 import { MdVerified, MdOutlineAccountBalance } from "react-icons/md";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { BsGraphUp } from "react-icons/bs";
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
-
+import { NavLink, Navigate, useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 
 function TrustBadges() {
@@ -25,18 +25,19 @@ function TrustBadges() {
   );
 }
 
-function PropertyCard() {
+function PropertyCard({property}) {
   return (
     <div className="flex items-start gap-4 bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
       <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg overflow-hidden flex-shrink-0 bg-gradient-to-br from-sky-400 to-teal-600 flex items-center justify-center">
-        <BsGraphUp size={32} className="text-white opacity-70" />
+        {/* <BsGraphUp size={32} className="text-white opacity-70" /> */}
+        <img src={property.img} size={32}  />
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-2 flex-wrap">
           <div>
-            <h3 className="font-bold text-gray-900 text-base sm:text-lg">The Azure Heights</h3>
+            <h3 className="font-bold text-gray-900 text-base sm:text-lg"> {property.name}  </h3>
             <p className="text-gray-500 text-xs sm:text-sm flex items-center gap-1 mt-0.5">
-              <FiMapPin size={11} /> Dubai, UAE
+              <FiMapPin size={11} /> {property.loc}
             </p>
           </div>
           <span className="bg-amber-100 text-amber-700 text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap">15.5% ROI</span>
@@ -48,7 +49,7 @@ function PropertyCard() {
           </div>
           <div>
             <p className="text-gray-400 text-xs">Share Price</p>
-            <p className="text-gray-800 text-sm font-semibold">$25,000</p>
+            <p className="text-gray-800 text-sm font-semibold">{property.sharePrice}</p>
           </div>
         </div>
       </div>
@@ -56,7 +57,7 @@ function PropertyCard() {
   );
 }
 
-function ShareSelector({ shares, setShares }) {
+function ShareSelector({ shares, setShares, property }) {
   return (
     <div className="">
       <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-3">Select Number of Shares</h3>
@@ -86,6 +87,7 @@ function ShareSelector({ shares, setShares }) {
 }
 
 function ReferralCode({ code, setCode, applied, setApplied }) {
+
   return (
     <div>
       <p className="text-gray-500 text-xs font-semibold tracking-wide uppercase mb-2"> Broker Referral Code (Optional)</p>
@@ -165,15 +167,15 @@ function AgreementRow({ agreed, setAgreed }) {
   );
 }
 
-function InvestmentSummary({ shares }) {
+function InvestmentSummary({ shares, property }) {
   return (
     <div className="bg-white border border-gray-100 rounded-xl p-4 sm:p-5 shadow-sm">
       <h3 className="text-gray-400 text-xs font-semibold tracking-widest uppercase mb-4">Investment Summary</h3>
       <div className="space-y-3">
         {[
-          { label: "Property", value: "The Azure Heights" },
-          { label: "Location", value: "Dubai, UAE" },
-          { label: "Share Price", value: "$25,000", bold: true },
+          { label: "Property", value: property.name },
+          { label: "Location", value: property.loc },
+          { label: "Share Price", value: property.sharePrice, bold: true },
           { label: "Selected Shares", value: `${shares} Share${shares > 1 ? "s" : ""}`, bold: true },
           { label: "Ownership %", value: `${shares}.00%`, teal: true, bold: true },
         ].map((r) => (
@@ -230,12 +232,18 @@ function FundingProgress() {
 }
 
 export default function Checkout() {
+  const location = useLocation();
   const navigate = useNavigate()
   const [shares, setShares] = useState(1);
   const [code, setCode] = useState("SOVEREIGN2024");
   const [applied, setApplied] = useState(true);
   const [agreed, setAgreed] = useState(false);
   
+  const properties = useSelector((state) => state.property.properties);
+  const id = location.state?.id;
+  const property = properties[id-1];
+  console.log('proer0', property);
+
   const onSubmit = () => {
     navigate('/kyc')
 
@@ -253,8 +261,8 @@ export default function Checkout() {
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           <div className="lg:col-span-3 space-y-5">
-            <PropertyCard />
-            <ShareSelector shares={shares} setShares={setShares} />
+            <PropertyCard property={property}/>
+            <ShareSelector shares={shares} setShares={setShares} property={property} />
             <ReferralCode code={code} setCode={setCode} applied={applied} setApplied={setApplied} />
             <InvestmentBreakdown shares={shares} applied={applied} />
             <AgreementRow agreed={agreed} setAgreed={setAgreed} />
@@ -272,7 +280,7 @@ export default function Checkout() {
           </div>
 
           <div className="lg:col-span-2 space-y-4">
-            <InvestmentSummary shares={shares} />
+            <InvestmentSummary shares={shares} property={property} />
             <FundingProgress />
           </div>
         </div>

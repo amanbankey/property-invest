@@ -175,7 +175,7 @@ function PropertyCard({ p }) {
 
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl hover:scale-105 duration-300 tr transition-all">
       <div className="relative">
         <img
           src={p.img}
@@ -349,7 +349,63 @@ export default function PropertyPage() {
       badge2: "MIXED USE",
       img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=500&q=80",
       name: "The Heritage Arcade",
-      loc: "Paris, France",
+      loc: "Dubai, UAE",
+      locking_period: "+125.4%",
+      roi: "+9.4%",
+      totalValue: "$19.1M",
+      sharePrice: "$1,910",
+      funded: 88,
+      status: "active",
+    },
+    {
+      id: 7,
+      badge1: "PREMIUM",
+      badge2: "MIXED USE",
+      img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=500&q=80",
+      name: "The Heritage Arcade",
+      loc: "Dubai, UAE",
+      locking_period: "+125.4%",
+      roi: "+9.4%",
+      totalValue: "$19.1M",
+      sharePrice: "$1,910",
+      funded: 88,
+      status: "active",
+    },
+    {
+      id: 8,
+      badge1: "PREMIUM",
+      badge2: "MIXED USE",
+      img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=500&q=80",
+      name: "The Heritage Arcade",
+      loc: "Dubai, UAE",
+      locking_period: "+125.4%",
+      roi: "+9.4%",
+      totalValue: "$19.1M",
+      sharePrice: "$1,910",
+      funded: 88,
+      status: "active",
+    },
+    {
+      id: 9,
+      badge1: "PREMIUM",
+      badge2: "MIXED USE",
+      img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=500&q=80",
+      name: "The Heritage Arcade",
+      loc: "New York, USA",
+      locking_period: "+125.4%",
+      roi: "+9.4%",
+      totalValue: "$19.1M",
+      sharePrice: "$1,910",
+      funded: 88,
+      status: "active",
+    },
+    {
+      id: 10,
+      badge1: "PREMIUM",
+      badge2: "MIXED USE",
+      img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=500&q=80",
+      name: "The Heritage Arcade",
+      loc: "New York, USA",
       locking_period: "+125.4%",
       roi: "+9.4%",
       totalValue: "$19.1M",
@@ -384,7 +440,7 @@ export default function PropertyPage() {
 
   useEffect(() => {
     if (!navigator.geolocation) {
-      console.log("Geolocation not supported");
+      // console.log("Geolocation not supported");
       return;
     }
 

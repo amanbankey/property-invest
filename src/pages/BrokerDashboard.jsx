@@ -303,7 +303,7 @@ function BrokerCodeCard() {
   const [copied, setCopied] = useState(false);
 
   return (
-    <div className="bg-teal-700  rounded-2xl p-5 flex flex-col gap-4 h-full">
+    <div className="bg-teal-700  rounded-2xl p-5 flex flex-col gap-4 h-full sm:max-w-md">
       <h3 className="text-white font-semibold text-sm">Your Broker Code</h3>
       <div className="bg-white/20 relative   rounded-xl px-4 py-3 flex items-center justify-between">
         <span className="text-white font-bold tracking-wider text-sm">
@@ -856,11 +856,11 @@ export default function BrokerDashboard() {
           <Header setMobileOpen={setMobileOpen} />
           <StatCards />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-            <div className="lg:col-span-2">
+          <div className="flex  flex-col sm:flex-row  gap-4 lg:gap-14 xl:gap-24 mb-6">
+            <div className="flex-1">
               <BrokerCodeCard />
             </div>
-            <div className="lg:col-span-3">
+            <div className="flex-1">
               <ReferralChart />
             </div>
           </div>

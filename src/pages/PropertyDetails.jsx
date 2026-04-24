@@ -5,8 +5,9 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { MdOutlineSquareFoot, MdOutlinePeople } from "react-icons/md";
 import { RiBuilding2Line } from "react-icons/ri";
 import { NavLink, useLocation } from "react-router-dom";
+import { FaHeart } from "react-icons/fa";
 import { useDispatch , useSelector } from "react-redux";
-
+import toast from "react-hot-toast";
 import { addToWatchlist } from "../slices/watchlistSlice";
 
 
@@ -125,7 +126,7 @@ function ReturnsCalculator() {
 
 function StickyCard({property}) {
   const dispatch = useDispatch();
-
+  const [liked, setLiked] = useState(false);
   // const properties = useSelector((state) => state.property.properties);
 
   // console.log("pro" , properties,  );
@@ -159,17 +160,26 @@ function StickyCard({property}) {
       </div>
       <p className="text-[10px] text-gray-400 mb-4">Joined by 94 individual investors</p>
       <button className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl text-sm transition-colors mb-3">
-        <NavLink to='/checkout'>
+        <NavLink to='/checkout'  state={{ id: property.id }}>
              Invest Now
         </NavLink>
        </button>
 
 
 
-      <button 
-      onClick={() => dispatch(addToWatchlist(property.id))}
+      <button  disabled={liked}
+      onClick={() => {dispatch(addToWatchlist(property.id))
+        //  toast.success("Add to watchlist")
+        
+        setLiked(!liked)
+      }}
       className="w-full flex items-center justify-center gap-2 border border-gray-200 text-gray-700 font-medium py-2.5 rounded-xl text-sm hover:bg-gray-50 transition-colors mb-4">
-        <FiHeart size={15} /> Save to Watchlist
+        {liked ? (
+        <FaHeart size={15} className="text-red-500" />
+      ) : (
+        <FiHeart size={15} />
+      )}
+      {liked ? "Saved" : "Save to Watchlist"}
       </button>
     
     </div>
@@ -243,7 +253,7 @@ export default function PropertydetailPage() {
           <span>&rsaquo;</span>
           <a href="#" className="hover:text-gray-700">Properties</a>
           <span>&rsaquo;</span>
-          <span className="text-gray-900 font-medium">The Azure Heights</span>
+          <span className="text-gray-900 font-medium">{property.name}</span>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
@@ -303,7 +313,7 @@ export default function PropertydetailPage() {
                 <h2 className="text-lg font-bold text-gray-900">Location</h2>
                 <div className="flex items-center gap-1 text-xs text-gray-500">
                   <HiOutlineLocationMarker size={13} />
-                  Marina District, Dubai, UAE
+                 {property.loc}
                 </div>
               </div>
               <div className="bg-gray-200 rounded-xl h-40 sm:h-52 flex items-center justify-center mb-4 overflow-hidden">
@@ -359,7 +369,7 @@ export default function PropertydetailPage() {
                   <h2 className="text-lg font-bold text-gray-900">Curated Opportunities</h2>
                   <p className="text-xs text-gray-500 mt-0.5">Hand-picked properties similar to your current view.</p>
                 </div>
-                <a href="#" className="flex items-center gap-1 text-xs text-emerald-700 font-semibold hover:underline">View Portfolio <FiArrowRight size={12} /></a>
+                <NavLink to='/portfolio' className="flex items-center gap-1 text-xs text-emerald-700 font-semibold hover:underline">View Portfolio <FiArrowRight size={12} /></NavLink>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {RELATED.map(p => <RelatedCard key={p.name} p={p} />)}
