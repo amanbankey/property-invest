@@ -436,7 +436,14 @@ export default function PropertyPage() {
     return matchedLocation;
   });
 
-  const visibleProperties = filtered.slice(0, load);
+
+  const itemsPerPage = 6;
+  const visibleProperties = filtered.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+  
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -540,33 +547,25 @@ export default function PropertyPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
               {visibleProperties.map((p) => (
-                <PropertyCard key={p.name} p={p} />
+                <PropertyCard key={p.id} p={p} />
               ))}
             </div>
 
             <div className="mt-10 flex flex-col items-center gap-4">
-              <button
-                onClick={() => {
-                  setLoad((prev) => prev + 3);
-                }}
-                className="border border-gray-200 text-gray-700 text-sm font-medium px-8 py-2.5 rounded-full hover:bg-gray-50 transition-colors"
-              >
-                Load More Properties
-              </button>
               <div className="flex items-center gap-2">
-                {[1, 2, 3, "...", 8].map((p, i) => (
-                  <button
-                    key={i}
-                    onClick={() => typeof p === "number" && setCurrentPage(p)}
-                    className={`w-8 h-8 text-sm rounded-full font-medium transition-colors ${
-                      p === currentPage
-                        ? "bg-emerald-700 text-white"
-                        : "text-gray-500 hover:bg-gray-100"
-                    }`}
-                  >
-                    {p}
-                  </button>
-                ))}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                        <button
+                          key={p}
+                          onClick={() => setCurrentPage(p)}
+                          className={`w-8 h-8 text-sm rounded-full font-medium ${
+                            p === currentPage
+                              ? "bg-emerald-700 text-white"
+                              : "text-gray-500"
+                          }`}
+                        >
+                          {p}
+                        </button>
+                      ))}
               </div>
             </div>
           </div>

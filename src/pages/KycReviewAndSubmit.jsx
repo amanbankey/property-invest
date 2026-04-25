@@ -178,7 +178,7 @@ export default function KycReviewandSubmit({setActive, edit, setEdit}) {
             </div>
 
             <div className="flex items-center justify-between pb-8">
-              <button className="text-sm font-semibold text-gray-500 hover:text-gray-800 transition-colors">Save as Draft</button>
+              
               <button disabled={!confirmed} onClick={onSubmit}
                 className={`px-8 py-3.5 rounded-2xl text-sm font-bold transition-colors ${confirmed ? "bg-emerald-800 hover:bg-emerald-900 text-white" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
               

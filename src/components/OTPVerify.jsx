@@ -109,7 +109,7 @@ export default function OTPVerify({mobile, setPage}) {
 
       } catch (error) {
         // console.log(error);
-        toast.error(error.response?.data?.message || "Error");
+        toast.error(error.res?.data?.message || "Error");
       }
     }else {
       setOtpErr("Invalid OTP. Please try again")

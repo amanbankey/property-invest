@@ -193,13 +193,13 @@ function Opportunities() {
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Investment Opportunities</h2>
             <p className="text-gray-500 text-sm mt-1">Current institutional grade assets available for fractional links.</p>
           </div>
-          <a href="#" className="hidden sm:flex items-center gap-1 text-emerald-600 text-sm font-semibold hover:underline">View All Properties <FiArrowRight /></a>
+          <NavLink to='/property' className="hidden sm:flex items-center gap-1 text-emerald-600 text-sm font-semibold hover:underline">View All Properties <FiArrowRight /></NavLink>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {PROPERTIES.map(p => <PropertyCard key={p.name} p={p} />)}
         </div>
         <div className="mt-6 sm:hidden text-center">
-          <a href="#" className="inline-flex items-center gap-1 text-emerald-600 text-sm font-semibold">View All Properties <FiArrowRight /></a>
+          <NavLink to='/property' className="inline-flex items-center gap-1 text-emerald-600 text-sm font-semibold">View All Properties <FiArrowRight /></NavLink>
         </div>
       </div>
     </section>
