@@ -1,18 +1,33 @@
 import { useState, useEffect } from "react";
-import { FiLock, FiShield, FiCheckCircle, FiCreditCard, FiChevronRight, FiInfo } from "react-icons/fi";
+import {
+  FiLock,
+  FiShield,
+  FiCheckCircle,
+  FiCreditCard,
+  FiChevronRight,
+  FiInfo,
+} from "react-icons/fi";
 import { MdOutlineVerified } from "react-icons/md";
 import { BsPhone, BsBank2, BsBuilding } from "react-icons/bs";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const VITE_RAZORPAY_SECRET = import.meta.env.VITE_RAZORPAY_SECRET;
+const VITE_RAZORPAY_KEY = import.meta.env.VITE_RAZORPAY_KEY;
 
+// console.log('url', BACKEND_URL)
 function PageHeader() {
   return (
     <div className="mb-7">
-    
-      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">Complete Your Payment</h1>
-     
-      
-      <p className="text-gray-500 text-sm sm:text-base mt-1">Secure your ownership and finalize your investment</p>
+      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900">
+        Complete Your Payment
+      </h1>
+
+      <p className="text-gray-500 text-sm sm:text-base mt-1">
+        Secure your ownership and finalize your investment
+      </p>
     </div>
   );
 }
@@ -24,8 +39,6 @@ function PaymentTabs({ active, setActive }) {
     { key: "net", label: "Net Banking", icon: <BsBank2 size={14} /> },
   ];
 
-  
-  
   return (
     <div className="flex items-center gap-1 bg-gray-100 rounded-2xl p-1 w-full sm:w-auto mb-6">
       {tabs.map((t) => (
@@ -33,7 +46,9 @@ function PaymentTabs({ active, setActive }) {
           key={t.key}
           onClick={() => setActive(t.key)}
           className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex-1 sm:flex-none justify-center ${
-            active === t.key ? "bg-teal-800 text-white shadow-sm" : "text-gray-500 hover:text-gray-800"
+            active === t.key
+              ? "bg-teal-800 text-white shadow-sm"
+              : "text-gray-500 hover:text-gray-800"
           }`}
         >
           {t.icon}
@@ -45,123 +60,146 @@ function PaymentTabs({ active, setActive }) {
   );
 }
 
-function CardForm() {
+function CardForm({ handlePayment }) {
   const [form, setForm] = useState({ name: "", card: "", expiry: "", cvv: "" });
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const inputCls = "w-full bg-slate-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-200 transition-all";
-  
- 
+  const inputCls =
+    "w-full bg-slate-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-200 transition-all";
+
   return (
     <div className="space-y-5">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Cardholder Name</label>
-        <input className={inputCls} placeholder="Johnathan Sterling" value={form.name} onChange={set("name")} />
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Card Number</label>
-        <div className="relative">
-          <input className={`${inputCls} pr-12`} placeholder="XXXX XXXX XXXX 4242" value={form.card} onChange={set("card")} maxLength={19} />
-          <FiCreditCard size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" />
-        </div>
-      </div>
-      <div className="grid grid-cols-2 gap-4">
+      <form onSubmit={handlePayment}>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Expiry Date</label>
-          <input className={inputCls} placeholder="MM / YY" value={form.expiry} onChange={set("expiry")} maxLength={7} />
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Cardholder Name
+          </label>
+          <input
+            className={inputCls}
+            placeholder="Johnathan Sterling"
+            value={form.name}
+            onChange={set("name")}
+          />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">CVV</label>
-          <input className={inputCls} placeholder="•••" type="password" value={form.cvv} onChange={set("cvv")} maxLength={4} />
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Card Number
+          </label>
+          <div className="relative">
+            <input
+              className={`${inputCls} pr-12`}
+              placeholder="XXXX XXXX XXXX 4242"
+              value={form.card}
+              onChange={set("card")}
+              maxLength={19}
+            />
+            <FiCreditCard
+              size={18}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
+            />
+          </div>
         </div>
-      </div>
-      <NavLink to='/investment-success' >
-      <button className="w-full bg-teal-800 text-white font-bold text-sm sm:text-base py-4 rounded-xl hover:bg-teal-900 active:scale-[0.98] transition-all mt-2" 
-      >
-        Confirm and Pay $24,500
-      </button>
-      </NavLink>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Expiry Date
+            </label>
+            <input
+              className={inputCls}
+              placeholder="MM / YY"
+              value={form.expiry}
+              onChange={set("expiry")}
+              maxLength={7}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              CVV
+            </label>
+            <input
+              className={inputCls}
+              placeholder="•••"
+              type="password"
+              value={form.cvv}
+              onChange={set("cvv")}
+              maxLength={4}
+            />
+          </div>
+        </div>
+
+        <button className="w-full bg-teal-800 text-white font-bold text-sm sm:text-base py-4 rounded-xl hover:bg-teal-900 active:scale-[0.98] transition-all mt-2">
+          Confirm and Pay $24,500
+        </button>
+      </form>
     </div>
   );
 }
 
-function UPIForm() {
-
-  const loadRazorpay = () => {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.onload = () => {
-        console.log("Razorpay loaded");
-        resolve(true);
-      };
-      script.onerror = () => {
-        console.log("Razorpay failed to load");
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  };
-
-  const handlePayment = async () => {
-    const res = await loadRazorpay();
-  
-    if (!res) {
-      alert("Razorpay SDK failed to load");
-      return;
-    }
-    const options = {
-      key: "rzp_test_bzK53YGmR1lrbV", 
-      amount: 50000, // paise me (500 = ₹5)
-      currency: "INR",
-      name: "Test Company",
-      description: "Test Transaction",
-      handler: function (response) {
-        console.log(response);
-      },
-      prefill: {
-        name: "Your Name",
-        email: "test@email.com",
-        contact: "9999999999",
-      },
-      theme: {
-        color: "#3399cc",
-      },
+const loadRazorpay = () => {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => {
+      resolve(true);
     };
-  
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open(); // 👈 ye missing hota hai aksar
-  };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+};
+
+function UPIForm({ handlePayment }) {
+  const navigate = useNavigate();
+  const [upi, setUpi] = useState("");
+
   return (
     <div className="space-y-5">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">UPI ID</label>
-        <input className="w-full bg-slate-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-200 transition-all" placeholder="yourname@upi" />
+        <form onSubmit={handlePayment}>
+          {" "}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              UPI ID
+            </label>
+            <input
+              className="w-full  bg-slate-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-700 placeholder-gray-400 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-200 transition-all"
+              placeholder="yourname@upi"
+              type="text"
+              value={upi}
+              onChange={(e) => setUpi(e.target.value)}
+            />
+          </div>
+          <button className="w-full mt-3 bg-teal-800 text-white font-bold text-sm sm:text-base py-4 rounded-xl hover:bg-teal-900 active:scale-[0.98] transition-all">
+            Confirm and Pay $24,500
+          </button>
+        </form>
       </div>
-      <button onClick={handlePayment} className="w-full bg-teal-800 text-white font-bold text-sm sm:text-base py-4 rounded-xl hover:bg-teal-900 active:scale-[0.98] transition-all">
-        Confirm and Pay $24,500
-      </button>
     </div>
   );
 }
 
-function NetBankingForm() {
+function NetBankingForm({ handlePayment }) {
   return (
     <div className="space-y-5">
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">Select Bank</label>
-        <select className="w-full bg-slate-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-700 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-200 transition-all">
-          <option value="">Choose your bank</option>
-          <option>HDFC Bank</option>
-          <option>ICICI Bank</option>
-          <option>SBI</option>
-          <option>Axis Bank</option>
-          <option>Kotak Mahindra</option>
-        </select>
-      </div>
-      <button className="w-full bg-teal-800 text-white font-bold text-sm sm:text-base py-4 rounded-xl hover:bg-teal-900 active:scale-[0.98] transition-all">
-        Confirm and Pay $24,500
-      </button>
+      <form onSubmit={handlePayment}>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Select Bank
+          </label>
+          <select className="w-full bg-slate-50 border border-gray-200 rounded-xl px-4 py-3.5 text-sm text-gray-700 outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-200 transition-all">
+            <option value="">Choose your bank</option>
+            <option>HDFC Bank</option>
+            <option>ICICI Bank</option>
+            <option>SBI</option>
+            <option>Axis Bank</option>
+            <option>Kotak Mahindra</option>
+          </select>
+        </div>
+        <button className="w-full bg-teal-800 text-white font-bold text-sm sm:text-base py-4 rounded-xl hover:bg-teal-900 active:scale-[0.98] transition-all">
+          Confirm and Pay $24,500
+        </button>
+      </form>
     </div>
   );
 }
@@ -179,7 +217,9 @@ function TrustBadges() {
           <div className="w-12 h-12 rounded-full bg-teal-50 flex items-center justify-center text-teal-700">
             {b.icon}
           </div>
-          <span className="text-xs text-gray-500 font-medium text-center">{b.label}</span>
+          <span className="text-xs text-gray-500 font-medium text-center">
+            {b.label}
+          </span>
         </div>
       ))}
     </div>
@@ -187,13 +227,84 @@ function TrustBadges() {
 }
 
 function PaymentForm() {
-  const [activeTab, setActiveTab] = useState("card");
+  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("upi");
+
+  const handlePayment = async (e) => {
+    e.preventDefault();
+    const res = await loadRazorpay();
+
+    if (!res) {
+      toast.error(
+        "Razorpay SDK failed to load. Check your Internet Connection."
+      )
+      return
+    }
+
+    try {
+
+      if(!res) {
+        toast.error("")
+      }
+      const response = await axios.post(`${BACKEND_URL}/capturePayment`, {
+        amount: 500,
+        currency: "INR",
+      });
+      const order = response.data.data;
+      // console.log('capture', order,  order.id )
+      const options = {
+        key: "rzp_test_bzK53YGmR1lrbV",
+        amount: order.amount, // paise me (500 = ₹5 )
+        currency: "INR",
+        name: "Test Company",
+        description: "Test Transaction",
+        order_id: order.id,
+
+        handler: async function (response) {
+          verifyPayment(response);
+        },
+      };
+
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+      // paymentObject.on("payment.failed", function (response) {
+      //   toast.error("Oops! Payment Failed.")
+      // })
+    } catch (err) {
+      console.log("PAYMENT API ERROR............", err);
+      toast.error("Could Not make Payment.");
+    }
+  };
+
+  async function verifyPayment(response) {
+    try {
+      const verify = await axios.post(`${BACKEND_URL}/verifyPayment`, {
+        razorpay_order_id: response.razorpay_order_id,
+        razorpay_payment_id: response.razorpay_payment_id,
+        razorpay_signature: response.razorpay_signature,
+      });
+
+      console.log("verify", verify);
+      if (verify.data.success) {
+        toast.success("Payment Verified");
+        navigate("/investment-success");
+      }
+
+      if (!verify.data.success) {
+        throw new Error(verify.data.message);
+      }
+    } catch (err) {
+      console.log("PAYMENT VERIFY ERROR............", err);
+      toast.error("Could Not Verify Payment.");
+    }
+  }
+
   return (
     <div className="flex-1 min-w-0 ">
       <PaymentTabs active={activeTab} setActive={setActiveTab} />
-      {activeTab === "card" && <CardForm />}
-      {activeTab === "upi" && <UPIForm />}
-      {activeTab === "net" && <NetBankingForm />}
+      {activeTab === "card" && <CardForm handlePayment={handlePayment} />}
+      {activeTab === "upi" && <UPIForm handlePayment={handlePayment} />}
+      {activeTab === "net" && <NetBankingForm handlePayment={handlePayment} />}
       <TrustBadges />
     </div>
   );
@@ -204,7 +315,11 @@ function OrderSummary() {
     { label: "Investment Amount", value: "$25,000.00", color: "text-gray-900" },
     { label: "Platform Fee", value: "$0.00", color: "text-gray-900" },
     { label: "Taxes & Duties", value: "$0.00", color: "text-gray-900" },
-    { label: "Promotional Discount", value: "-$500.00", color: "text-teal-600" },
+    {
+      label: "Promotional Discount",
+      value: "-$500.00",
+      color: "text-teal-600",
+    },
   ];
   return (
     <div className="w-full lg:w-96 xl:w-[420px] flex-shrink-0 shadow-2xl">
@@ -214,24 +329,42 @@ function OrderSummary() {
             <BsBuilding size={60} className="text-white opacity-30" />
           </div>
           <div className="relative z-10 p-4 pb-5 w-full bg-gradient-to-t from-black/50 to-transparent">
-            <p className="text-white/70 text-xs font-semibold uppercase tracking-widest">Current Asset</p>
-            <p className="text-white font-bold text-lg sm:text-xl mt-0.5">The Azure Heights, Dubai</p>
+            <p className="text-white/70 text-xs font-semibold uppercase tracking-widest">
+              Current Asset
+            </p>
+            <p className="text-white font-bold text-lg sm:text-xl mt-0.5">
+              The Azure Heights, Dubai
+            </p>
           </div>
         </div>
 
         <div className="p-5">
           <div className="flex items-center justify-between mb-5">
             <div>
-              <p className="text-gray-400 text-xs font-medium mb-0.5">Equity Allocation</p>
-              <p className="text-gray-900 font-bold text-sm sm:text-base">1 Share (1.00% Ownership)</p>
+              <p className="text-gray-400 text-xs font-medium mb-0.5">
+                Equity Allocation
+              </p>
+              <p className="text-gray-900 font-bold text-sm sm:text-base">
+                1 Share (1.00% Ownership)
+              </p>
             </div>
-            <span className="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1.5 rounded-full whitespace-nowrap">+4.2% Est. Yield</span>
+            <span className="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1.5 rounded-full whitespace-nowrap">
+              +4.2% Est. Yield
+            </span>
           </div>
 
           <div className="space-y-3 pb-4 border-b border-gray-100">
             {rows.map((r) => (
               <div key={r.label} className="flex justify-between text-sm">
-                <span className={r.label === "Promotional Discount" ? "text-teal-600" : "text-gray-500"}>{r.label}</span>
+                <span
+                  className={
+                    r.label === "Promotional Discount"
+                      ? "text-teal-600"
+                      : "text-gray-500"
+                  }
+                >
+                  {r.label}
+                </span>
                 <span className={`font-medium ${r.color}`}>{r.value}</span>
               </div>
             ))}
@@ -239,8 +372,12 @@ function OrderSummary() {
 
           <div className="pt-4 flex items-end justify-between">
             <div>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Total Payable</p>
-              <p className="text-3xl sm:text-4xl font-extrabold text-gray-900">$24,500</p>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">
+                Total Payable
+              </p>
+              <p className="text-3xl sm:text-4xl font-extrabold text-gray-900">
+                $24,500
+              </p>
             </div>
             <div className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 cursor-pointer hover:bg-gray-50">
               <FiInfo size={13} />
@@ -251,19 +388,18 @@ function OrderSummary() {
 
       <p className="text-gray-400 text-xs text-center mt-4 leading-relaxed px-5 pb-10">
         By clicking "Confirm and Pay", you agree to Sovereign Curator's{" "}
-        <span className="text-teal-700 underline cursor-pointer">Terms of Investment</span>{" "}
+        <span className="text-teal-700 underline cursor-pointer">
+          Terms of Investment
+        </span>{" "}
         and acknowledge the risks associated with fractional property ownership.
       </p>
     </div>
   );
 }
 
-
-
 export default function Payment() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
-    
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
         <PageHeader />
         <div className="flex flex-col  lg:flex-row gap-8 lg:gap-10 lg:items-start items-center ">
@@ -271,7 +407,6 @@ export default function Payment() {
           <OrderSummary />
         </div>
       </main>
-   
     </div>
   );
 }

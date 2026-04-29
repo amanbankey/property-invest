@@ -553,19 +553,49 @@ export default function PropertyPage() {
 
             <div className="mt-10 flex flex-col items-center gap-4">
               <div className="flex items-center gap-2">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                        <button
-                          key={p}
-                          onClick={() => setCurrentPage(p)}
-                          className={`w-8 h-8 text-sm rounded-full font-medium ${
-                            p === currentPage
-                              ? "bg-emerald-700 text-white"
-                              : "text-gray-500"
-                          }`}
-                        >
-                          {p}
-                        </button>
-                      ))}
+
+                {/* PREV */}
+                <button
+                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 text-sm border rounded disabled:opacity-50"
+                >
+                  Prev
+                </button>
+
+                {/* LIMITED PAGE NUMBERS */}
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .slice(
+                    Math.max(currentPage - 2, 0),
+                    Math.min(currentPage + 1, totalPages)
+                  )
+                  .map((p) => (
+                    <button
+                      key={p}
+                      onClick={() => setCurrentPage(p)}
+                      className={`w-8 h-8 text-sm rounded-full font-medium ${
+                        p === currentPage
+                          ? "bg-emerald-700 text-white"
+                          : "text-gray-500"
+                      }`}
+                    >
+                      {p}
+                    </button>
+                  ))}
+
+                {/* NEXT */}
+                <button
+                  onClick={() =>
+                    setCurrentPage((prev) =>
+                      Math.min(prev + 1, totalPages)
+                    )
+                  }
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1 text-sm border rounded disabled:opacity-50"
+                >
+                  Next
+                </button>
+
               </div>
             </div>
           </div>

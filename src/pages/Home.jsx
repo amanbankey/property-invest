@@ -70,7 +70,7 @@ function Hero() {
               </NavLink>
             </button>
             <button className="border border-gray-300 hover:border-emerald-400 text-gray-700 font-semibold px-7 py-3 rounded-lg transition-colors text-sm bg-green-50">
-              <NavLink to='/broker-dashboard'>
+              <NavLink to='/broker-signup'>
                   Become a Partner
               </NavLink>
             </button>
