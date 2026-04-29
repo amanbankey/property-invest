@@ -102,6 +102,8 @@ function App() {
 
           <Route path="broker-dashboard" element={<BrokerDashboard />} />
           <Route path="broker-login" element={<BrokerLogin />} />
+          <Route path="broker-signup" element={<BrokerSignup />} />
+
           
 
           <Route path="watchlist" element={<WatchList />} />
