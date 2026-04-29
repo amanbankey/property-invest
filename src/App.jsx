@@ -32,6 +32,7 @@ import BrokerDashboard from "./pages/BrokerDashboard";
 import AadharVerify from "./pages/AadharVerify";
 import WatchList from "./components/WatchList";
 import BrokerLogin from "./pages/BrokerLogin";
+import BrokerSignup from "./pages/BrokerSignup";
 
 function App() {
   useEffect(() => {
@@ -82,6 +83,11 @@ function App() {
               </OpenRoute>
             }
           />
+          <Route
+            path="broker-signup"
+            element={ <BrokerSignup />  }
+          />
+
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route
@@ -97,6 +103,7 @@ function App() {
           <Route path="broker-dashboard" element={<BrokerDashboard />} />
           <Route path="broker-login" element={<BrokerLogin />} />
           
+
           <Route path="watchlist" element={<WatchList />} />
 
         </Route>

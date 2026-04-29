@@ -30,6 +30,7 @@ const About = () => {
             By tokenizing real estate into fractional shares, we make high-yield property investment open to all—from first‑time investors to seasoned professionals.
           </p>
         </div>
+
         <div className="flex-1 relative">
           <img
             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80"
@@ -39,7 +40,16 @@ const About = () => {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+      <div className="grid lg:grid-cols-2  gap-12 items-center mb-16">
+
+      <div className="flex-1 order-1 lg:order-2">
+          <img
+            src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80"
+            alt="Our vision - Global real estate"
+            className="rounded-2xl shadow-xl w-full h-64 sm:h-80 lg:h-96 object-cover"
+          />
+        </div>
+
         <div className="flex-1 order-2 lg:order-1">
           <h2 className="text-3xl font-bold text-gray-900 mb-5">Our Vision</h2>
           <p className="text-gray-500 text-base sm:text-lg leading-relaxed">
@@ -49,13 +59,7 @@ const About = () => {
             With transparent reporting, digital verification, and automated distributions, we aim to become the trusted platform for fractional real estate worldwide.
           </p>
         </div>
-        <div className="flex-1 order-1 lg:order-2">
-          <img
-            src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80"
-            alt="Our vision - Global real estate"
-            className="rounded-2xl shadow-xl w-full h-64 sm:h-80 lg:h-96 object-cover"
-          />
-        </div>
+     
       </div>
 
       {/* Values Section */}

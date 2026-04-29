@@ -11,18 +11,19 @@ const WatchList = () => {
         watchList.includes(property.id)
       );
 
-      console.log('watcha', watchListProperties)
+      // console.log('watcha', watchListProperties)
   return (
-   <div className="overflow-x-auto bg-white rounded-2xl shadow-lg border border-emerald-100">
+   <div className="overflow-x-auto bg-white rounded-2xl mt-10 shadow-lg border border-emerald-100 w-10/12 mx-auto">
   <table className="min-w-full text-sm text-left">
     
     
     <thead className="bg-emerald-600 text-white">
       <tr>
         <th className="px-6 py-3 font-semibold">ID</th>
-        <th className="px-6 py-3 font-semibold">Title</th>
-        <th className="px-6 py-3 font-semibold">Image</th>
+        <th className="px-6 py-3 font-semibold">Property Name </th>
+        <th className="px-6 py-3 font-semibold">Property Image</th>
         <th className="px-6 py-3 font-semibold">Price</th>
+        <th className="px-6 py-3 font-semibold">Total Value</th>
       </tr>
     </thead>
 
@@ -37,6 +38,10 @@ const WatchList = () => {
             {index + 1}
           </td>
 
+          <td className="px-6 py-4 text-gray-800 font-semibold">
+            {property.name}
+          </td>
+
           <td className="px-6 py-4">
             <img
               src={property.img}
@@ -45,12 +50,14 @@ const WatchList = () => {
             />
           </td>
 
-          <td className="px-6 py-4 text-gray-800 font-semibold">
-            {property.name}
-          </td>
+         
 
           <td className="px-6 py-4 text-emerald-600 font-bold">
             ₹ {property.sharePrice}
+          </td>
+
+          <td className="px-6 py-4 text-emerald-600 font-bold">
+            ₹ {property.totalValue}
           </td>
         </tr>
       ))}

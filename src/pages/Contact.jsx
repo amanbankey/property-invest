@@ -36,11 +36,11 @@ function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">Full Name *</label>
-          <input className={inputCls} placeholder="Johnathan Sterling" value={form.name} onChange={set("name")} />
+          <input className={inputCls} required placeholder="Johnathan Sterling" value={form.name} onChange={set("name")} />
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">Email Address *</label>
-          <input type="email" className={inputCls} placeholder="john@example.com" value={form.email} onChange={set("email")} />
+          <input type="email" className={inputCls} required placeholder="john@example.com" value={form.email} onChange={set("email")} />
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -68,7 +68,7 @@ function ContactForm() {
       </div>
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1.5">Message *</label>
-        <textarea className={`${inputCls} resize-none h-32`} placeholder="Describe your query in detail..." value={form.message} onChange={set("message")} />
+        <textarea  required className={`${inputCls} resize-none h-32`} placeholder="Describe your query in detail..." value={form.message} onChange={set("message")} />
       </div>
       <button onClick={handleSubmit} className="w-full sm:w-auto flex items-center justify-center gap-2 bg-teal-800 text-white font-bold text-sm px-8 py-3.5 rounded-xl hover:bg-teal-900 active:scale-95 transition-all">
         <FiSend size={15} />
@@ -114,53 +114,6 @@ function FAQ() {
   );
 }
 
-function Footer() {
-  const socials = [
-    { icon: <BsLinkedin size={16} />, href: "#" },
-    { icon: <BsTwitter size={16} />, href: "#" },
-    { icon: <BsInstagram size={16} />, href: "#" },
-    { icon: <BsWhatsapp size={16} />, href: "#" },
-  ];
-  return (
-    <footer className="bg-gray-900 text-gray-400 py-10 px-4 sm:px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          <div>
-            <p className="font-bold text-white text-base mb-3">SovereignCurator</p>
-            <p className="text-xs leading-relaxed mb-4">Fractional real estate investments redefined. Regulated, verified, and transparent.</p>
-            <div className="flex gap-3">
-              {socials.map((s, i) => (
-                <a key={i} href={s.href} className="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-teal-700 transition-all">{s.icon}</a>
-              ))}
-            </div>
-          </div>
-          {[
-            { title: "Company", links: ["About Us", "Our Team", "Careers", "Press"] },
-            { title: "Invest", links: ["Browse Properties", "How It Works", "ROI Calculator", "KYC Process"] },
-            { title: "Support", links: ["Contact Us", "Help Center", "Privacy Policy", "Terms of Service"] },
-          ].map((col) => (
-            <div key={col.title}>
-              <p className="font-semibold text-white text-sm mb-3">{col.title}</p>
-              <div className="space-y-2">
-                {col.links.map((l) => (
-                  <p key={l} className="text-xs cursor-pointer hover:text-teal-400 transition-colors">{l}</p>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs">
-          <p>© 2024 Sovereign Curator. All Rights Reserved. Fractional ownership entails risks.</p>
-          <div className="flex gap-4">
-            {["Privacy Policy", "Terms of Service", "Regulatory Disclosures"].map((l) => (
-              <span key={l} className="cursor-pointer hover:text-teal-400 transition-colors">{l}</span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
 
 export default function ContactPage() {
   return (

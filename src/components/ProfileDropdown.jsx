@@ -4,9 +4,10 @@ import { VscDashboard, VscSignOut } from "react-icons/vsc"
 import { Link, NavLink, useNavigate } from "react-router-dom"
 import useOnClickOutside from "../hooks/useOnClickOutside"
 import { CiSaveUp2 } from "react-icons/ci";
-
+import { useSelector } from "react-redux"
 
 export default function ProfileDropdown({handleLogout}) {
+  const watchList = useSelector((state) => state.watchlist.watchlist);
 
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
@@ -31,11 +32,18 @@ export default function ProfileDropdown({handleLogout}) {
           ref={ref}
         >
           <Link to="/dashboard" onClick={() => setOpen(false)}>
-            <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
+            <div className="flex w-full items-center border-b gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
               <VscDashboard className="text-lg" />
               Dashboard
             </div>
           </Link>
+           <NavLink to='/watchlist'> 
+            <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
+            <CiSaveUp2  className="text-lg" />
+              WatchList <span className="w-5 h-5 bg-green-400 rounded-full animate-bounce  px-2  flex items-center justify-center py-2">{watchList.length}</span>
+            </div>
+          </NavLink>
+
           <div
             onClick={() => {
              handleLogout();
@@ -47,10 +55,7 @@ export default function ProfileDropdown({handleLogout}) {
             Logout
           </div>
 
-         <NavLink to='/watchlist'>  <div className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25">
-              <CiSaveUp2  className="text-lg" />
-              WatchList
-            </div> </NavLink>
+        
         
         </div>
       )}

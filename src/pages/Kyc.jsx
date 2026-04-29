@@ -338,7 +338,7 @@ function FormCard({ setActive, edit, setEdit }) {
             </div>
             <p className="text-[10px] text-gray-400 mb-4">Joined by 94 individual investors</p>
             <button className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl text-sm transition-colors mb-3">
-              <NavLink to='/checkout'>
+              <NavLink to='/checkout' state={{ id: 1 }}>
                    Invest Now
               </NavLink>
              </button>

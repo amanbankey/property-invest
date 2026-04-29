@@ -86,6 +86,7 @@ const recentInvestors = [
 
 const totalReferral = [
   {
+    id:1,
     name: "Jonathan Sterling",
     contact: "+91  XXXXX1234",
     property: "Azure Bay Penthouse",
@@ -93,7 +94,7 @@ const totalReferral = [
     date: "Oct 12, 2023",
     status: "Completed",
   },
-  {
+  { id:2,
     name: "Amara Okafor",
     contact: "+91  XXXXX5678",
     property: "Golden Valley Estates",
@@ -101,7 +102,8 @@ const totalReferral = [
     date: "Oct 08, 2023",
     status: "In Process",
   },
-  {
+  { 
+    id:3,
     name: "Kenji Tanaka",
     contact: "+91  XXXXX9812",
     property: "The Sovereign Tower",
@@ -109,7 +111,7 @@ const totalReferral = [
     date: "Sep 28, 2023",
     status: "Completed",
   },
-  {
+  {  id:4,
     name: "Jonathan Sterling",
     contact: "+91  XXXXX1234",
     property: "Azure Bay Penthouse",
@@ -117,7 +119,7 @@ const totalReferral = [
     date: "Oct 12, 2023",
     status: "Completed",
   },
-  {
+  {  id:5,
     name: "Amara Okafor",
     contact: "+91  XXXXX5678",
     property: "Golden Valley Estates",
@@ -125,15 +127,12 @@ const totalReferral = [
     date: "Oct 08, 2023",
     status: "In Process",
   },
+ 
+];
+
+const totalConverted = [
   {
-    name: "Kenji Tanaka",
-    contact: "+91  XXXXX9812",
-    property: "The Sovereign Tower",
-    amount: "$250,000",
-    date: "Sep 28, 2023",
-    status: "Completed",
-  },
-  {
+    id:1,
     name: "Jonathan Sterling",
     contact: "+91  XXXXX1234",
     property: "Azure Bay Penthouse",
@@ -141,7 +140,55 @@ const totalReferral = [
     date: "Oct 12, 2023",
     status: "Completed",
   },
-  {
+  { id:2,
+    name: "Amara Okafor",
+    contact: "+91  XXXXX5678",
+    property: "Golden Valley Estates",
+    amount: "$45,000",
+    date: "Oct 08, 2023",
+    status: "In Process",
+  },
+  { id:3,
+    name: "Kenji Tanaka",
+    contact: "+91  XXXXX9812",
+    property: "The Sovereign Tower",
+    amount: "$250,000",
+    date: "Sep 28, 2023",
+    status: "Completed",
+  },
+  { id:4,
+    name: "Jonathan Sterling",
+    contact: "+91  XXXXX1234",
+    property: "Azure Bay Penthouse",
+    amount: "$125,000",
+    date: "Oct 12, 2023",
+    status: "Completed",
+  },
+  { id:5,
+    name: "Amara Okafor",
+    contact: "+91  XXXXX5678",
+    property: "Golden Valley Estates",
+    amount: "$45,000",
+    date: "Oct 08, 2023",
+    status: "In Process",
+  },
+  { id:6,
+    name: "Kenji Tanaka",
+    contact: "+91  XXXXX9812",
+    property: "The Sovereign Tower",
+    amount: "$250,000",
+    date: "Sep 28, 2023",
+    status: "Completed",
+  },
+  { id:7,
+    name: "Jonathan Sterling",
+    contact: "+91  XXXXX1234",
+    property: "Azure Bay Penthouse",
+    amount: "$125,000",
+    date: "Oct 12, 2023",
+    status: "Completed",
+  },
+  { id:8,
     name: "Amara Okafor",
     contact: "+91  XXXXX5678",
     property: "Golden Valley Estates",
@@ -227,61 +274,6 @@ function StatusBadge({ status }) {
   );
 }
 
-// function Sidebar({ mobileOpen, setMobileOpen }) {
-//   return (
-//     <>
-//       {mobileOpen && (
-//         <div
-//           className="fixed inset-0 bg-black/40 z-10 lg:hidden"
-//           onClick={() => setMobileOpen(false)}
-//         />
-//       )}
-//       <aside
-//         className={`fixed top-0 left-0 h-screen w-44 bg-white border-r border-gray-100 flex flex-col z-10 transition-transform duration-300
-//         ${
-//           mobileOpen ? "translate-x-0" : "-translate-x-full"
-//         } lg:translate-x-0 lg:fixed lg:top-0 lg:flex lg:h-screen lg:flex-shrink-0`}
-//       >
-//         <div className="flex items-center gap-2 px-4 py-5 border-b border-gray-100">
-//           <div className="w-8 h-8 bg-teal-700 rounded-lg flex items-center justify-center">
-//             <HiBriefcase className="text-white text-sm" />
-//           </div>
-//           <div>
-//             <p className="text-sm whitespace-nowrap font-semibold text-gray-800 leading-tight">
-//               Broker Portal
-//             </p>
-//             <p className="text-xs text-gray-400">Premium Tier</p>
-//           </div>
-//         </div>
-//         <nav className="flex-1 py-4 px-2">
-//           {navItems.map(({ icon: Icon, label, active }) => (
-//             <button
-//               key={label} 
-//               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm font-medium transition-colors
-//               ${
-//                 active
-//                   ? "bg-teal-50 text-teal-700"
-//                   : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
-//               }`}
-//             >
-//               <Icon className="text-lg flex-shrink-0" />
-//               {label}
-//             </button>
-//           ))}
-//         </nav>
-//         <div className="px-2 pb-4 border-t border-gray-100 pt-3">
-//           <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-500 hover:bg-gray-50 mb-1">
-//             <HiOutlineQuestionMarkCircle className="text-lg" /> Help Center
-//           </button>
-//           <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-gray-500 hover:bg-gray-50">
-//             <HiArrowRightOnRectangle className="text-lg" /> Sign Out
-//           </button>
-//         </div>
-//       </aside>
-//     </>
-//   );
-// }
-
 function StatCards() {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 mb-6">
@@ -303,7 +295,7 @@ function BrokerCodeCard() {
   const [copied, setCopied] = useState(false);
 
   return (
-    <div className="bg-teal-700  rounded-2xl p-5 flex flex-col gap-4 h-full">
+    <div className="bg-teal-700  rounded-2xl p-5 flex flex-col gap-4 h-full sm:max-w-md">
       <h3 className="text-white font-semibold text-sm">Your Broker Code</h3>
       <div className="bg-white/20 relative   rounded-xl px-4 py-3 flex items-center justify-between">
         <span className="text-white font-bold tracking-wider text-sm">
@@ -532,70 +524,7 @@ function EarningsSummary() {
   );
 }
 
-function ActiveOpportunities() {
-  return (
-    <div className="mb-6">
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h3 className="font-bold text-gray-800 text-base">
-            Active Opportunities
-          </h3>
-          <p className="text-xs text-gray-400">
-            Recommended properties for your network
-          </p>
-        </div>
-        <div className="flex gap-2">
-          <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 text-gray-500">
-            <HiOutlineChevronLeft className="text-sm" />
-          </button>
-          <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 text-gray-500">
-            <HiOutlineChevronRight className="text-sm" />
-          </button>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-        {opportunities.map((opp) => (
-          <div
-            key={opp.name}
-            className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden"
-          >
-            <div className="relative h-40">
-              <img
-                src={opp.img}
-                alt={opp.name}
-                className="w-full h-full object-cover"
-              />
-              <span
-                className={`absolute top-3 left-3 ${opp.tagColor} text-white text-xs font-semibold px-2.5 py-1 rounded-full`}
-              >
-                {opp.tag}
-              </span>
-              <span
-                className={`absolute bottom-3 left-3 ${opp.roiColor} text-white text-xs font-semibold px-2.5 py-1 rounded-full`}
-              >
-                {opp.roi}
-              </span>
-            </div>
-            <div className="p-4 flex items-end justify-between">
-              <div>
-                <p className="font-bold text-gray-800 text-sm">{opp.name}</p>
-                <p className="text-xs text-gray-400 mb-2">{opp.location}</p>
-                <p className="text-xs text-gray-400">SHARE PRICE</p>
-                <p className="font-bold text-gray-800 text-sm">
-                  {opp.price}{" "}
-                  <span className="text-gray-400 font-normal">/ share</span>
-                </p>
-              </div>
-              <button className="w-9 h-9 bg-yellow-400 rounded-xl flex items-center justify-center hover:bg-yellow-300 transition-colors flex-shrink-0">
-                <HiOutlineShare className="text-gray-800 text-base" />
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+
 
 function Header({ setMobileOpen }) {
   return (
@@ -625,16 +554,32 @@ function Header({ setMobileOpen }) {
 export default function BrokerDashboard() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive] = useState("overview");
-  console.log("dd", active);
+  // console.log("dd", active);
+  const [currentConvertPage, setCurrentConvertPage] = useState(1);
+  const [currentReferralPage, setCurrentReferralPage] = useState(1);
 
+  const convertItemPerPage = 2
+  const referralItemPerPage = 2
+
+  const visibleConverted = totalConverted.slice(
+    (currentConvertPage - 1) * convertItemPerPage,
+    currentConvertPage * convertItemPerPage
+  );
+
+  const totalConvertedPages = Math.ceil(totalConverted.length / convertItemPerPage);
+ 
+  
+  const visibleReferral = totalReferral.slice(
+    (currentReferralPage - 1) * referralItemPerPage,
+    currentReferralPage * referralItemPerPage
+  );
+
+  const totalReferralPages = Math.ceil(totalReferral.length / referralItemPerPage);
   return (
     <div className="flex bg-gray-50 font-sans   ">
       <aside
         className={
-          // ` sticky top-[11%] h-[90vh] w-52 bg-gray-50 border-r border-gray-200
-          // flex flex-col z-10
-          // ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
-          // lg:translate-x-0 lg:flex-shrink-0`
+        
           `fixed lg:sticky top-0 lg:top-[11%] left-0
           h-full lg:h-[90vh] w-52 bg-gray-50 border-r border-gray-200
           flex flex-col z-40
@@ -662,16 +607,6 @@ export default function BrokerDashboard() {
             </div>
           </div>
         </div>
-
-        {/* <nav className="flex-1 py-4 px-2">
-          {navItems.map(({ icon: Icon, label, active, type }) => (
-            <button key={label} onClick={() => setActive(type)} className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm font-medium transition-colors
-              ${type ? "bg-teal-50 text-teal-700" : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"}`}>
-              <Icon className="text-lg flex-shrink-0" />
-              {label}
-            </button>
-          ))}
-        </nav> */}
 
         <nav className="flex-1 py-4 px-2">
           {navItems.map(({ icon: Icon, label, type }) => (
@@ -719,9 +654,6 @@ export default function BrokerDashboard() {
             <h3 className="font-bold text-gray-800 text-base">
                 Total Referral
               </h3>
-            
-            
-            
             </div>
              
               <button className="text-teal-700 text-sm font-medium flex items-center gap-1 hover:underline">
@@ -733,9 +665,9 @@ export default function BrokerDashboard() {
                 <thead>
                   <tr className="border-b border-gray-50">
                     {[
-                      "INVESTOR NAME",
-                      "CONTACT",
-                      "PROPERTY NAME",
+                      " NAME",
+                      "NUMBER",
+                      "PAN NUMBER",
                       "INVESTMENT VALUE",
                       "DATE",
                     ].map((h) => (
@@ -749,7 +681,7 @@ export default function BrokerDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {totalReferral.map((row) => (
+                  {visibleReferral.map((row) => (
                     <tr
                       key={row.name}
                       className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50"
@@ -769,11 +701,60 @@ export default function BrokerDashboard() {
                       <td className="px-5 py-4 text-gray-500 whitespace-nowrap">
                         {row.date}
                       </td>
-                      {/* <td className="px-5 py-4 whitespace-nowrap"><StatusBadge status={row.status} /></td> */}
                     </tr>
                   ))}
                 </tbody>
               </table>
+
+              <div className="mt-10 flex flex-col items-center gap-4">
+                    <div className="flex items-center gap-2">
+
+                      {/* PREV */}
+                      <button
+                        onClick={() =>
+                          setCurrentReferralPage((prev) => Math.max(prev - 1, 1))
+                        }
+                        disabled={currentReferralPage === 1}
+                        className="px-3 py-1 text-sm border rounded disabled:opacity-50"
+                      >
+                        Prev
+                      </button>
+
+                      {/* PAGE NUMBERS */}
+                      {Array.from({ length: totalReferralPages }, (_, i) => i + 1)
+                        .slice(
+                          Math.max(currentReferralPage - 2, 0),
+                          Math.min(currentReferralPage + 1, totalReferralPages)
+                        )
+                        .map((p) => (
+                          <button
+                            key={p}
+                            onClick={() => setCurrentReferralPage(p)}
+                            className={`w-8 h-8 text-sm rounded-full font-medium ${
+                              p === currentReferralPage
+                                ? "bg-emerald-700 text-white"
+                                : "text-gray-500"
+                            }`}
+                          >
+                            {p}
+                          </button>
+                        ))}
+
+                      {/* NEXT */}
+                      <button
+                        onClick={() =>
+                          setCurrentReferralPage((prev) =>
+                            Math.min(prev + 1, totalReferralPages)
+                          )
+                        }
+                        disabled={currentReferralPage === totalReferralPages}
+                        className="px-3 py-1 text-sm border rounded disabled:opacity-50"
+                      >
+                        Next
+                      </button>
+
+                    </div>
+                  </div>
             </div>
           </div>
         </div>
@@ -794,8 +775,7 @@ export default function BrokerDashboard() {
               <h3 className="font-bold text-gray-800 text-base">
                 Total Converted
               </h3> </div>
-          
-
+    
               <button className="text-teal-700 text-sm font-medium flex items-center gap-1 hover:underline">
                 View All <HiOutlineChevronRight />
               </button>
@@ -821,9 +801,9 @@ export default function BrokerDashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {totalReferral.map((row) => (
+                  {visibleConverted.map((row) => (
                     <tr
-                      key={row.name}
+                      key={row.id}
                       className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50"
                     >
                       <td className="px-5 py-4 font-semibold text-gray-800 whitespace-nowrap">
@@ -841,11 +821,58 @@ export default function BrokerDashboard() {
                       <td className="px-5 py-4 text-gray-500 whitespace-nowrap">
                         {row.date}
                       </td>
-                      {/* <td className="px-5 py-4 whitespace-nowrap"><StatusBadge status={row.status} /></td> */}
+                      
                     </tr>
                   ))}
                 </tbody>
               </table>
+              <div className="mt-10 flex flex-col items-center gap-4">
+                    <div className="flex items-center gap-2">
+
+                      {/* PREV BUTTON */}
+                      <button
+                        onClick={() => setCurrentConvertPage((prev) => Math.max(prev - 1, 1))}
+                        disabled={currentConvertPage === 1}
+                        className="px-3 py-1 text-sm border rounded disabled:opacity-50"
+                      >
+                        Prev
+                      </button>
+
+                      {/* PAGE NUMBERS (LIMITED) */}
+                      {Array.from({ length: totalConvertedPages }, (_, i) => i + 1)
+                        .slice(
+                          Math.max(currentConvertPage - 2, 0),
+                          Math.min(currentConvertPage + 1, totalConvertedPages)
+                        )
+                        .map((p) => (
+                          <button
+                            key={p}
+                            onClick={() => setCurrentConvertPage(p)}
+                            className={`w-8 h-8 text-sm rounded-full font-medium ${
+                              p === currentConvertPage
+                                ? "bg-emerald-700 text-white"
+                                : "text-gray-500"
+                            }`}
+                          >
+                            {p}
+                          </button>
+                        ))}
+
+                      {/* NEXT BUTTON */}
+                      <button
+                        onClick={() =>
+                          setCurrentConvertPage((prev) =>
+                            Math.min(prev + 1, totalConvertedPages)
+                          )
+                        }
+                        disabled={currentConvertPage === totalConvertedPages}
+                        className="px-3 py-1 text-sm border rounded disabled:opacity-50"
+                      >
+                        Next
+                      </button>
+                      
+                    </div>
+                  </div>
             </div>
           </div>
         </div>
@@ -856,11 +883,20 @@ export default function BrokerDashboard() {
           <Header setMobileOpen={setMobileOpen} />
           <StatCards />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-            <div className="lg:col-span-2">
+          {/* <div className="flex  flex-col sm:flex-row  justify-center gap-4 lg:gap-14  mb-6">
+            <div className="flex-1">
               <BrokerCodeCard />
             </div>
-            <div className="lg:col-span-3">
+            <div className="flex-1">
+              <ReferralChart />
+            </div>
+          </div> */}
+
+          <div className="flex flex-col sm:flex-row items-stretch gap-6 lg:gap-8 mb-6 max-w-5xl mx-auto">
+            <div className="w-full sm:w-1/2">
+              <BrokerCodeCard />
+            </div>
+            <div className="w-full sm:w-1/2">
               <ReferralChart />
             </div>
           </div>
@@ -876,7 +912,7 @@ export default function BrokerDashboard() {
             </div>
           </div>
 
-          {/* <ActiveOpportunities /> */}
+           
         </main>
       )}
 

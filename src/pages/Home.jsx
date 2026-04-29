@@ -70,7 +70,7 @@ function Hero() {
               </NavLink>
             </button>
             <button className="border border-gray-300 hover:border-emerald-400 text-gray-700 font-semibold px-7 py-3 rounded-lg transition-colors text-sm bg-green-50">
-              <NavLink to='/broker-dashboard'>
+              <NavLink to='/broker-signup'>
                   Become a Partner
               </NavLink>
             </button>
@@ -149,7 +149,7 @@ function HowItWorks() {
 
 function PropertyCard({ p }) {
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow">
+    <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl   hover:scale-105 duration-300 tr transition-all">
       <div className="relative">
         <img src={p.img} alt={p.name} className="w-full h-44 object-cover" />
         <span className="absolute top-3 left-3 bg-emerald-500 text-white text-[10px] font-bold px-2 py-1 rounded-md tracking-wide">{p.badge}</span>
@@ -193,13 +193,13 @@ function Opportunities() {
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Investment Opportunities</h2>
             <p className="text-gray-500 text-sm mt-1">Current institutional grade assets available for fractional links.</p>
           </div>
-          <a href="#" className="hidden sm:flex items-center gap-1 text-emerald-600 text-sm font-semibold hover:underline">View All Properties <FiArrowRight /></a>
+          <NavLink to='/property' className="hidden sm:flex items-center gap-1 text-emerald-600 text-sm font-semibold hover:underline">View All Properties <FiArrowRight /></NavLink>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {PROPERTIES.map(p => <PropertyCard key={p.name} p={p} />)}
         </div>
         <div className="mt-6 sm:hidden text-center">
-          <a href="#" className="inline-flex items-center gap-1 text-emerald-600 text-sm font-semibold">View All Properties <FiArrowRight /></a>
+          <NavLink to='/property' className="inline-flex items-center gap-1 text-emerald-600 text-sm font-semibold">View All Properties <FiArrowRight /></NavLink>
         </div>
       </div>
     </section>

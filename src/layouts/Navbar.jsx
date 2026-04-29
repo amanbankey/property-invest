@@ -9,14 +9,13 @@ import { CgProfile } from "react-icons/cg";
 import { RxCross1 } from "react-icons/rx";
 
 const Navbar = () => {
+
   const [open, setOpen] = useState(true);
   const isLoggedIn = !!localStorage.getItem("token");
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const navigate = useNavigate();
 
-  console.log('op', open)
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
@@ -28,6 +27,8 @@ const Navbar = () => {
     navigate('/dashboard');
     setMobileMenuOpen(false);
   }
+  
+
   return (
     <div className="z-20 shadow-lg  sticky top-0">
       <div className="">
@@ -48,6 +49,10 @@ const Navbar = () => {
               </div>
               <div className="py-1 transition hover:text-or">
                 <NavLink to="/property"> Properties</NavLink>
+              </div>
+
+              <div className="py-1 transition hover:text-or">
+              <NavLink to="/portfolio"> Portfolio</NavLink>
               </div>
               <div className="py-1 transition hover:text-or">
               <NavLink to="/about">
@@ -140,6 +145,11 @@ const Navbar = () => {
               >
                 Property
               </NavLink>
+              
+              <NavLink to="/portfolio"  onClick={() => setMobileMenuOpen(false)}
+               className="text-gray-700 hover:text-[#0F766E] transition"> Portfolio</NavLink>
+             
+               
               <NavLink
                 to="/about"
                 onClick={() => setMobileMenuOpen(false)}
@@ -157,22 +167,28 @@ const Navbar = () => {
               </NavLink>
 
               <div className="flex flex-col items-start gap-3 mb-5 ">
-              {/* <NavLink to="/dashboard"> */}
-              <button className="text-white bg-emerald-500 hover:bg-emerald-600 px-3 py-2  rounded-lg "  
+               
+              <button className="text-white bg-[#0F766E] hover:bg-[#0F766E] px-3 py-2  rounded-lg "  
               onClick={onDashboard}> 
                 Dashboard 
               </button>
 
-               {/* </NavLink> */}
-               <button className="text-white bg-emerald-500 hover:bg-emerald-600 px-3 py-2  rounded-lg "
+               {/* Watchlist */}
+                <button onClick={() => {
+                  navigate('/watchlist')
+                }} className="text-white bg-[#0F766E] hover:bg-[#0F766E] px-3 py-2  rounded-lg "> 
+                Watchlist 
+                </button>
+
+               
+                {isLoggedIn && (
+               <button className="text-white bg-[#0F766E] hover:bg-[#0F766E] px-3 py-2  rounded-lg "
                 onClick={handleLogout} > 
                 Logout 
                 </button>
-
-               {/* Watchlist */}
-                <button className="text-white bg-emerald-500 hover:bg-emerald-600 px-3 py-2  rounded-lg "> 
-                Watchlist 
-                </button>
+                )
+              }
+            
 
               </div>
 
@@ -180,7 +196,7 @@ const Navbar = () => {
 
             </div>
 
-            <div className="flex justify-start gap-3 pb-5">
+            <div className="flex justify-center gap-3 pb-5">
               {!isLoggedIn && (
                 <NavLink onClick={() => {
                   setMobileMenuOpen((prev) => !prev)
