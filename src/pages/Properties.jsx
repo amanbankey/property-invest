@@ -14,7 +14,7 @@ import {
 import { BsPersonCircle } from "react-icons/bs";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector , useDispatch } from "react-redux";
 
 const NAV_LINKS = ["Portfolio", "Marketplace", "Insights", "Governance"];
@@ -170,6 +170,7 @@ function PropertyCard({ p }) {
   
   // const properties = useSelector((state) => state.property.properties);
   console.log('propert', p.id);
+  const navigate = useNavigate();
   
 
 
@@ -248,13 +249,14 @@ function PropertyCard({ p }) {
           </div>
         </div>
         <div className="mt-4 flex items-center gap-2">
-          <button className="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold py-2.5 rounded-xl transition-colors">
-            <NavLink 
-              to="/property-details" 
-              state={{ id: p.id }}
-            >
-              View Details
-            </NavLink>
+       
+          <button
+            onClick={() =>
+              navigate("/property-details", { state: { id: p.id } })
+            }
+            className="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold py-2.5 rounded-xl transition-colors"
+          >
+            View Details
           </button>
         </div>
       </div>

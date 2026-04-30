@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from "react";
+import react, { useState, useEffect , Suspense, lazy }  from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
@@ -35,6 +35,7 @@ import BrokerLogin from "./pages/BrokerLogin";
 import BrokerSignup from "./pages/BrokerSignup";
 
 function App() {
+
   useEffect(() => {
     const lenis = new Lenis({
       lerp: 0.05, // smoothness (0.05 = very smooth)
@@ -49,8 +50,19 @@ function App() {
     requestAnimationFrame(raf);
   }, []);
 
+
+
+const Home = lazy(() => import("./pages/Home"));
+
+const PropertydetailPage = lazy(() => import("./pages/PropertyDetails"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+
+
+
+
   return (
     <div>
+    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -110,6 +122,8 @@ function App() {
 
         </Route>
       </Routes>
+      </Suspense>
+      
     </div>
   );
 }

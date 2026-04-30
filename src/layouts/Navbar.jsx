@@ -9,7 +9,6 @@ import { CgProfile } from "react-icons/cg";
 import { RxCross1 } from "react-icons/rx";
 
 const Navbar = () => {
-
   const [open, setOpen] = useState(true);
   const isLoggedIn = !!localStorage.getItem("token");
 
@@ -24,10 +23,17 @@ const Navbar = () => {
   };
 
   const onDashboard = () => {
-    navigate('/dashboard');
+    navigate("/dashboard");
     setMobileMenuOpen(false);
-  }
-  
+  };
+
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Properties", path: "/property" },
+    { name: "Portfolio", path: "/portfolio" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   return (
     <div className="z-20 shadow-lg  sticky top-0">
@@ -35,10 +41,13 @@ const Navbar = () => {
         <nav className="  mx-auto   bg-white/40  transparent  rounded-2xl   backdrop-blur-xl">
           <div className="flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 h-[65px] sm:h-[70px] lg:h-[75px] max-w-screen-2xl mx-auto">
             <NavLink to="/" className="flex-shrink-0 text-black duration-200">
-               <img src="https://cdn-icons-png.flaticon.com/128/602/602175.png" className="object-contain w-10 10" />
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/602/602175.png"
+                className="object-contain w-10 10"
+              />
             </NavLink>
 
-            <div className="hidden lg:flex items-center gap-6 text-[16px] font-medium tracking-wide">
+            {/* <div className="hidden lg:flex items-center gap-6 text-[16px] font-medium tracking-wide">
               <div className="py-1 transition hover:text-or">
                 <NavLink
                   to="/"
@@ -65,9 +74,27 @@ const Navbar = () => {
                   Contact
                 </NavLink>
                 </div>
-              {/* <div className="py-1 transition hover:text-or">about</div> */}
+            </div> */}
 
-              <div className="py-1 transition px-2 rounded-lg   "></div>
+            <div className="hidden lg:flex items-center gap-8 text-[16px] font-medium tracking-wide">
+              {navItems.map((item, index) => (
+                <NavLink
+                  key={index}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `relative inline-block text-black transition-colors duration-200 
+                        after:content-[''] after:absolute after:left-0 after:bottom-0 
+                        after:h-[2px] after:bg-green-700 after:transition-all after:duration-300 
+                        ${
+                          isActive
+                            ? "after:w-full text-green-700"
+                            : "after:w-0 hover:after:w-full hover:text-green-700"
+                        }`
+                  }
+                >
+                  {item.name}
+                </NavLink>
+              ))}
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3">
@@ -88,17 +115,16 @@ const Navbar = () => {
                 </NavLink>
               )}
 
-          <div className="hidden lg:block"> 
-            <div className="flex justify-center gap-3  ">
-               {isLoggedIn && (
-                <>
-                  <CgProfile className="w-7 h-7" />
-                  <ProfileDropdown handleLogout={handleLogout} />
-                </>
-              )}
-            </div>
-            </div>
-             
+              <div className="hidden lg:block">
+                <div className="flex justify-center gap-3  ">
+                  {isLoggedIn && (
+                    <>
+                      <CgProfile className="w-7 h-7" />
+                      <ProfileDropdown handleLogout={handleLogout} />
+                    </>
+                  )}
+                </div>
+              </div>
 
               {/* cross and show button  */}
               {!mobileMenuOpen && (
@@ -145,11 +171,16 @@ const Navbar = () => {
               >
                 Property
               </NavLink>
-              
-              <NavLink to="/portfolio"  onClick={() => setMobileMenuOpen(false)}
-               className="text-gray-700 hover:text-[#0F766E] transition"> Portfolio</NavLink>
-             
-               
+
+              <NavLink
+                to="/portfolio"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-gray-700 hover:text-[#0F766E] transition"
+              >
+                {" "}
+                Portfolio
+              </NavLink>
+
               <NavLink
                 to="/about"
                 onClick={() => setMobileMenuOpen(false)}
@@ -167,40 +198,40 @@ const Navbar = () => {
               </NavLink>
 
               <div className="flex flex-col items-start gap-3 mb-5 ">
-               
-              <button className="text-white bg-[#0F766E] hover:bg-[#0F766E] px-3 py-2  rounded-lg "  
-              onClick={onDashboard}> 
-                Dashboard 
-              </button>
-
-               {/* Watchlist */}
-                <button onClick={() => {
-                  navigate('/watchlist')
-                }} className="text-white bg-[#0F766E] hover:bg-[#0F766E] px-3 py-2  rounded-lg "> 
-                Watchlist 
+                <button
+                  className="text-white bg-[#0F766E] hover:bg-[#0F766E] px-3 py-2  rounded-lg "
+                  onClick={onDashboard}
+                >
+                  Dashboard
                 </button>
 
-               
+                {/* Watchlist */}
+                <button
+                  onClick={() => {
+                    navigate("/watchlist");
+                  }}
+                  className="text-white bg-[#0F766E] hover:bg-[#0F766E] px-3 py-2  rounded-lg "
+                >
+                  Watchlist
+                </button>
+
                 {isLoggedIn && (
-               <button className="text-white bg-[#0F766E] hover:bg-[#0F766E] px-3 py-2  rounded-lg "
-                onClick={handleLogout} > 
-                Logout 
-                </button>
-                )
-              }
-            
-
+                  <button
+                    className="text-white bg-[#0F766E] hover:bg-[#0F766E] px-3 py-2  rounded-lg "
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                )}
               </div>
-
-
-
             </div>
 
             <div className="flex justify-center gap-3 pb-5">
               {!isLoggedIn && (
-                <NavLink onClick={() => {
-                  setMobileMenuOpen((prev) => !prev)
-                }}
+                <NavLink
+                  onClick={() => {
+                    setMobileMenuOpen((prev) => !prev);
+                  }}
                   to="/signup"
                   className="sm:hidden w-40 text-center block  px-4 py-2 bg-[#0F766E] hover:bg-[#0F766E] text-white rounded-lg  cursor-pointer"
                 >
@@ -208,17 +239,16 @@ const Navbar = () => {
                 </NavLink>
               )}
               {!isLoggedIn && (
-                <NavLink onClick={() => {
-                  setMobileMenuOpen((prev) => !prev)
-                }}
+                <NavLink
+                  onClick={() => {
+                    setMobileMenuOpen((prev) => !prev);
+                  }}
                   to="/login"
                   className="sm:hidden w-40 text-center block px-4 py-2 bg-[#0F766E] hover:bg-[#0F766E] border-2 text-white  rounded-lg cursor-pointer "
                 >
                   Login
                 </NavLink>
               )}
-
-             
 
               {/* <div className=" flex justify-center gap-3 mb-5 z-40">
                  {isLoggedIn && (
@@ -228,9 +258,6 @@ const Navbar = () => {
                 </>
               )}
               </div> */}
-
-
-             
             </div>
           </div>
         </nav>

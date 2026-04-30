@@ -4,7 +4,7 @@ import { BsPersonCircle, BsBuilding, BsFileText, BsShieldCheck, BsDiagram3 } fro
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { MdOutlineSquareFoot, MdOutlinePeople } from "react-icons/md";
 import { RiBuilding2Line } from "react-icons/ri";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { useDispatch , useSelector } from "react-redux";
 import toast from "react-hot-toast";
@@ -131,6 +131,9 @@ function StickyCard({property}) {
 
   // console.log("pro" , properties,  );
 
+  const navigate = useNavigate();
+
+
    
 
   return (
@@ -159,12 +162,15 @@ function StickyCard({property}) {
         <div className="bg-emerald-700 h-1.5 rounded-full" style={{ width: "88%" }}></div>
       </div>
       <p className="text-[10px] text-gray-400 mb-4">Joined by 94 individual investors</p>
-      <button className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl text-sm transition-colors mb-3">
-        <NavLink to='/checkout'  state={{ id: property.id }}>
-             Invest Now
-        </NavLink>
-       </button>
 
+          <button
+            onClick={() =>
+              navigate("/checkout", { state: { id: property.id } })
+            }
+            className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl text-sm transition-colors mb-3"
+          >
+            Invest Now
+          </button>
 
 
       <button  disabled={liked}
